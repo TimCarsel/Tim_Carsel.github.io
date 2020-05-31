@@ -24,7 +24,7 @@ knitr::opts_chunk$set(results='hold')
 ```
 
 ```{r, echo=FALSE, warning=FALSE}
-setwd("C:/Users/tcarse2/Documents/GitHub/personal_site/")
+setwd("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io")
 library(knitr)
 library(kableExtra)
 library(simr)
