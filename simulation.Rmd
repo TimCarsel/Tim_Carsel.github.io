@@ -170,7 +170,7 @@ summary(T1)
 Yep. That went the way we expected it!
 
 
-Here's the expected relaitonship between the relevance to strength and importance on interpersonal trust.
+Here's the expected relationship between the relevance to strength and importance on interpersonal trust.
 ```{r, , echo=FALSE, out.width='.49\\linewidth', fig.width=2.25, fig.height=2.5,fig.show='hold',fig.align='center'}
 # Plotting interaction between importance and the relevance of the friend's strength to the goal
 Final.Fixed<-effect(c("impcat*relstrength"), T1,
@@ -222,7 +222,7 @@ plot(SCurve1)
 
 
 
-And here's the expected relaitonship between the relevance to weakness and importance on interpersonal trust.
+And here's the expected relationship between the relevance to weakness and importance on interpersonal trust.
 ```{r}
 #####################################################
 ### Plotting Primary Analysis: RelWeak*Importance ###
@@ -335,7 +335,7 @@ plot(SCurve2b)
 ```
 
 # Simulation 3
-In Simulation 3, I set a strong and positive (0.80) correlation between the relevance of the best friends’ strengths and weaknesses to the goal. This would be a worst-case scenario, not simply because of multicolinearity issues but because my predictions the effect of the relevance to strength and relevance to weakness on trust were in the opposite idrections. Consequently, if Simulation 3 was true, then my hypotheses would certainly not be supported.
+In Simulation 3, I set a strong and positive (0.80) correlation between the relevance of the best friends’ strengths and weaknesses to the goal. This would be a worst-case scenario, not simply because of multicollinearity issues but because my predictions the effect of the relevance to strength and relevance to weakness on trust were in the opposite directions. Consequently, if Simulation 3 was true, then my hypotheses would certainly not be supported.
 
 ```{r}
 set.seed(10101)
