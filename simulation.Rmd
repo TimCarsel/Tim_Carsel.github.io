@@ -114,7 +114,7 @@ Sub <-diag(c(.6,.2))
 # Setting cov between slope and intercept
 Sub[lower.tri(Sub)] <- .05
 
-# Setting residual residual variance
+# Setting residual variance
 s <- (1-(sum(Sub)))^.5 
 # Checking
 s # Residual s2=.15 
