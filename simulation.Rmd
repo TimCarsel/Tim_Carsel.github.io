@@ -75,7 +75,7 @@ b1 <- c(0,0,.05,-.05,.1,-.15)                          #
 As you can see, other than the last interaction, I set my expected betas to be pretty weak. This allowed me to have a conservative estimate of a priori power.
 
 ## First Set of Simulations: Varying the covariance between predictors
-The degree to which a set of predictors covary affects your ability to reject a false null hypothesis (i.e., it affects your power). In these first three simulations, I am going to examine change the correlation among my predictors in a principled way and observe how that affects my power.
+The degree to which a set of predictors covary affects your ability to reject a false null hypothesis (i.e., it affects your power). In these first three simulations, I am going to change the correlation among my predictors in a principled way and observe how that affects my power.
 
 # Simulation 1
 In this first simulation, I will set the correlation between the relevance of the best friend's strength to the goal (hereafter referred to as relevance of strength) and the relevance of the best friend's weakness to the goal (heareafter referred to as relevance to weakness) to be weak and negative.
