@@ -8,3 +8,5 @@ navbar:
       href: about.html
     - text: "Simulating An RM Study"
       href: simulation.html
+    - text: "Contextual Trust Study"
+      href: dissertation.html
