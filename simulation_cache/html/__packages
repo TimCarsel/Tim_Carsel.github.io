@@ -1,0 +1,13 @@
+base
+knitr
+kableExtra
+Matrix
+lme4
+simr
+tidyr
+ggplot2
+carData
+effects
+mvtnorm
+beepr
+MuMIn
