@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1590969011224.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "352726157",
+    "id" : "8F2B875C",
+    "lastKnownWriteTime" : 1580341094,
+    "last_content_update" : 1580341094,
+    "path" : "~/GitHub/Tim_Carsel.github.io/about.Rmd",
+    "project_path" : "about.Rmd",
+    "properties" : {
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

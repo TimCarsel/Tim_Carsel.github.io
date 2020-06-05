@@ -1,0 +1,1877 @@
+####################################################################################################################################################
+####################################################################################################################################################
+############################################################  Dissertation Analyses  ###############################################################
+####################################################################################################################################################
+####################################################################################################################################################
+######################
+### Pre-Processing ###
+######################
+rm(list=ls())
+# Set working directory
+setwd("C:/Users/tcarse2/OneDrive/Studies/Trust/Dissertation/Data/Working Data/")
+
+# Load libraries
+library(psych)
+library(lme4)
+library(plyr)
+library(tidyverse)
+library(ggplot2)
+library(ggstatsplot)
+library(data.table)
+library(gmodels)
+library(texreg)
+library(lmerTest)
+library(apaTables)
+
+#################
+### Load data ###
+#################
+data1<-read.csv("Dissertation_IdioTrust.csv",header=T,na.strings = c(""))
+
+######################
+### Creating a PIN ###
+######################
+data1$PIN<-seq(from=1, to=length(data1$Progress))
+data1$PIN<-as.factor(data1$PIN)
+
+##################################
+### Extracting Number of Goals ###
+##################################
+data1$numGoals<-(25-rowSums(is.na(data1[22:46])))
+describe(data1$numGoals)
+
+#####################################################
+### Creating variables for the continuous measure ###
+#### of goal importance Most Important Goals ########
+#####################################################
+data1$g1Imp<-(as.numeric(data1$Q5.2)-1)
+data1$g2Imp<-(as.numeric(data1$Q6.2)-1)
+data1$g3Imp<-(as.numeric(data1$Q7.2)-1)
+
+#############################
+### Least Important Goals ###
+#############################
+data1$g4Imp<-(as.numeric(data1$Q8.2)-1)
+data1$g5Imp<-(as.numeric(data1$Q9.2)-1)
+data1$g6Imp<-(as.numeric(data1$Q10.2)-1)
+
+#######################################
+### Extracting Number of Attributes ###
+#######################################
+# Strengths
+data1$numStrengths<-(5-rowSums(is.na(data1[1288:1292])))
+describe(data1$numStrengths)
+
+# Weaknesses
+data1$numWeaknesses<-(5-rowSums(is.na(data1[1299:1303])))
+describe(data1$numWeaknesses)
+
+#########################################
+### Creating Goal Relevance Variables ###
+######### Most Important Goals ##########
+#########################################
+# Goal 1 Strength
+data1$Goal1StrRel<-(apply(data1[, 1311:1345], 1, function(x) x[!is.na(x)][1]))-1
+# Goal 1 Weakness
+data1$Goal1WeakRel<-(apply(data1[, 1346:1380], 1, function(x) x[!is.na(x)][1]))-1
+# Goal 2 Strength
+data1$Goal2StrRel<-(apply(data1[, 1381:1415], 1, function(x) x[!is.na(x)][1]))-1
+# Goal 2 Weakness
+data1$Goal2WeakRel<-(apply(data1[, 1416:1450], 1, function(x) x[!is.na(x)][1]))-1
+# Goal 3 Strength
+data1$Goal3StrRel<-(apply(data1[, 1451:1485], 1, function(x) x[!is.na(x)][1]))-1
+# Goal 3 Weakness
+data1$Goal3WeakRel<-(apply(data1[, 1486:1520], 1, function(x) x[!is.na(x)][1]))-1
+
+#############################
+### Least Important Goals ###
+#############################
+# Goal 4 Strength
+data1$Goal4StrRel<-(apply(data1[, 1521:1555], 1, function(x) x[!is.na(x)][1]))-1
+# Goal 4 Weakness
+data1$Goal4WeakRel<-(apply(data1[, 1556:1590], 1, function(x) x[!is.na(x)][1]))-1
+# Goal 5 Strength
+data1$Goal5StrRel<-(apply(data1[, 1591:1625], 1, function(x) x[!is.na(x)][1]))-1
+# Goal 5 Weakness
+data1$Goal5WeakRel<-(apply(data1[, 1626:1660], 1, function(x) x[!is.na(x)][1]))-1
+# Goal 6 Strength
+data1$Goal6StrRel<-(apply(data1[, 1661:1695], 1, function(x) x[!is.na(x)][1]))-1
+# Goal 6 Weakness
+data1$Goal6WeakRel<-(apply(data1[, 1696:1730], 1, function(x) x[!is.na(x)][1]))-1
+
+#####################################
+### Creating Goal-Based Trust DVs ###
+#####################################
+###########################
+### Trust for Project 1 ###
+###########################
+# Trust
+data1$Goal1TrustDi<-(apply(data1[, 1731:1765], 1, function(x) x[!is.na(x)][1]))
+# Extent Ss Trusts Best Friend for Project 1
+data1$G1TrustExt<-as.numeric(data1$Q26.2)
+# Extent Ss distrusts Best Friend for Project 1
+data1$G1DistrustExt<-as.numeric(-data1$Q26.3)
+# Lean Toward Trust vs Distrust
+data1$G1TrustLean<-as.numeric(data1$Q26.4)
+# Creating bipolar measure of Trust-Distrust
+data1$Goal1TrustBP<-ifelse(data1$Goal1TrustDi==1,data1$G1TrustExt,
+                           ifelse(data1$Goal1TrustDi==2,data1$G1DistrustExt,
+                           ifelse(data1$G1TrustLean==1,1,
+                           ifelse(data1$G1TrustLean==2,-1,NA))))
+
+# Rely
+data1$Goal1RelyDi<-(apply(data1[, 1769:1803], 1, function(x) x[!is.na(x)][1]))
+# Extent Ss Trusts Best Friend for Project 1
+data1$G1RelyExt<-as.numeric(data1$Q26.6)
+# Extent Ss distrusts Best Friend for Project 1
+data1$G1UnrelyDiExt<-as.numeric(-data1$Q26.7)
+# Lean Toward Trust vs Distrust
+data1$G1RelyLean<-as.numeric(data1$Q26.8)
+# Creating bipolar measure of Trust-Distrust
+data1$Goal1RelyBP<-ifelse(data1$Goal1RelyDi==1,data1$G1RelyExt,
+                           ifelse(data1$Goal1RelyDi==2,data1$G1UnrelyDiExt,
+                           ifelse(data1$G1RelyLean==1,1,
+                           ifelse(data1$G1RelyLean==2,-1,NA))))
+
+###########################
+### Trust for Project 2 ###
+###########################
+# Trust
+data1$Goal2TrustDi<-(apply(data1[, 1807:1841], 1, function(x) x[!is.na(x)][1]))
+# Extent Ss Trusts Best Friend for Project 1
+data1$G2TrustExt<-as.numeric(data1$Q27.2)
+# Extent Ss distrusts Best Friend for Project 1
+data1$G2DistrustExt<-as.numeric(-data1$Q27.3)
+# Lean Toward Trust vs Distrust
+data1$G2TrustLean<-as.numeric(data1$Q27.4)
+# Creating bipolar measure of Trust-Distrust
+data1$Goal2TrustBP<-ifelse(data1$Goal2TrustDi==1,data1$G2TrustExt,
+                           ifelse(data1$Goal2TrustDi==2,data1$G2DistrustExt,
+                           ifelse(data1$G2TrustLean==1,1,
+                           ifelse(data1$G2TrustLean==2,-1,NA))))
+
+# Rely
+data1$Goal2RelyDi<-(apply(data1[, 1845:1879], 1, function(x) x[!is.na(x)][1]))
+# Extent Ss Trusts Best Friend for Project 1
+data1$G2RelyExt<-as.numeric(data1$Q27.6)
+# Extent Ss distrusts Best Friend for Project 1
+data1$G2UnrelyDiExt<-as.numeric(-data1$Q27.7)
+# Lean Toward Trust vs Distrust
+data1$G2RelyLean<-as.numeric(data1$Q27.8)
+# Creating bipolar measure of Trust-Distrust
+data1$Goal2RelyBP<-ifelse(data1$Goal2RelyDi==1,data1$G2RelyExt,
+                          ifelse(data1$Goal2RelyDi==2,data1$G2UnrelyDiExt,
+                          ifelse(data1$G2RelyLean==1,1,
+                          ifelse(data1$G2RelyLean==2,-1,NA))))
+
+###########################
+### Trust for Project 3 ###
+###########################
+# Trust
+data1$Goal3TrustDi<-(apply(data1[, 1883:1917], 1, function(x) x[!is.na(x)][1]))
+# Extent Ss Trusts Best Friend for Project 1
+data1$G3TrustExt<-as.numeric(data1$Q28.2)
+# Extent Ss distrusts Best Friend for Project 1
+data1$G3DistrustExt<-as.numeric(-data1$Q28.3)
+# Lean Toward Trust vs Distrust
+data1$G3TrustLean<-as.numeric(data1$Q28.4)
+# Creating bipolar measure of Trust-Distrust
+data1$Goal3TrustBP<-ifelse(data1$Goal3TrustDi==1,data1$G3TrustExt,
+                           ifelse(data1$Goal3TrustDi==2,data1$G3DistrustExt,
+                           ifelse(data1$G3TrustLean==1,1,
+                           ifelse(data1$G3TrustLean==2,-1,NA))))
+
+# Rely
+data1$Goal3RelyDi<-(apply(data1[, 1921:1955], 1, function(x) x[!is.na(x)][1]))
+# Extent Ss Trusts Best Friend for Project 1
+data1$G3RelyExt<-as.numeric(data1$Q28.6)
+# Extent Ss distrusts Best Friend for Project 1
+data1$G3UnrelyDiExt<-as.numeric(-data1$Q28.7)
+# Lean Toward Trust vs Distrust
+data1$G3RelyLean<-as.numeric(data1$Q28.8)
+# Creating bipolar measure of Trust-Distrust
+data1$Goal3RelyBP<-ifelse(data1$Goal3RelyDi==1,data1$G3RelyExt,
+                          ifelse(data1$Goal3RelyDi==2,data1$G3UnrelyDiExt,
+                          ifelse(data1$G3RelyLean==1,1,
+                          ifelse(data1$G3RelyLean==2,-1,NA))))
+
+###########################
+### Trust for Project 4 ###
+###########################
+# Trust
+data1$Goal4TrustDi<-(apply(data1[, 1959:1993], 1, function(x) x[!is.na(x)][1]))
+# Extent Ss Trusts Best Friend for Project 1
+data1$G4TrustExt<-as.numeric(data1$Q29.2)
+# Extent Ss distrusts Best Friend for Project 1
+data1$G4DistrustExt<-as.numeric(-data1$Q29.3)
+# Lean Toward Trust vs Distrust
+data1$G4TrustLean<-as.numeric(data1$Q29.4)
+# Creating bipolar measure of Trust-Distrust
+data1$Goal4TrustBP<-ifelse(data1$Goal4TrustDi==1,data1$G4TrustExt,
+                           ifelse(data1$Goal4TrustDi==2,data1$G4DistrustExt,
+                           ifelse(data1$G4TrustLean==1,1,
+                           ifelse(data1$G4TrustLean==2,-1,NA))))
+
+# Rely
+data1$Goal4RelyDi<-(apply(data1[, 1997:2031], 1, function(x) x[!is.na(x)][1]))
+# Extent Ss Trusts Best Friend for Project 1
+data1$G4RelyExt<-as.numeric(data1$Q29.6)
+# Extent Ss distrusts Best Friend for Project 1
+data1$G4UnrelyDiExt<-as.numeric(-data1$Q29.7)
+# Lean Toward Trust vs Distrust
+data1$G4RelyLean<-as.numeric(data1$Q29.8)
+# Creating bipolar measure of Trust-Distrust
+data1$Goal4RelyBP<-ifelse(data1$Goal4RelyDi==1,data1$G4RelyExt,
+                          ifelse(data1$Goal4RelyDi==2,data1$G4UnrelyDiExt,
+                          ifelse(data1$G4RelyLean==1,1,
+                          ifelse(data1$G4RelyLean==2,-1,NA))))
+
+###########################
+### Trust for Project 5 ###
+###########################
+# Trust
+data1$Goal5TrustDi<-(apply(data1[, 2035:2069], 1, function(x) x[!is.na(x)][1]))
+# Extent Ss Trusts Best Friend for Project 1
+data1$G5TrustExt<-as.numeric(data1$Q30.2)
+# Extent Ss distrusts Best Friend for Project 1
+data1$G5DistrustExt<-as.numeric(-data1$Q30.3)
+# Lean Toward Trust vs Distrust
+data1$G5TrustLean<-as.numeric(data1$Q30.4)
+# Creating bipolar measure of Trust-Distrust
+data1$Goal5TrustBP<-ifelse(data1$Goal5TrustDi==1,data1$G5TrustExt,
+                           ifelse(data1$Goal5TrustDi==2,data1$G5DistrustExt,
+                           ifelse(data1$G5TrustLean==1,1,
+                           ifelse(data1$G5TrustLean==2,-1,NA))))
+
+# Rely
+data1$Goal5RelyDi<-(apply(data1[, 2073:2107], 1, function(x) x[!is.na(x)][1]))
+# Extent Ss Trusts Best Friend for Project 1
+data1$G5RelyExt<-as.numeric(data1$Q30.6)
+# Extent Ss distrusts Best Friend for Project 1
+data1$G5UnrelyDiExt<-as.numeric(-data1$Q30.7)
+# Lean Toward Trust vs Distrust
+data1$G5RelyLean<-as.numeric(data1$Q30.8)
+# Creating bipolar measure of Trust-Distrust
+data1$Goal5RelyBP<-ifelse(data1$Goal5RelyDi==1,data1$G5RelyExt,
+                          ifelse(data1$Goal5RelyDi==2,data1$G5UnrelyDiExt,
+                          ifelse(data1$G5RelyLean==1,1,
+                          ifelse(data1$G5RelyLean==2,-1,NA))))
+
+###########################
+### Trust for Project 6 ###
+###########################
+# Trust
+data1$Goal6TrustDi<-(apply(data1[, 2111:2145], 1, function(x) x[!is.na(x)][1]))
+# Extent Ss Trusts Best Friend for Project 1
+data1$G6TrustExt<-as.numeric(data1$Q31.2)
+# Extent Ss distrusts Best Friend for Project 1
+data1$G6DistrustExt<-as.numeric(-data1$Q31.3)
+# Lean Toward Trust vs Distrust
+data1$G6TrustLean<-as.numeric(data1$Q31.4)
+# Creating bipolar measure of Trust-Distrust
+data1$Goal6TrustBP<-ifelse(data1$Goal6TrustDi==1,data1$G6TrustExt,
+                           ifelse(data1$Goal6TrustDi==2,data1$G6DistrustExt,
+                           ifelse(data1$G6TrustLean==1,1,
+                           ifelse(data1$G6TrustLean==2,-1,NA))))
+
+# Rely
+data1$Goal6RelyDi<-(apply(data1[, 2149:2183], 1, function(x) x[!is.na(x)][1]))
+# Extent Ss Trusts Best Friend for Project 1
+data1$G6RelyExt<-as.numeric(data1$Q31.6)
+# Extent Ss distrusts Best Friend for Project 1
+data1$G6UnrelyDiExt<-as.numeric(-data1$Q31.7)
+# Lean Toward Trust vs Distrust
+data1$G6RelyLean<-as.numeric(data1$Q31.8)
+# Creating bipolar measure of Trust-Distrust
+data1$Goal6RelyBP<-ifelse(data1$Goal6RelyDi==1,data1$G6RelyExt,
+                          ifelse(data1$Goal6RelyDi==2,data1$G6UnrelyDiExt,
+                          ifelse(data1$G6RelyLean==1,1,
+                          ifelse(data1$G6RelyLean==2,-1,NA))))
+
+##########################################
+### Creating Composite Measures of SITS ###
+##########################################
+# Subsetting the factor Overall Trust from the SITS
+SITStrust<-subset(data1, select=c(Q32.1:Q32.9))
+# Converting the scale to be from -4:+4
+SITStrust<-SITStrust-5
+# Reverse-scoring items
+SITStrust$Q32.4<-(-SITStrust$Q32.4)
+SITStrust$Q32.9<-(-SITStrust$Q32.9)
+# Checking alpha
+psych::alpha(SITStrust)
+# Adding the average of the items back to dataframe
+data1$SITStrust<-rowMeans(SITStrust)
+# Here's an alternate way to create the variable that's better but doesn't center the variables
+# I did this second and as a way to ensure the first version does what it's supposed to
+data1<-data1 %>%
+  rowwise() %>%
+  mutate(SITStrust2 = mean(c(Q32.1,Q32.2,Q32.3,9-Q32.4,Q32.5,Q32.6,
+                             Q32.7,Q32.8,9-Q32.9)))
+cor(data1$SITStrust,data1$SITStrust2, use = "pairwise.complete.obs")
+# r = 1, so it checks
+# Examining descriptives
+describe(data1$SITStrust)
+#  n   mean  sd   median  trimmed   mad    min    max  range  skew   kurtosis   se
+# 399  2.19  0.8   2.22     2.25   0.82  -1.56     4    5.56  -0.67    0.98   0.04
+
+# Subsetting the factor Emotional Trust from the SITS
+SITSemo<-subset(data1, select=c(Q32.10:Q32.16))
+# Converting the scale to be from -4:+4
+SITSemo<-SITSemo-5
+# Reverse-scoring items
+SITSemo$Q32.10<-(-SITSemo$Q32.10)
+# Checking alpha
+psych::alpha(SITSemo)
+# Adding the average of the items back to dataframe
+data1$SITSemo<-rowMeans(SITSemo)
+# Examining descriptives
+describe(data1$SITSemo)
+#  n  mean   sd   median  trimmed  mad   min   max  range  skew   kurtosis   se
+# 399 2.72  1.11   2.86    2.85   1.06  -0.86   4   4.86  -0.92     0.38   0.06
+
+# Subsetting the factor Reliability from the SITS
+SITSrely<-subset(data1, select=c(Q32.17:Q32.23))
+# Converting the scale to be from -4:+4
+SITSrely<-SITSrely-5
+# Checking alpha
+psych::alpha(SITSrely)
+# Adding the average of the items back to dataframe
+data1$SITSrely<-rowMeans(SITSrely)
+#  n  mean sd median trimmed  mad   min   max range  skew   kurtosis   se
+# 399 2.85  1    3    2.96   1.06  -0.71   4  4.71  -0.91     0.36   0.05
+
+# Checking correlations among factors
+SITStest<-subset(data1, select = c(SITStrust,SITSemo,SITSrely))
+cor(na.omit(SITStest))
+#############################################
+#           SITStrust    SITSemo   SITSrely #
+# SITStrust 1.0000000 0.4949231   0.6653781 #
+# SITSemo   0.4949231 1.0000000   0.5519472 #
+# SITSrely  0.6653781 0.5519472   1.0000000 #
+#############################################
+
+##########################################
+### Creating Composite Measures of ABI ###
+##########################################
+# Subsetting the factor Ability from the ABI
+ABIable<-subset(data1, select=c(Q33.1:Q33.6))
+# Converting the scale to be from -2:+2
+ABIable<-ABIable-3
+# Checking alpha
+psych::alpha(ABIable)
+# Adding the average of the items back to dataframe
+data1$ABIable<-rowMeans(ABIable)
+# Examining descriptives
+describe(data1$ABIable)
+#  n  mean   sd  median  trimmed  mad   min  max range  skew   kurtosis   se
+# 399 1.27  0.51  1.33    1.29   0.49 -0.67   2  2.67  -0.48    -0.19   0.03
+
+# Subsetting the factor Benevolence from the ABI
+ABIbenev<-subset(data1, select=c(Q33.7:Q33.11))
+# Converting the scale to be from -2:+2
+ABIbenev<-ABIbenev-3
+# Checking alpha
+psych::alpha(ABIbenev)
+# Adding the average of the items back to dataframe
+data1$ABIbenev<-rowMeans(ABIbenev)
+# Examining descriptives
+describe(data1$ABIbenev)
+#  n  mean   sd  median  trimmed  mad  min  max range skew  kurtosis   se
+# 399 1.37  0.54   1.4    1.42   0.59 -0.4   2   2.4  -0.6   -0.45   0.03
+
+# Subsetting the factor Integrity from the ABI
+ABItegridy<-subset(data1, select=c(Q33.12:Q33.17))
+# Converting the scale to be from -2:+2
+ABItegridy<-ABItegridy-3
+# Reverse-scoring items
+ABItegridy$Q33.15<-(-ABItegridy$Q33.15)
+# Checking alpha
+psych::alpha(ABItegridy)
+# Adding the average of the items back to dataframe
+data1$ABItegridy<-rowMeans(ABItegridy)
+# Examining descriptives
+describe(data1$ABItegridy)
+#  n  mean  sd  median trimmed  mad   min   max range  skew  kurtosis   se
+# 399 1.05 0.51    1    1.07   0.49  -0.83   2  2.83  -0.45    0.5    0.03
+
+# Checking correlations among factors
+ABItest<-subset(data1, select = c(ABIable,ABIbenev,ABItegridy))
+cor(na.omit(ABItest))
+#############################################
+#              ABIable  ABIbenev ABItegridy #
+# ABIable    1.0000000 0.5448763  0.5718301 #
+# ABIbenev   0.5448763 1.0000000  0.5307649 #
+# ABItegridy 0.5718301 0.5307649  1.0000000 #
+#############################################
+
+###############################
+### Subsetting For Analyses ###
+###############################
+data2<-subset(data1,select=c(PIN:Goal1TrustDi,Goal1TrustBP,Goal1RelyDi,Goal1RelyBP,Goal2TrustDi,
+                             Goal2TrustBP,Goal2RelyDi,Goal2RelyBP,Goal3TrustDi,Goal3TrustBP,Goal3RelyDi,
+                             Goal3RelyBP,Goal4TrustDi,Goal4TrustBP,Goal4RelyDi,Goal4RelyBP,Goal5TrustDi,
+                             Goal5TrustBP,Goal5RelyDi,Goal5RelyBP,Goal6TrustDi,Goal6TrustBP,Goal6RelyDi,
+                             Goal6RelyBP,SITStrust,SITSemo,SITSrely,ABIable,ABIbenev,ABItegridy)) 
+str(data2)
+#################################################
+### Arranging columns for easier manipulation ###
+
+#######################
+### Goal Importance ###
+# Select vars
+impData<-data2 %>% dplyr::select(tidyselect::vars_select(names(data2), dplyr::matches('Imp')))
+# Check cor
+cor(impData, use = "pairwise.complete.obs")
+# Add PIN
+impData$PIN<-data2$PIN
+# Wide to Long
+impLong<-impData %>% gather(Goal,Importance,g1Imp:g6Imp)
+# Rename factor levels
+impLong$Goal<-mapvalues(impLong$Goal, from = c("g1Imp","g2Imp","g3Imp","g4Imp","g5Imp","g6Imp"),
+                        to = c("Goal1","Goal2","Goal3","Goal4","Goal5","Goal6"))
+
+#############################################
+### Relevance of strength to each project ###
+# Select vars
+strengthData<-data2 %>% dplyr::select(tidyselect::vars_select(names(data2), matches('StrRel')))
+# Check cor
+cor(strengthData, use = "pairwise.complete.obs")
+# Add PIN
+strengthData$PIN<-data2$PIN
+# Wide to Long
+srelLong<-strengthData %>% gather(Goal,StRel,Goal1StrRel:Goal6StrRel)
+# Rename factor levels
+srelLong$Goal<-mapvalues(srelLong$Goal, from = c("Goal1StrRel","Goal2StrRel","Goal3StrRel","Goal4StrRel","Goal5StrRel","Goal6StrRel"),
+                         to = c("Goal1","Goal2","Goal3","Goal4","Goal5","Goal6"))
+
+#############################################
+### Relevance of weakness to each project ###
+# Select vars
+weakData<-data2 %>% dplyr::select(tidyselect::vars_select(names(data2), matches('WeakRel')))
+# Check cor
+cor(weakData, use = "pairwise.complete.obs")
+# Add PIN
+weakData$PIN<-data2$PIN
+# Wide to Long
+wrelLong<-weakData %>% gather(Goal,WeakRel,Goal1WeakRel:Goal6WeakRel)
+# Rename factor levels
+wrelLong$Goal<-mapvalues(wrelLong$Goal, from = c("Goal1WeakRel","Goal2WeakRel","Goal3WeakRel","Goal4WeakRel","Goal5WeakRel","Goal6WeakRel"),
+                         to = c("Goal1","Goal2","Goal3","Goal4","Goal5","Goal6"))
+
+#########################
+### Trust best friend ###
+# Select vars
+trustData<-data2 %>% dplyr::select(tidyselect::vars_select(names(data2), matches('TrustBP')))
+# Check cor
+cor(trustData, use = "pairwise.complete.obs")
+# Add PIN
+trustData$PIN<-data2$PIN
+# Wide to Long
+tLong<-trustData %>% gather(Goal,Trust,Goal1TrustBP:Goal6TrustBP)
+# Rename factor levels
+tLong$Goal<-mapvalues(tLong$Goal, from = c("Goal1TrustBP","Goal2TrustBP","Goal3TrustBP","Goal4TrustBP","Goal5TrustBP","Goal6TrustBP"),
+                      to = c("Goal1","Goal2","Goal3","Goal4","Goal5","Goal6"))
+
+###########################
+### Rely on best friend ###
+# Select vars
+relyData<-data2 %>% dplyr::select(tidyselect::vars_select(names(data2), matches('RelyBP')))
+# Check cor
+cor(relyData, use = "pairwise.complete.obs")
+# Add PIN
+relyData$PIN<-data2$PIN
+# Wide to Long
+rLong<-relyData %>% gather(Goal,Rely,Goal1RelyBP:Goal6RelyBP)
+# Rename factor levels
+rLong$Goal<-mapvalues(rLong$Goal, from = c("Goal1RelyBP","Goal2RelyBP","Goal3RelyBP","Goal4RelyBP","Goal5RelyBP","Goal6RelyBP"),
+                      to = c("Goal1","Goal2","Goal3","Goal4","Goal5","Goal6"))
+
+##################################
+### Creating Working Long Data ###
+# Importance and Trust
+imp.trust<-merge(tLong,impLong,by=c("Goal","PIN"))
+# Adding rely
+imp.trust.rely<-merge(imp.trust,rLong,by=c("Goal","PIN"))
+# Adding relevance to strength
+imp.trust.rely.str<-merge(imp.trust.rely,srelLong,by=c("Goal","PIN"))
+# Adding relevance to weakness
+data3<-merge(imp.trust.rely.str,wrelLong,by=c("Goal","PIN"))
+# Adding Nomothetic Measures and Number of Goals
+# Number of goals
+data3$numGoals<-data2$numGoals
+# SITS Overall Trust
+data3$SITStrust<-data2$SITStrust
+# SITS Emotional Trust
+data3$SITSemo<-data2$SITSemo
+# SITS Reliability
+data3$SITSrely<-data2$SITSrely
+# ABI Ability
+data3$ABIable<-data2$ABIable
+# ABI Benevolence
+data3$ABIbenev<-data2$ABIbenev
+# ABI Integrity
+data3$ABItegridy<-data2$ABItegridy
+# Converting variables to proper format
+data3$Goal<-as.factor(data3$Goal)
+
+# Adding Factor Indicating Most vs Least Important Projects
+data3$impCat<-ifelse(data3$Goal=="Goal1",1,
+                 ifelse(data3$Goal=="Goal2",1,
+                 ifelse(data3$Goal=="Goal3",1,
+                 ifelse(data3$Goal=="Goal4",0,
+                 ifelse(data3$Goal=="Goal5",0,
+                 ifelse(data3$Goal=="Goal6",0,NA))))))
+# Converting to Factor
+data3$impCat<-as.factor(data3$impCat)
+
+data3$impCat<-factor(data3$impCat,
+                     levels=c(0,1),
+                     labels=c("Least Important","Most Important"))
+
+str(data3)
+
+#write.csv(data3, file="workingData.csv")
+
+#############################################
+### Extracting Goals andd Goal Categories ###
+#############################################
+## Creating a table with goal numbers for reference
+## Most important goals
+# Separate string by comma into each goal number
+mostImp<-setDT(data1)[, strsplit(as.character(Q4.1_0_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.1_0_GROUP)
+                      ][,.(Q4.1_0_GROUP = V1, PIN)]
+# Number goals from 1 to 3
+mostImp$Goal<-as.factor(rep(seq(from=1,to=3), length.out=length(mostImp$PIN)))
+# Convert to wide format
+mostImp<-mostImp %>% pivot_wider(names_from=Goal, values_from=Q4.1_0_GROUP)
+# Rename variables
+names(mostImp)[2:4]<-paste0("Goal",names(mostImp)[2:4])
+
+## Least important goals
+# Separate string by comma into each goal number
+leastImp<-setDT(data1)[, strsplit(as.character(Q4.2_0_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.2_0_GROUP)
+                       ][,.(Q4.2_0_GROUP = V1, PIN)]
+# Number goals from 1 to 3
+leastImp$Goal<-as.factor(rep(seq(from=6,to=4), length.out=length(leastImp$PIN)))
+# Convert to wide format
+leastImp<-leastImp %>% pivot_wider(names_from=Goal, values_from=Q4.2_0_GROUP)
+# Rename variables
+names(leastImp)[2:4]<-paste0("Goal",names(leastImp)[2:4])
+
+# Merging Most & Least Important Goals
+goalData<-merge(mostImp,leastImp, by="PIN")
+
+### Identifying goal categories
+## Most important
+# Splitting Academic Projects
+academicsMI<-setDT(data1)[, strsplit(as.character(Q4.3_0_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.3_0_GROUP)
+                          ][,.(Q4.3_0_GROUP = V1, PIN)]
+# Splitting Occupational Projects
+occupationalMI<-setDT(data1)[, strsplit(as.character(Q4.3_1_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.3_1_GROUP)
+                             ][,.(Q4.3_1_GROUP = V1, PIN)]
+# Splitting Health/Body Projects
+healthMI<-setDT(data1)[, strsplit(as.character(Q4.3_2_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.3_2_GROUP)
+                       ][,.(Q4.3_2_GROUP = V1, PIN)]
+# Splitting Interpersonal Projects
+interMI<-setDT(data1)[, strsplit(as.character(Q4.3_3_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.3_3_GROUP)
+                      ][,.(Q4.3_3_GROUP = V1, PIN)]
+# Splitting Leisure Projects
+leisureMI<-setDT(data1)[, strsplit(as.character(Q4.3_4_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.3_4_GROUP)
+                        ][,.(Q4.3_4_GROUP = V1, PIN)]
+# Splitting Intrapersonal Projects
+intraMI<-setDT(data1)[, strsplit(as.character(Q4.3_5_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.3_5_GROUP)
+                      ][,.(Q4.3_5_GROUP = V1, PIN)]
+# Splitting Maintenance Projects
+maintainMI<-setDT(data1)[, strsplit(as.character(Q4.3_6_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.3_6_GROUP)
+                         ][,.(Q4.3_6_GROUP = V1, PIN)]
+# Merging Academmic and Occupational MI Goals
+tryHard<-merge(academicsMI,occupationalMI,all=T,by="PIN")
+# Renaming Categories
+tryHard<-plyr::rename(tryHard, replace=c("Q4.3_0_GROUP"="Academic","Q4.3_1_GROUP"="Occupational"))
+# Adding MI Health
+tryHarder<-merge(tryHard,healthMI,all=T,by="PIN")
+# Renaming
+tryHarder<-plyr::rename(tryHarder, replace=c("Q4.3_2_GROUP"="Health"))
+# Adding MI INterpersonal
+tryHardest<-merge(tryHarder,interMI,all=T,by="PIN")
+# Renaming
+tryHardest<-plyr::rename(tryHardest, replace=c("Q4.3_3_GROUP"="Interpersonal"))
+# Adding MI Leisure
+tryHardester<-merge(tryHardest,leisureMI,all=T,by="PIN")
+# Renaming
+tryHardester<-plyr::rename(tryHardester, replace=c("Q4.3_4_GROUP"="Leisure"))
+# Adding MI Intrapersonal
+tryHardestest<-merge(tryHardester,intraMI,all=T,by="PIN")
+# Renaming
+tryHardestest<-plyr::rename(tryHardestest, replace=c("Q4.3_5_GROUP"="Intrapersonal"))
+# Adding MI Maintenance
+tryHardestester<-merge(tryHardestest,maintainMI,all=T,by="PIN")
+# Renaming
+tryHardestester<-plyr::rename(tryHardestester, replace=c("Q4.3_6_GROUP"="Maintenance"))
+# Converting to Long Format & Removing Missing Values
+goalMI<-na.omit(unique(tryHardestester %>% pivot_longer(c(Academic,Occupational,Health,Interpersonal,Leisure,Intrapersonal,Maintenance), 
+                                                        names_to = "Goal_Category", values_to = "Goal_Number")))
+
+## Least important
+# Splitting Academic Projects
+academicsLI<-setDT(data1)[, strsplit(as.character(Q4.4_0_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.4_0_GROUP)
+                          ][,.(Q4.4_0_GROUP = V1, PIN)]
+# Splitting Occupational Projects
+occupationalLI<-setDT(data1)[, strsplit(as.character(Q4.4_1_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.4_1_GROUP)
+                             ][,.(Q4.4_1_GROUP = V1, PIN)]
+# Splitting Health/Body Projects
+healthLI<-setDT(data1)[, strsplit(as.character(Q4.4_2_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.4_2_GROUP)
+                       ][,.(Q4.4_2_GROUP = V1, PIN)]
+# Splitting Interpersonal Projects
+interLI<-setDT(data1)[, strsplit(as.character(Q4.4_3_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.4_3_GROUP)
+                      ][,.(Q4.4_3_GROUP = V1, PIN)]
+# Splitting Leisure Projects
+leisureLI<-setDT(data1)[, strsplit(as.character(Q4.4_4_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.4_4_GROUP)
+                        ][,.(Q4.4_4_GROUP = V1, PIN)]
+# Adding MI Intrapersonal
+intraLI<-setDT(data1)[, strsplit(as.character(Q4.4_5_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.4_5_GROUP)
+                      ][,.(Q4.4_5_GROUP = V1, PIN)]
+# Splitting Maintenance Projects
+maintainLI<-setDT(data1)[, strsplit(as.character(Q4.4_6_GROUP), ",", fixed=TRUE), by = .(PIN, Q4.4_6_GROUP)
+                         ][,.(Q4.4_6_GROUP = V1, PIN)]
+# Merging Academmic and Occupational MI Goals
+tryHard2<-merge(academicsLI,occupationalLI,all=T,by="PIN")
+# Renaming Categories
+tryHard2<-plyr::rename(tryHard2, replace=c("Q4.4_0_GROUP"="Academic","Q4.4_1_GROUP"="Occupational"))
+# Adding LI Health
+tryHarder2<-merge(tryHard2,healthLI,all=T,by="PIN")
+# Renaming
+tryHarder2<-plyr::rename(tryHarder2, replace=c("Q4.4_2_GROUP"="Health"))
+# Adding LI INterpersonal
+tryHardest2<-merge(tryHarder2,interLI,all=T,by="PIN")
+# Renaming
+tryHardest2<-plyr::rename(tryHardest2, replace=c("Q4.4_3_GROUP"="Interpersonal"))
+# Adding LI Leisure
+tryHardester2<-merge(tryHardest2,leisureLI,all=T,by="PIN")
+# Renaming
+tryHardester2<-plyr::rename(tryHardester2, replace=c("Q4.4_4_GROUP"="Leisure"))
+# Adding LI Intrapersonal
+tryHardestest2<-merge(tryHardester2,intraLI,all=T,by="PIN")
+# Renaming
+tryHardestest2<-plyr::rename(tryHardestest2, replace=c("Q4.4_5_GROUP"="Intrapersonal"))
+# Adding LI Maintenance
+tryHardestester2<-merge(tryHardestest2,maintainLI,all=T,by="PIN")
+# Renaming
+tryHardestester2<-plyr::rename(tryHardestester2, replace=c("Q4.4_6_GROUP"="Maintenance"))
+# Converting to Long Format & Removing Missing Values
+goalLI<-na.omit(unique(tryHardestester2 %>% pivot_longer(c(Academic,Occupational,Health,Interpersonal,Leisure,Intrapersonal,Maintenance), 
+                                                        names_to = "Goal_Category", values_to = "Goal_Number")))
+
+# Merging Most & Least Important Goals
+goalData2<-bind_rows(goalMI,goalLI)
+# Converting to Long Format for Merging
+goalData<-goalData %>% pivot_longer(c(Goal1, Goal2, Goal3, Goal4, Goal5, Goal6), 
+                                   names_to = "Goal", values_to = "Goal_Number")
+# Merging Goal Tibbles
+finalGoal<-full_join(goalData, goalData2, by = c("PIN","Goal_Number"))
+
+#####################################################
+### Extracting the list of each Ss goal fron data ###
+qual_goal <- finalGoal
+
+# Naming as column in data1
+qual_goal$goal_content <- paste0("Q3.2_", qual_goal$Goal_Number)
+
+# Create dataframe with goal content
+q_vars_keep <- c("PIN",names(data1)[22:46])
+q_vars <-  data1[, ..q_vars_keep]
+
+# Transform to long
+q_vars <- q_vars %>%
+  pivot_longer(names_to = "goal_content", values_to = "text", -PIN) %>% 
+  arrange(PIN)
+data.table(q_vars)
+
+# Merge dataframes keeping only selected goals
+new_qual_goal <-  join(qual_goal, q_vars,by = c("PIN", "goal_content"), type = "left")
+
+# Creating Final Dataframe
+dataFinal<-full_join(data3, finalGoal, by=c("PIN", "Goal"))
+
+#write.csv(dataFinal, file="finalData.csv")
+
+####################################
+### Extracting Friend Attributes ###
+####################################
+# Adding Strength Content
+strengthData$Strength <- ifelse(!is.na(data1$Q12.2_0_1_RANK == 1), as.character(data1$Q12.1_1),
+                         ifelse(!is.na(data1$Q12.2_0_2_RANK == 1), as.character(data1$Q12.1_2),
+                         ifelse(!is.na(data1$Q12.2_0_3_RANK == 1), as.character(data1$Q12.1_3),
+                         ifelse(!is.na(data1$Q12.2_0_4_RANK == 1), as.character(data1$Q12.1_4),
+                         ifelse(!is.na(data1$Q12.2_0_5_RANK == 1), as.character(data1$Q12.1_5), NA)))))
+
+# Creating a long dataframe to attach strengths
+strengthData_Long <- strengthData %>% 
+  pivot_longer(names_to = "Goal", values_to = "Strength_Relevance", -c(PIN, Strength))
+
+# Relabeling Goal levels
+strengthData_Long$Goal<-as.factor(paste0("Goal", rep(seq(from=1, to=6), 
+                                  length.out=length(strengthData_Long$PIN))))
+
+# Adding Weakness Content
+weakData$Weakness <- ifelse(!is.na(data1$Q12.4_0_1_RANK == 1), as.character(data1$Q12.3_1),
+                     ifelse(!is.na(data1$Q12.4_0_2_RANK == 1), as.character(data1$Q12.3_2),
+                     ifelse(!is.na(data1$Q12.4_0_3_RANK == 1), as.character(data1$Q12.3_3),
+                     ifelse(!is.na(data1$Q12.4_0_4_RANK == 1), as.character(data1$Q12.3_4),
+                     ifelse(!is.na(data1$Q12.4_0_5_RANK == 1), as.character(data1$Q12.3_5), NA)))))
+
+# Creating a long dataframe to attach strengths
+weakData_Long <- weakData %>% 
+  pivot_longer(names_to = "Goal", values_to = "weakness_Relevance", -c(PIN, Weakness))
+
+# Relabeling Goal levels
+weakData_Long$Goal<-as.factor(paste0("Goal", rep(seq(from=1, to=6), 
+                              length.out=length(weakData_Long$PIN))))
+
+# Merging strengths and weaknesses
+attribute_data <- merge(weakData_Long, strengthData_Long, by = c("PIN", "Goal"))
+
+# Merging attributes and goals
+idio_data <- merge(attribute_data, new_qual_goal, by = c("PIN", "Goal"))
+
+# Removing unneccasary column
+idio_data$goal_content <- NULL
+idio_data$Goal_Number <- NULL
+
+# Reordering columns
+idio_data <- idio_data[, c(1, 2, 7, 8, 5, 6, 3, 4)]
+
+#write.csv(idio_data, file="qualitative_data.csv")
+
+####################################################################################################################################################
+####################################################################################################################################################
+###############################################################  Analyses & Graphing  ##############################################################
+####################################################################################################################################################
+####################################################################################################################################################
+
+# Converting Variables into Proper Format
+dataFinal$PIN<-as.factor(dataFinal$PIN)
+dataFinal$Goal<-as.factor(dataFinal$Goal)
+dataFinal$Goal_Category<-as.factor(dataFinal$Goal_Category)
+
+###########################
+### Centering IVs by Ss ###
+###########################
+# Relevance to Strength
+dataFinal<-ddply(dataFinal,.(PIN), plyr::mutate, rStrMean = mean(StRel))
+dataFinal$StrRelC<-dataFinal$StRel-dataFinal$rStrMean
+dataFinal$StrRel_GlobC <- scale(dataFinal$StRel, scale = FALSE)[,]
+
+# Relevance to Weakness
+dataFinal<-ddply(dataFinal,.(PIN), plyr::mutate, rWeakMean = mean(WeakRel))
+dataFinal$WeakRelC<-dataFinal$WeakRel-dataFinal$rWeakMean
+dataFinal$WeakRel_GlobC <- scale(dataFinal$WeakRel, scale = FALSE)[,]
+
+# Importance
+dataFinal<-ddply(dataFinal,.(PIN), plyr::mutate, ImpC = mean(Importance))
+dataFinal$ImportanceC <-dataFinal$Importance-dataFinal$ImpC
+dataFinal$Imp_GlobC <- scale(dataFinal$Importance, scale = FALSE)[,]
+
+#############################
+### Checking Correlations ###
+#############################
+# Attributes
+cor.test(dataFinal$StrRelC,dataFinal$WeakRelC, use = "pairwise.complete.obs")
+# 0.283
+
+# Checking descriptives
+describe(dataFinal$StRel)
+describe(dataFinal$WeakRel)
+
+# DVs
+cor.test(dataFinal$Trust,dataFinal$Rely, use = "pairwise.complete.obs")
+# 0.791
+
+# Creating composite criterion
+dataFinal$trustRely<-(dataFinal$Trust+dataFinal$Rely)/2
+
+# Centering DV for Interpretability ###
+#dataFinal$trustRelyC <- dataFinal$trustRely - 4
+
+# Printing correlations among nomothetic measures of trust
+nomoMeasures<-subset(dataFinal, select = c(SITStrust,SITSemo,SITSrely,
+                                           ABIable,ABIbenev,ABItegridy))
+#apa.cor.table(nomoMeasures, filename="NomoTable_APA.doc", table.number=3)
+
+
+################
+### Graphing ###
+################
+###################
+### Crude Hists ###
+# Goal-specific trust
+hist(dataFinal$trustRely)
+describe(dataFinal$trustRely)
+
+# Goal immportance
+hist(dataFinal$Importance)
+describe(dataFinal$Importance)
+
+## Relevance to weakness ##
+hist(dataFinal$WeakRel)
+# Descriptives
+describe(dataFinal$WeakRel)
+describeBy(dataFinal$trustRely, dataFinal$WeakRel)
+# Publication plot
+rel_weak_Hist <- dataFinal %>%
+  ggplot(aes(x = WeakRel)) +
+  geom_histogram() +
+  xlab("Relevance to Weakness")+ylab("Count") + # add labels 
+  theme_bw() +
+  theme(panel.grid.major = element_blank(),
+       panel.grid.minor = element_blank(),
+       panel.border = element_rect(fill = NA, colour = "NA"),
+       axis.line = element_line(size = 1, colour = "grey80"),
+       legend.position = "none",
+       legend.title = element_blank())
+rel_weak_Hist
+
+# Relevance to strength
+hist(dataFinal$StRel)
+# Descriptives
+describe(dataFinal$StRel)
+describeBy(dataFinal$trustRely, dataFinal$StRel)
+# Publication plot
+rel_str_Hist <- dataFinal %>%
+  ggplot(aes(x = StRel)) +
+  geom_histogram() +
+  xlab("Relevance to Strength")+ylab("Count") + # add labels 
+  theme_bw() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "none",
+        legend.title = element_blank())
+rel_str_Hist
+
+# SITS General trust
+hist(dataFinal$SITStrust)
+# Descriptives
+describe(dataFinal$SITStrust)
+# Publication plot
+SITStrust_Hist <- dataFinal %>%
+  ggplot(aes(x = SITStrust)) +
+  geom_histogram() +
+  xlab("SITS Overall Trust")+ylab("Count") + # add labels 
+  xlim(-4, 4)+
+  theme_bw() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "none",
+        legend.title = element_blank())
+SITStrust_Hist
+
+# SITS Emotional trust
+hist(dataFinal$SITSemo)
+# Descriptives
+describe(dataFinal$SITSemo)
+# Publication plot
+SITSemo_Hist <- dataFinal %>%
+  ggplot(aes(x = SITSemo)) +
+  geom_histogram() +
+  xlab("SITS Emotional Trust")+ylab("Count") + # add labels 
+  xlim(-4, 4)+
+  theme_bw() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "none",
+        legend.title = element_blank())
+SITSemo_Hist
+
+# SITS Reliability
+hist(dataFinal$SITSrely)
+# Descriptives
+describe(dataFinal$SITSrely)
+# Publication plot
+SITSrely_Hist <- dataFinal %>%
+  ggplot(aes(x = SITSrely)) +
+  geom_histogram() +
+  xlab("SITS Reliability")+ylab("Count") + # add labels 
+  xlim(-4, 4)+
+  theme_bw() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "none",
+        legend.title = element_blank())
+SITSrely_Hist
+
+# ABI Ability
+hist(dataFinal$ABIable)
+# Descriptives
+describe(dataFinal$ABIable)
+# Publication plot
+ABIable_Hist <- dataFinal %>%
+  ggplot(aes(x = ABIable)) +
+  geom_histogram() +
+  xlab("ABI Ability")+ylab("Count") + # add labels 
+  xlim(-2, 2)+
+  theme_bw() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "none",
+        legend.title = element_blank())
+ABIable_Hist
+
+# ABI Benevolence
+hist(dataFinal$ABIbenev)
+# Descriptives
+describe(dataFinal$ABIbenev)
+# Publication plot
+ABIbenev_Hist <- dataFinal %>%
+  ggplot(aes(x = ABIbenev)) +
+  geom_histogram() +
+  xlab("ABI Benevolence")+ylab("Count") + # add labels 
+  xlim(-2, 2)+
+  theme_bw() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "none",
+        legend.title = element_blank())
+ABIbenev_Hist
+
+# ABI Integrity
+hist(dataFinal$ABItegridy)
+# Descriptives
+describe(dataFinal$ABItegridy)
+# Publication plot
+ABItegridy_Hist <- dataFinal %>%
+  ggplot(aes(x = ABItegridy)) +
+  geom_histogram() +
+  xlab("ABI Integrity")+ylab("Count") + # add labels 
+  xlim(-2, 2)+
+  theme_bw() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "none",
+        legend.title = element_blank())
+ABItegridy_Hist
+
+#####################################
+### Importance Manipulation Check ###
+#####################################
+
+# Checking importance by goal
+describeBy(dataFinal$Importance,group = dataFinal$Goal)
+describeBy(dataFinal$Importance,group = dataFinal$Goal_Category)
+describeBy(dataFinal$trustRely,group = dataFinal$Goal)
+
+# Graphing Importance by ImpCat
+impCheck <-ggplot(data = dataFinal,aes(x = Goal, y=ImportanceC))+
+  geom_point(aes(colour = PIN))+
+  geom_smooth(method = "lm", se = T, aes(group = impCat, colour=impCat))+
+  xlab("Goal")+ylab("Importance")+ # add labels
+  ylim(-4, 4)+#xlim(-4, 4)+
+  theme_bw()+
+  theme(panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "none",
+        legend.title = element_blank())
+impCheck
+
+# Graphing Trust by Importance
+ImpTrust <-ggplot(data = dataFinal, 
+  aes(x = ImportanceC, y=trustRely))+
+  #geom_point(aes(colour = PIN))+
+  geom_smooth(method="lm", se = T)+#, aes(group = PIN))+# we add group level
+  xlab("Importance")+ylab("Trust")+ # add labels
+  ylim(-4, 4)+
+  #xlim(-4, 4)+
+  theme_bw()+
+  theme(panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "none",
+        legend.title = element_blank())
+ImpTrust
+
+#############################
+### Relevance to Weakness ###
+#############################
+# Graphing by Ss with RelWeak
+relWeakP <-ggplot(data = dataFinal, 
+  aes(x = WeakRelC, y=trustRely))+ 
+  geom_point(aes(colour = PIN))+
+  geom_smooth(method = "lm", se = F, aes(group = PIN))+ # we add group level
+  xlab("Relevance to Weakness")+ylab("Trust")+ # add labels
+  ylim(-4, 4)+
+  theme_bw()+
+  theme(panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "none",
+        legend.title = element_blank())
+relWeakP
+
+# Plotting single regression equation
+relWeakP2 <-ggplot(data = dataFinal, 
+  aes(x = WeakRelC, y=trustRely))+ 
+  geom_point(aes(colour = PIN))+
+  geom_smooth(method = "lm", se = F)+ # we add group level
+  xlab("Relevance to Weakness")+ylab("Trust")+ # add labels
+  ylim(-4, 4)+
+  theme_bw()+
+  theme(panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "none",
+        legend.title = element_blank())
+relWeakP2
+
+# Graphing by Importance with RelWeak
+relWeakImp <-ggplot(data = dataFinal, 
+  aes(x = WeakRelC, y=trustRely))+ 
+  geom_smooth(method = "lm", se = T, aes(group = impCat, colour=impCat))+# we add group level
+  xlab("Relevance to Weakness")+ylab("Trust")+ # add labels
+  ylim(-4, 4)+
+  theme_bw()+
+  theme(panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "top",
+        legend.title = element_blank())
+relWeakImp
+
+# Graphing by RelWeak
+relWeak <-ggplot(data = dataFinal, 
+  aes(x = WeakRelC, y=trustRely))+ 
+  geom_smooth(method = "lm", se = T)+
+  xlab("Relevance to Weakness")+ylab("Trust")+ # add labels
+  ylim(-4, 4)+
+  theme_bw()+
+  theme(panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "top",
+        legend.title = element_blank())
+relWeak
+
+##############################
+### Releveance to Strength ###
+##############################
+# Graphing by Ss with RelStr
+relStrP <-ggplot(data = dataFinal, 
+  aes(x = StrRelC, y=trustRely))+ 
+  geom_point(aes(colour = PIN))+
+  geom_smooth(method = "lm", se = F, aes(group = PIN))+# we add group level
+  xlab("Relevance to Strength")+ylab("Trust")+ # add labels
+  ylim(-4, 4)+
+  theme_bw()+
+  theme(panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "none",
+        legend.title = element_blank())
+relStrP
+
+# Plotting single regression equation
+relStrP2 <-ggplot(data = dataFinal, 
+  aes(x = StrRelC, y=trustRely))+ 
+  #geom_point(aes(colour = PIN))+
+  geom_smooth(method = "lm", se = T)+# we add group level
+  xlab("Relevance to Strength")+ylab("Trust")+ # add labels
+  ylim(-4, 4)+
+  theme_bw()+
+  theme(panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "none",
+        legend.title = element_blank())
+relStrP2
+
+# Graphing by Importance with Relstr
+relStrImp <-ggplot(data = dataFinal, 
+  aes(x = StrRelC, y=trustRely))+ 
+  geom_smooth(method = "lm", se = T, aes(group = impCat, colour=impCat))+ # add group level
+  xlab("Relevance to Strength")+ylab("Trust")+ # add labels
+  ylim(-4, 4)+
+  theme_bw()+
+  theme(panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "top",
+        legend.title = element_blank())
+relStrImp
+
+# Graphing by Strength
+relStr <-ggplot(data = dataFinal, 
+  aes(x = StrRelC, y=trustRely))+ 
+  geom_smooth(method = "lm", se = T)+
+  xlab("Relevance to Strength")+ylab("Trust")+ # add labels
+  ylim(-4, 4)+
+  theme_bw()+
+  theme(panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "top",
+        legend.title = element_blank())
+relStr
+
+##################
+### Importance ###
+##################
+# Graphing by Importance
+ProjectImportance <-ggplot(data = dataFinal, 
+  aes(x = ImportanceC, y=trustRely))+ 
+  geom_smooth(method = "lm", se = T, aes(group = impCat, colour=impCat))+ # add group level
+  xlab("Continuous Importance")+ylab("Trust")+ # add labels
+  ylim(-4, 4)+
+  theme_bw()+
+  theme(panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "top",
+        legend.title = element_blank())
+ProjectImportance
+
+###############
+### By Goal ###
+###############
+# Subsetting a random 4 PINs
+set.seed(101)
+byGoalSample<- sample(dataFinal$PIN,4)
+byGoalSample2<-dataFinal[dataFinal$PIN %in% byGoalSample,]
+
+# Graphing Ss across goals
+byGoal <-ggplot(data = byGoalSample2, 
+  aes(x = Goal, y=trustRely))+
+  facet_grid(vars(PIN))+
+  geom_point(aes(colour = Goal))+
+  geom_smooth(method = "lm", se = F, aes(group = PIN))+# we add group level
+  xlab("Goal")+ylab("Trust")+ # add labels
+  ylim(-4, 4)+
+  theme(legend.position = "none")
+byGoal
+# Graphing Ss across goals
+byGoal2 <-ggplot(data = byGoalSample2, 
+  aes(x = Goal, y=trustRely))+
+  facet_grid(vars(PIN))+
+  geom_point(aes(colour = PIN))+
+  geom_line(aes(colour = PIN,group = 1))+
+  xlab("Goal")+ylab("Trust")+ # add labels
+  ylim(-4, 4)+
+  theme(legend.position = "none")
+byGoal2
+
+# This is in the dissertation manuscript
+# Graphing Ss across goals
+byGoal3 <-ggplot(data = byGoalSample2, 
+  aes(x = Goal, y=trustRely))+
+  facet_grid(vars(PIN))+
+  geom_point(aes(colour = PIN))+
+  geom_line(aes(colour = PIN,group = 1))+
+  xlab("Goal")+ylab("Trust")+ # add labels
+  ylim(-4, 4)+
+  theme_bw()+
+  theme(panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "top",
+        legend.title = element_blank())
+byGoal3
+
+##############
+### Ss 229 ###
+##############
+ss229<-dataFinal[dataFinal$PIN ==229,]
+
+# This is in the dissertation manuscript
+byGoalSS229 <-ggplot(data = ss229, 
+  aes(x = Goal, y=trustRely))+
+  facet_grid(vars(PIN))+
+  geom_point(aes(colour = PIN))+
+  geom_line(aes(colour = PIN,group = 1))+
+  xlab("Relevance to Strength")+ylab("Trust")+ # add labels
+  ylim(-4, 4)+
+  theme_bw()+
+  theme(panel.border = element_rect(fill = NA, colour = "NA"),
+        axis.line = element_line(size = 1, colour = "grey80"),
+        legend.position = "none")#,
+#legend.title = element_blank())
+byGoalSS229
+
+################
+### Analyses ###
+################
+####################
+### Descriptives ###
+####################
+describe(dataFinal$numGoals)
+#  n    mean    sd   median  trimmed  mad  min max  range skew  kurtosis  se
+# 2406  13.96  4.95     13    13.53  4.45   6   25    19  0.64   -0.32   0.1
+
+########################
+### Random Structure ###
+Null.Model<-lmer(trustRely ~ 1 + (1+impCat|PIN), 
+                 data=dataFinal, REML=F)
+summary(Null.Model)
+#ICC.Model(Null.Model)
+
+null.PCA<-rePCA(Null.Model)
+summary(null.PCA)
+# -0.4 cor between intercept and slope
+# Intercept accounts for most of the var
+
+##########################
+### Manipulation check ###
+# Checking whether the Most Important Goals are rated as more important than the Least Important Goals
+T1<-lmer(Importance~impCat
+         + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(T1)
+
+T1.1<-lmerTest::lmer(Importance~impCat
+                     + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(T1.1)
+# The manipulation worked
+# The Most Important Goals are rated more importantly
+
+# Checking whether Goal Importance varies across categories
+# Setting reference as Academic
+dataFinal <- within(dataFinal, Goal_Category <- relevel(Goal_Category, ref = "Academic"))
+T2<-lmer(Importance~Goal_Category
+         + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(T2)
+# Checking main effect
+T2.1<-lmerTest::lmer(Importance~Goal_Category
+                     + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(T2.1)
+anova(T2.1)
+# Project categories are not rated as equally important
+
+# Printing Model Results for Dissertation
+# htmlreg(list(T2),file = "ImpByCat", 
+#         single.row = FALSE, stars = c(0.001, 0.01, 0.05,0.1),digits=3,
+#         inline.css = FALSE, doctype = TRUE, html.tag = TRUE, 
+#         head.tag = TRUE, body.tag = TRUE)
+
+# Setting reference as Occupational 
+dataFinal <- within(dataFinal, Goal_Category <- relevel(Goal_Category, ref = "Occupational"))
+# Looking at potential differences
+T2.2<-lmer(Importance~Goal_Category
+           + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(T2.2)
+
+# Checking whether Trust varies across Goal Categories
+dataFinal <- within(dataFinal, Goal_Category <- relevel(Goal_Category, ref = "Academic"))
+T3<-lmer(trustRely~Goal_Category
+         + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(T3)
+# Model failed to converge
+# Testing main effects
+T3.1<-lmerTest::lmer(trustRely~Goal_Category
+                     + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(T3.1)
+anova(T3.1)
+# p = 0.067
+
+# Friends are trusted more for Interpersonal Projects
+# Printing Model Results for Dissertation
+# htmlreg(list(T3.1),file = "TrustByCat", 
+#         single.row = FALSE, stars = c(0.001, 0.01, 0.05,0.1),digits=3,
+#         inline.css = FALSE, doctype = TRUE, html.tag = TRUE, 
+#         head.tag = TRUE, body.tag = TRUE)
+
+# Setting reference as Interpersonal (Highest trust)
+dataFinal <- within(dataFinal, Goal_Category <- relevel(Goal_Category, ref = "Interpersonal"))
+T3.2<-lmer(trustRely~Goal_Category
+           + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(T3.2)
+# Friends are trusted equivalently for Occupational and Interpersonal Goals
+# Friends are trusted more for Interpersonal than Academic, Health, Leisure, or Maintenance Goals
+
+#####################
+### Controls only ###
+#####################
+# Full Randy
+ControlsOnly<-lmerTest::lmer(trustRely ~ SITStrust + SITSemo + SITSrely 
+                             + ABIable + ABIbenev + ABItegridy
+                             + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(ControlsOnly)
+anova(ControlsOnly)
+
+# Partial Randy
+ControlsOnly2<-lmerTest::lmer(trustRely ~ SITStrust + SITSemo + SITSrely 
+                              + ABIable + ABIbenev + ABItegridy
+                              + (1|PIN), data=dataFinal, REML=F)
+summary(ControlsOnly2)
+anova(ControlsOnly2)
+
+############################
+### Full Random Structre ###
+############################
+#############################
+### Primary with controls ###
+#############################
+# Main effects only 
+omgplzworkME<-lmer(trustRely ~ SITStrust + SITSemo + SITSrely 
+                   + ABIable + ABIbenev + ABItegridy
+                   + WeakRelC+impCat + StrRelC+impCat
+                   + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(omgplzworkME)
+# Model failed to converge
+## Importance (+) and Strength (+) predict trust
+
+# Interaction between strength and importance
+omgplzworkSxI<-lmer(trustRely ~ SITStrust + SITSemo + SITSrely 
+                    + ABIable + ABIbenev + ABItegridy
+                    + WeakRelC+impCat + StrRelC*impCat
+                    + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(omgplzworkSxI)
+## Importance (+) and Strength (+) predict trust
+anova(omgplzworkME,omgplzworkSxI)
+# Not different
+
+# Interaction between weakness and importance
+omgplzworkWxI<-lmer(trustRely ~ SITStrust + SITSemo + SITSrely 
+                    + ABIable + ABIbenev + ABItegridy
+                    + WeakRelC*impCat + StrRelC+impCat
+                    + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(omgplzworkWxI)
+## Importance (+) and Strength (+) predict trust
+anova(omgplzworkME,omgplzworkWxI)
+# Not different
+
+# Full model
+omgplzworkFull<-lmer(trustRely ~ SITStrust + SITSemo + SITSrely 
+                     + ABIable + ABIbenev + ABItegridy
+                     + WeakRelC*impCat + StrRelC*impCat
+                     + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(omgplzworkFull)
+## Importance (+) and Strength (+) predict trust
+anova(omgplzworkSxI,omgplzworkFull)
+# Not different
+anova(omgplzworkWxI,omgplzworkFull)
+# Not different
+
+# Printing Model Results for Dissertation
+# htmlreg(list(omgplzworkME,omgplzworkSxI,omgplzworkWxI,omgplzworkFull),
+#         file = "FullRandyControlsModelResults.doc", 
+#         single.row = FALSE, stars = c(0.001, 0.01, 0.05,0.1),digits=3,
+#         inline.css = FALSE, doctype = TRUE, html.tag = TRUE, 
+#         head.tag = TRUE, body.tag = TRUE)
+
+########################################
+### Removing Nonpredictive variables ###
+########################################
+# Removing SITS one at a time
+omgplzwork<-lmer(trustRely ~ SITSemo + SITSrely 
+                 + ABIable + ABIbenev + ABItegridy
+                 + WeakRelC*impCat + StrRelC*impCat 
+                 + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(omgplzwork)
+# Slight REDUCTION in the residual and INCREASE in Intercept
+# Checking model fit
+anova(omgplzworkFull,omgplzwork)
+# No difference
+
+# Removing SITS one at a time
+omgplzwork2<-lmer(trustRely ~ SITSrely 
+                  + ABIable + ABIbenev + ABItegridy
+                  + WeakRelC*impCat + StrRelC*impCat 
+                  + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(omgplzwork2)
+# Slight REDUCTION in the residual and INCREASE in Intercept
+# Checking model fit
+anova(omgplzwork,omgplzwork2)
+# No difference
+
+# Removing SITS one at a time
+omgplzwork3<-lmer(trustRely ~ ABIable + ABIbenev + ABItegridy
+                  + WeakRelC*impCat + StrRelC*impCat 
+                  + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(omgplzwork3)
+# Slight INCREASE in Intercept and no effect on residual
+# Slight decrease in predictors
+# Checking model fit
+anova(omgplzwork2,omgplzwork3)
+# No difference
+
+# Removing ABI one at a time
+omgplzwork4<-lmer(trustRely ~ ABIbenev + ABItegridy
+                  + WeakRelC*impCat + StrRelC*impCat 
+                  + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(omgplzwork4)
+# Slight INCREASE in Intercept and no effect on residual
+# Mixed effect on predictors
+# Checking model fit
+anova(omgplzwork3,omgplzwork4)
+# No difference
+
+# Removing ABI one at a time
+omgplzwork5<-lmer(trustRely ~ ABItegridy
+                  + WeakRelC*impCat + StrRelC*impCat 
+                  + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(omgplzwork5)
+# Slight INCREASE in Intercept and residual
+# Mixed effect on predictors
+# Checking model fit
+anova(omgplzwork,omgplzwork5)
+# No difference
+
+# Removing ABI one at a time
+omgplzwork6<-lmer(trustRely ~ WeakRelC*impCat + StrRelC*impCat 
+                  + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(omgplzwork6)
+# Slight INCREASE in Intercept and DECREASE in residual
+# Mixed effect on predictors
+# Checking model fit
+anova(omgplzwork5,omgplzwork6)
+# No difference
+
+# Removing interaction between weak and imp
+omgplzwork7<-lmer(trustRely ~ WeakRelC + StrRelC*impCat 
+                  + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(omgplzwork7)
+# Slight DECREASE in Intercept and residual
+# Slight decrease in predictors
+# Checking model fit
+anova(omgplzwork6,omgplzwork7)
+# No difference
+
+# Removing weakRel
+omgplzwork8<-lmer(trustRely ~ StrRelC*impCat 
+                  + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(omgplzwork8)
+# Slight decrease in Intercept and increase in residual
+# INCREASE in most predictors
+# Checking model fit
+anova(omgplzwork7,omgplzwork8)
+# Marginal difference
+
+# Removing interaction between importance and relStrength
+omgplzwork9<-lmer(trustRely ~ WeakRelC + StrRelC+impCat 
+                  + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(omgplzwork9)
+# Slight INCREASE in residual and DECREASE in intercept
+# Mixed effect on predictors -- Big increase for relStrength
+# Importance remains significant
+# Checking model fit
+anova(omgplzwork7,omgplzwork9)
+# No difference
+
+################################
+### Primary without controls ###
+################################
+MainEffects<-lmer(trustRely ~ WeakRelC + StrRelC + impCat
+                  + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(MainEffects)
+# WeakRel and Importance are not significant
+## Adding interaction between Strength and Importance
+StrengthByImportance<-lmer(trustRely ~ WeakRelC + StrRelC*impCat
+                           + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(StrengthByImportance)
+# The interaction is negative but not significant
+anova(MainEffects,StrengthByImportance)
+# Not a significant improvement in model fit
+## Adding interaction between Weakness and Importance
+weaknessByImportance<-lmer(trustRely ~ WeakRelC*impCat + StrRelC
+                           + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(weaknessByImportance)
+# The interaction is not significant
+anova(MainEffects,weaknessByImportance)
+# Not a significant improvement in model fit
+## Adding both interactions for completeness
+FullModel<-lmer(trustRely ~ WeakRelC*impCat + StrRelC*impCat
+                + (1+dummy(impCat)|PIN), data=dataFinal, REML=F)
+summary(FullModel)
+# Neither interaction is significant
+anova(StrengthByImportance,FullModel)
+anova(weaknessByImportance,FullModel)
+# Not a significant improvement in model fit over either singular interaction models
+
+# Printing Model Results for Dissertation
+# htmlreg(list(MainEffects,StrengthByImportance,weaknessByImportance,FullModel),file = "ModelResults.doc", 
+#         single.row = FALSE, stars = c(0.001, 0.01, 0.05,0.1),digits=3,
+#         inline.css = FALSE, doctype = TRUE, html.tag = TRUE, 
+#         head.tag = TRUE, body.tag = TRUE)
+
+################################
+### Reduced Random Structure ###
+################################
+#############################
+### Primary with controls ###
+#############################
+# Main effects only 
+ControlsMEReduced<-lmer(trustRely ~ SITStrust + SITSemo + SITSrely 
+                        + ABIable + ABIbenev + ABItegridy
+                        + WeakRelC+impCat + StrRelC+impCat
+                        + (1|PIN), data=dataFinal, REML=F)
+summary(ControlsMEReduced)
+# Model failed to converge
+## Importance (+) and Strength (+) predict trust
+
+# Interaction between strength and importance
+ControlsSxIReduced<-lmer(trustRely ~ SITStrust + SITSemo + SITSrely 
+                         + ABIable + ABIbenev + ABItegridy
+                         + WeakRelC+impCat + StrRelC*impCat
+                         + (1|PIN), data=dataFinal, REML=F)
+summary(omgplzworkSxI)
+## Importance (+) and Strength (+) predict trust
+anova(ControlsMEReduced,ControlsSxIReduced)
+# Not different
+
+# Interaction between weakness and importance
+ControlsWxIReduced<-lmer(trustRely ~ SITStrust + SITSemo + SITSrely 
+                         + ABIable + ABIbenev + ABItegridy
+                         + WeakRelC*impCat + StrRelC+impCat
+                         + (1|PIN), data=dataFinal, REML=F)
+summary(ControlsWxIReduced)
+## Importance (+) and Strength (+) predict trust
+anova(ControlsMEReduced,ControlsWxIReduced)
+# Not different
+
+# Full model
+ControlsFullReduced<-lmer(trustRely ~ SITStrust + SITSemo + SITSrely 
+                          + ABIable + ABIbenev + ABItegridy
+                          + WeakRelC*impCat + StrRelC*impCat
+                          + (1|PIN), data=dataFinal, REML=F)
+summary(ControlsFullReduced)
+## Importance (+) and Strength (+) predict trust
+anova(ControlsSxIReduced,ControlsFullReduced)
+# Not different
+anova(ControlsWxIReduced,ControlsFullReduced)
+# Not different
+
+########################################
+### Removing Nonpredictive variables ###
+########################################
+# Removing SITS one at a time
+omgplzwork10<-lmer(trustRely ~ SITSemo + SITSrely 
+                   + ABIable + ABIbenev + ABItegridy
+                   + WeakRelC*impCat + StrRelC*impCat 
+                   + (1|PIN), data=dataFinal, REML=F)
+summary(omgplzwork10)
+# Slight REDUCTION in the residual and INCREASE in Intercept
+
+# Removing SITS one at a time
+omgplzwork11<-lmer(trustRely ~ SITSrely 
+                   + ABIable + ABIbenev + ABItegridy
+                   + WeakRelC*impCat + StrRelC*impCat 
+                   + (1|PIN), data=dataFinal, REML=F)
+summary(omgplzwork11)
+# Slight REDUCTION in the residual and INCREASE in Intercept
+# Checking model fit
+anova(omgplzwork10,omgplzwork11)
+# No difference
+
+# Removing SITS one at a time
+omgplzwork12<-lmer(trustRely ~ ABIable + ABIbenev + ABItegridy
+                   + WeakRelC*impCat + StrRelC*impCat 
+                   + (1|PIN), data=dataFinal, REML=F)
+summary(omgplzwork12)
+# Slight INCREASE in Intercept and no effect on residual
+# Slight decrease in predictors
+# Checking model fit
+anova(omgplzwork11,omgplzwork12)
+# No difference
+
+# Removing ABI one at a time
+omgplzwork13<-lmer(trustRely ~ ABIbenev + ABItegridy
+                   + WeakRelC*impCat + StrRelC*impCat 
+                   + (1|PIN), data=dataFinal, REML=F)
+summary(omgplzwork13)
+# Slight INCREASE in Intercept and no effect on residual
+# Mixed effect on predictors
+# Checking model fit
+anova(omgplzwork12,omgplzwork13)
+# No difference
+
+# Removing ABI one at a time
+omgplzwork14<-lmer(trustRely ~ ABItegridy
+                   + WeakRelC*impCat + StrRelC*impCat 
+                   + (1|PIN), data=dataFinal, REML=F)
+summary(omgplzwork14)
+# Slight INCREASE in Intercept and residual
+# Mixed effect on predictors
+# Checking model fit
+anova(omgplzwork13,omgplzwork14)
+# No difference
+
+# Removing ABI one at a time
+omgplzwork15<-lmer(trustRely ~ WeakRelC*impCat + StrRelC*impCat 
+                   + (1|PIN), data=dataFinal, REML=F)
+summary(omgplzwork15)
+# Slight INCREASE in Intercept and DECREASE in residual
+# Mixed effect on predictors
+# Checking model fit
+anova(omgplzwork14,omgplzwork15)
+# No difference
+
+# Removing interaction between weak and imp
+omgplzwork16<-lmer(trustRely ~ WeakRelC + StrRelC*impCat 
+                   + (1|PIN), data=dataFinal, REML=F)
+summary(omgplzwork16)
+# Slight DECREASE in Intercept and residual
+# Slight decrease in predictors
+# Checking model fit
+anova(omgplzwork15,omgplzwork16)
+# No difference
+
+# Removing weakRel
+omgplzwork17<-lmer(trustRely ~ StrRelC*impCat 
+                   + (1|PIN), data=dataFinal, REML=F)
+summary(omgplzwork17)
+# Slight decrease in Intercept and increase in residual
+# INCREASE in most predictors
+# Checking model fit
+anova(omgplzwork16,omgplzwork17)
+# Marginal difference
+
+# Removing interaction between importance and relStrength
+omgplzwork18<-lmer(trustRely ~ WeakRelC + StrRelC+impCat 
+                   + (1|PIN), data=dataFinal, REML=F)
+summary(omgplzwork18)
+# Slight INCREASE in residual and DECREASE in intercept
+# Mixed effect on predictors -- Big increase for relStrength
+# Importance remains significant
+# Checking model fit
+anova(omgplzwork17,omgplzwork18)
+# No difference
+
+################################
+### Primary without controls ###
+################################
+MainEffectsReduced<-lmer(trustRely ~ WeakRelC + StrRelC + impCat
+                         + (1|PIN), data=dataFinal, REML=F)
+summary(MainEffectsReduced)
+# WeakRel and Importance are not significant
+## Adding interaction between Strength and Importance
+StrengthByImportanceReduced<-lmer(trustRely ~ WeakRelC + StrRelC*impCat
+                                  + (1|PIN), data=dataFinal, REML=F)
+summary(StrengthByImportanceReduced)
+# The interaction is negative but not significant
+anova(MainEffectsReduced,StrengthByImportanceReduced)
+# Not a significant improvement in model fit
+## Adding interaction between Weakness and Importance
+weaknessByImportanceReduced<-lmer(trustRely ~ WeakRelC*impCat + StrRelC
+                                  + (1|PIN), data=dataFinal, REML=F)
+summary(weaknessByImportanceReduced)
+# The interaction is not significant
+anova(MainEffectsReduced,weaknessByImportanceReduced)
+# Not a significant improvement in model fit
+## Adding both interactions for completeness
+FullModelReduced<-lmer(trustRely ~ WeakRelC*impCat + StrRelC*impCat
+                       + (1|PIN), data=dataFinal, REML=F)
+summary(FullModelReduced)
+# Neither interaction is significant
+anova(StrengthByImportanceReduced,FullModelReduced)
+anova(weaknessByImportanceReduced,FullModelReduced)
+# Not a significant improvement in model fit over either singular interaction models
+
+# Printing Model Results for Dissertation
+# htmlreg(list(MainEffectsReduced,StrengthByImportanceReduced,weaknessByImportanceReduced,FullModelReduced),
+#         file = "ModelResults.doc", 
+#         single.row = FALSE, stars = c(0.001, 0.01, 0.05,0.1),digits=3,
+#         inline.css = FALSE, doctype = TRUE, html.tag = TRUE, 
+#         head.tag = TRUE, body.tag = TRUE)
+
+################################
+### Global Centered Analyses ###
+################################
+GC_MainEffects<-lmer(trustRely ~ + WeakRel_GlobC+impCat + StrRel_GlobC+impCat
+                     + (1|PIN), data=dataFinal, REML=F)
+summary(GC_MainEffects)
+# Relevance to strength is still predictive of trust at the global level
+# Relevance to weakness is predictive at the global level
+## Adding interaction between Strength and Importance
+GC_StrengthByImportance<-lmer(trustRely ~ WeakRel_GlobC+impCat + StrRel_GlobC*impCat
+                              + (1|PIN), data=dataFinal, REML=F)
+summary(GC_StrengthByImportance)
+# The interaction is negative but not significant
+anova(GC_MainEffects,GC_StrengthByImportance)
+# Not a significant improvement in model fit
+## Adding interaction between Weakness and Importance
+GC_weaknessByImportance<-lmer(trustRely ~ WeakRel_GlobC*impCat + StrRel_GlobC+impCat
+                              + (1|PIN), data=dataFinal, REML=F)
+summary(GC_weaknessByImportance)
+# The interaction is not significant
+anova(GC_MainEffects,GC_weaknessByImportance)
+# Not a significant improvement in model fit
+## Adding both interactions for completeness
+GC_FullModel<-lmer(trustRely ~ WeakRel_GlobC*impCat + StrRel_GlobC*impCat
+                   + (1|PIN), data=dataFinal, REML=F)
+summary(GC_FullModel)
+# Neither interaction is significant
+anova(GC_StrengthByImportance,GC_FullModel)
+anova(GC_weaknessByImportance,GC_FullModel)
+# Not a significant improvement in model fit over either singular interaction models
+
+# Printing Model Results for Dissertation
+# htmlreg(list(GC_MainEffects,GC_StrengthByImportance,GC_weaknessByImportance,GC_FullModel),file = "ModelResults_GlobCent.doc", 
+#         single.row = FALSE, stars = c(0.001, 0.01, 0.05,0.1),digits=3,
+#         inline.css = FALSE, doctype = TRUE, html.tag = TRUE, 
+#         head.tag = TRUE, body.tag = TRUE)
+
+
+############################
+### Exploratory Analyses ###
+############################
+################################################
+### Looking at goal categories by importance ###
+# Interpersonal is still the reference
+goalCatImp<-lmer(trustRely ~ Goal_Category*impCat
+                  + (1|PIN), data=dataFinal, REML=F)
+summary(goalCatImp)
+# Friends are trusted less for Intrapersonal and Maintenance
+# None of the interactions are significant
+
+# Using 2 difference crosstabs
+# Crosstab 1
+catImp <- xtabs(~Goal_Category+impCat, data=dataFinal)
+ftable(catImp) # print table
+summary(catImp) # View chi-square
+
+# Crosstab 2
+catImp2<-CrossTable(dataFinal$Goal_Category,dataFinal$impCat, expected = T)
+
+CrossTable(dataFinal$Importance,dataFinal$impCat, expected = T)
+
+##############################################
+### Looking at Trust by Number of Projects ###
+numgoalTrust<-lmer(trustRely ~ numGoals
+                 + (1|PIN), data=dataFinal, REML=F)
+summary(numgoalTrust)
+# Trending toward lower trust - Does it predict trust variability?
+
+# Descriptives for dissertation
+# Creating a measure of subject-level variance in trust
+dataFinal<-ddply(dataFinal,.(PIN), plyr::mutate, trustVar = var(trustRely))
+describe(dataFinal$trustVar)
+# Creating a measure of subject-level standard deviation in trust
+dataFinal<-ddply(dataFinal,.(PIN), plyr::mutate, trustSD = sd(trustRely))
+describe(dataFinal$trustSD)
+# Keeping only one estimate of the variability
+trust_SD <- dataFinal %>% distinct(PIN, .keep_all = T)
+describe(trust_SD$trustSD)
+
+# Creating a second measure of subject-level variance in trust
+trustVar_2 <- aggregate(trustRely ~ PIN, dataFinal, var)
+describe(trustVar_2)
+
+# Creating a third measure of subject-level variability in trust
+dataFinal$trustVar_3 <- dataFinal %>% group_by(PIN) %>%
+  rowwise() %>%
+  summarise(trustVar_3 = var(trustRely))
+describe(dataFinal$trustVar_3)
+
+describe(dataFinal$trustRely)
+
+# Centering number of goals
+dataFinal$numGoalsC <- scale(dataFinal$numGoals, scale = FALSE)[,]
+
+# Examining variability in trust between Most and Least Important Goals
+describeBy(dataFinal$trustRely, dataFinal$impCat)
+
+# Using trust variability as the criterion
+numgoalTrustVar<-lm(trustVar ~ numGoalsC, data=dataFinal)
+summary(numgoalTrustVar)
+cor.test(dataFinal$trustVar,dataFinal$numGoals)
+# Not Significant
+
+#############################################################
+### Correlating average of trust with nomothetic measures ###
+# Computing average trust
+dataFinal<-ddply(dataFinal,.(PIN), plyr::mutate, trust_ave = mean(trustRely))
+# Subsetting data
+trust_cor <- subset(dataFinal, select = c(trust_ave, SITStrust, SITSemo, SITSrely,
+                                          ABIable, ABIbenev, ABItegridy))
+# Running correlations
+cor(trust_cor, use = "pairwise.complete.obs")#, method = "spearman")
+
+###########################################
+### Dichotomizing Relevance to Wekaness ###
+dataFinal$rWeak_di <- ifelse(dataFinal$WeakRel >= 1, 1,
+                      ifelse(dataFinal$WeakRel == 0, 0, NA))
+# Checking frequencies
+describeBy(dataFinal$trustRely, dataFinal$rWeak_di)
+
+################################
+### Primary without controls ###
+################################
+MainEffectsDi<-lmer(trustRely ~ rWeak_di + StrRelC + impCat
+                         + (1|PIN), data=dataFinal, REML=F)
+summary(MainEffectsDi)
+# WeakRel and Importance are not significant
+## Adding interaction between Strength and Importance
+StrengthByImportanceDi<-lmer(trustRely ~ rWeak_di + StrRelC*impCat
+                                  + (1|PIN), data=dataFinal, REML=F)
+summary(StrengthByImportanceDi)
+# The interaction is negative but not significant
+anova(MainEffectsDi,StrengthByImportanceDi)
+# Not a significant improvement in model fit
+## Adding interaction between Weakness and Importance
+weaknessByImportanceDi<-lmer(trustRely ~ rWeak_di*impCat + StrRelC
+                                  + (1|PIN), data=dataFinal, REML=F)
+summary(weaknessByImportanceDi)
+# The interaction is not significant
+anova(MainEffectsDi,weaknessByImportanceDi)
+# Not a significant improvement in model fit
+## Adding both interactions for completeness
+FullModelDi<-lmer(trustRely ~ rWeak_di*impCat + StrRelC*impCat
+                       + (1|PIN), data=dataFinal, REML=F)
+summary(FullModelDi)
+# Neither interaction is significant
+anova(StrengthByImportanceDi,FullModelDi)
+anova(weaknessByImportanceDi,FullModelDi)
+# Not a significant improvement in model fit over either singular interaction models
+
+# Printing Model Results for Dissertation
+# htmlreg(list(MainEffectsDi,StrengthByImportanceDi,weaknessByImportanceDi,FullModelDi),file = "ModelResults_RelWeakDi.doc", 
+#         single.row = FALSE, stars = c(0.001, 0.01, 0.05,0.1),digits=3,
+#         inline.css = FALSE, doctype = TRUE, html.tag = TRUE, 
+#         head.tag = TRUE, body.tag = TRUE)
+
+############################
+### Demographic Analyses ###
+############################
+data1$ethnicity <- ifelse(data1$Q34.4==9,0,
+                       ifelse(data1$Q34.4==3,1,
+                       ifelse(data1$Q34.4==4,2,
+                       ifelse(data1$Q34.4==2,3,
+                       ifelse(data1$Q34.4==5,4,
+                       ifelse(data1$Q34.4==1,5,
+                       ifelse(data1$Q34.4==8,6,
+                       ifelse(data1$Q34.4==6,7,NA))))))))
+data1$ethnicity <- factor(data1$ethnicity,
+          levels = c(0,1,2,3,4,5,6,7),
+          labels = c("White/European American","Black/African American","Latinx/Hispanic",
+                     "Asian/Asian American","Middle Eastern/North African","American Indian/Alaska Native",
+                     "Native Hawaiian/Pacific Islander","Multiracial"))
+CrossTable(data1$ethnicity, expected = T)
+
+
+
+
+
+
+
+
