@@ -1,0 +1,19 @@
+---
+title: 'My Website'
+output:
+  html_document:
+    code_download: yes
+    fontsize: 8pt
+    highlight: textmate
+    number_sections: no
+    theme: flatly
+    toc: yes
+    toc_float:
+      collapsed: no
+---
+
+Welcome to my website! I built this website in R, and my code and data are all available.
+
+```{r pressure, echo=FALSE,out.height='50%',out.width='50%'}
+knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/Head Shot2.jpg")
+```
