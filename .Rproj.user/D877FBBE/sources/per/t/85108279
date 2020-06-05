@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1591370758799.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "551190060",
+    "id" : "85108279",
+    "lastKnownWriteTime" : 1590006583,
+    "last_content_update" : 1590006583,
+    "path" : "C:/Users/tcarse2/OneDrive/Studies/Trust/Dissertation/Data/Working Data/Dissertation Analyses_Final.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "816,23",
+        "scrollLine" : "809"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
