@@ -8,3 +8,5 @@ navbar:
       href: about.html
     - text: "Simulating An RM Study"
       href: simulation.html
+    - text: "Data Pre-processing, Graphing, & Anlyzing"
+      href: dissertation.html
