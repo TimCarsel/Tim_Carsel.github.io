@@ -80,7 +80,7 @@ In idiographically-tailored survey from which we got our data, participants were
 \pagebreak
 
 # Data Pre-processing
-The first step in analyzing data in ```R``` is to set your working environment and then load your data and required packages. I have already done that in the background, so I encourage you to download the code for this page if you would like to see that step. I will only show one example of code for each pre-processing step to save prcious internet space.
+The first step in analyzing data in ```R``` is to set your working environment and then load your data and required packages. I have already done that in the background, so I encourage you to download the code for this page if you would like to see that step. I will only show one example of code for each pre-processing step to save precious internet space.
 
 After you've set up your enviornment you can start pre-processing your data to get it into the necessary format for analyses. Below, I create a participant identification number (PIN) and set it as a factor. Then I rename the variables that identify exactly *how* important, on a 1 to 10 scale, participants viewed their three most and three least important goals.
 
@@ -575,7 +575,7 @@ That is *much* worse. Notice how nearly all of the values are at the lowest end 
 
 Finally, let's check out the distribution of the continuous measure of goal importance.
 
-### Continuous Measure of Goal Importance Histogram
+### Goal Importance Histogram
 ```{r, , echo=FALSE, out.width='.49\\linewidth', fig.width=3, fig.height=3.25,fig.show='hold',fig.align='center'}
 rel_weak_Hist <- data3 %>%
   ggplot(aes(x = Importance)) +
