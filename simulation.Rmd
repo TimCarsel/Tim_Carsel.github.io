@@ -45,6 +45,18 @@ For simple designs, such as a *t*-test, determining the power of a study is rela
 
 Below, I walk you through the simulations and power analyses for my dissertation.
 
+\pagebreak
+
+# Overview of Variables
+Here is the list of variables we will simulate:
+
+* Criterion
+  + Goal-Specific Trust (6 measurements for each participant)
+* Predictors
+  + Relevance of best friend's strength to the goal (6 measurements for each participant)
+  + Relevance of best friend's weakness to the goal (6 measurements for each participant)
+  + Categorical Measure of Goal importance of 6 Goals (2 levels: MOst Important, Least Important)
+
 # Setting the Initial Values
 
 For our simulations, we will need to create a sample of generated data. Think of these as computer people who will act in the way we tell them to. These values stay the same throughout all of the simulations except where explicitly mentioned.
@@ -69,7 +81,7 @@ b1 <- c(0,0,.05,-.05,.1,-.15)                          #
 ```
 
 - In the code above, we created a sample of 5000 subjects (Ss) who each have 6 measurements of the criterion variable. 
-- Then, we added a between-subjects covariate. In the case of my dissertation, I included a categorical measure of goal importance (Most Important, Least Important) to include in the random structure of the multilevel model. 
+- Then, we added a within-subjects covariate. In the case of my dissertation, I included a categorical measure of goal importance (Most Important, Least Important) to include in the random structure of the multilevel model. 
 - Finally, I initialized the beta values for my eventual model, starting with the intercept, moving through the main effects, and ending with two, two-way interactions. 
 
 As you can see, other than the last interaction, I set my expected betas to be pretty weak. This allowed me to have a conservative estimate of a priori power.
@@ -278,7 +290,7 @@ plot(SCurve2)
 In contrast to the potential situation just characterized, whereby people were expected to view their friend’s strengths and weaknesses as weakly and negative related, the next simulation estimates the effect of friend attributes’ goal relevance being positive correlated. In the study’s design, participants were first asked to identify and describe their personal projects and then to identify and describe their best friend. Therefore, the methods pressed for participants to imagine their personal projects, free from whom they may choose to rely upon. Consequently, it seemed possible that the same constellation of friend attributes may be perceived as both a strength and a weakness and relevant to similar situations. For example, perhaps Tim believes that Andy is a “free spirit.” Consequently, he may believe that Andy’s biggest strength is that he is good at generating novel solutions to problems, but Tim may believe Andy’s greatest weakness is that he is unreliable. To model this potential outcome in Simulation 2, I set a moderate and positive (0.40) correlation between the relevance of the best friends’ strengths and weaknesses to the goal.
 
 
-```{r, echo=FALSE,results="hide"}
+```{r}
 # Resetting seed
 set.seed(10101)
 

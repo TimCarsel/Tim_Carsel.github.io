@@ -47,33 +47,34 @@ data1<-read.csv("Dissertation_IdioTrust.csv", header = T, na.strings = c(""))
 
 \pagebreak
 
-# Rationale of this study
+# Brief Rationale of this study
 Interpersonal trust is an important facet of relationships, but current theories and research paradigms on interpersonal trust may be incomplete. Trust has traditionally been studied as either a trait of the individual or a facet of a specific relationship between two people. Although both approaches highlight different and important aspects of the psychology of trust, both approaches are limited in their ability to uncover more minute dynamics. 
 
-In my dissertation, I proposed and tested a goal-specific theory of interpersonal trust, the Interdependent Goal Model of Interpersonal Trust (IGM). I argued that the trust between two people varies across the interdependent goals that are shared within a relationship and that this variability is important for understanding interpersonal relationships. If trust does vary meaningfully within a given relationship, then trait and relationship paradigms of interpersonal trust will be inappropriate to investigate this variability.
+In my dissertation, I proposed and tested a goal-specific theory of interpersonal trust, the Interdependent Goal Model of Interpersonal Trust (IGM). I argued that the trust between two people varies across the interdependent goals that are shared within a relationship and that this variability is important for understanding interpersonal relationships. 
 
 Testing the hypotheses derived from the IGM required a methodology sensitive to the idiosyncratic goals and relationships of the participants. To this end, I employed a novel and ideographically-tailored survey in which participants described their current goals and best friend. After participants described their goals and best friend, they were asked to what extent they would trust their best friend across some of their most and least important goals.  
 
-The IGM and associated research paradigm is a promising orientation to interpersonal trust. Intra-relational trust varies across the interdependent goals that are shared within a relationship, and this variability is predictable. More research is needed to better understand how trust operates *within* a relationship.
-
-On this page, I will walk you through the logic and main findings of my dissertation, including all necessary data pre-processing steps and my analyses.
+On this page, I will walk you through the logic and main findings of my dissertation, including all necessary data pre-processing steps and my analyses. If you're interested in a more detailed account of my theory, hypotheses, and methods, then I encourage you to read my dissertation [COMING HERE SOON]
 
 \pagebreak
 
 # Hypotheses
-The first major premise of the IGM is that trust is inherently instrumental for the individual’s goal pursuit. Specifically, the IGM argues that an important prototype of trust is the willingness of a person to rely on another for the achievement of a desired end and therefore is in preparation of an act of social risk taking. Consequently, people should be sensitive to the probability of goal attainment that is associated with relying on a particular person for a particular goal. In other words, people should be more likely to trust another person if they believe they are competent to perform the task at hand and less likely to trust another person if they believe they are incompetent to perform the task. The first hypothesis of the present study is that interpersonal trust will increase as the relevance of a best friend’s strength to a given task increases, and interpersonal trust will decrease as the relevance of a best friend’s weakness to a given task increases. 
+- The first hypothesis of the present study is that interpersonal trust will increase as the relevance of a best friend’s strength to a given task increases, and interpersonal trust will decrease as the relevance of a best friend’s weakness to a given task increases. 
 
-The second major premise of the IGM is that trust is not merely a calculative decision in a one-shot interaction. Instead, trust is the result of a push and pull between the importance the individual places in the goal versus the importance of the relationship with the trustee. Although people should calibrate their trust relative to the demands of the goal, some relational partners allow the individual to pursue more and more valued goals (Orehek et al., 2018a). For those relationships, the individual may be more likely to trust them across a range of goals, even if they are not perceived as the best-suited for the tasks, because doing so makes the trustee feel valued (Inagaki & Orehek, 2017). However, as the importance of accomplishing the goal increases for the trustor, they may again become more selective in their choice of trustee. Therefore, the second hypothesis of the present study is that individuals will place lower trust in another person on average across a range of highly important goals relative to goals of lower importance.
+- The second hypothesis of the present study is that individuals will place lower trust in another person on average across a range of highly important goals relative to goals of lower importance.
 
-Combining the above premises suggests that the lower trust in relational partners across more important goals will be driven by the trustor being more selective in whom they trust for those important goals. That is, people will not simply lower their trust in their best friend, for example, across their most important goals simply because those goals are important. Instead, the lower trust should be explained by the trustor relying on the relational partner for goals the trustor believes could be accomplished with the help of the trustee and not relying on the relational partner for goals the trustor believes could not be accomplished with the help of the trustee. Specifically, the third hypothesis of the present study is that for more important goals, people will be more likely to trust an important relational partner (e.g., best friend) if they believe the trustee’s strengths are relevant to the task and less likely to trust that relational partner if they believe the trustee’s weaknesses are relevant to the task. For goals that are less important, beliefs about the trustee’s strengths and weaknesses will be less relevant.
+- The third hypothesis of the present study is that for more important goals, people will be more likely to trust an important relational partner (e.g., best friend) if they believe the trustee’s strengths are relevant to the task and less likely to trust that relational partner if they believe the trustee’s weaknesses are relevant to the task. For goals that are less important, beliefs about the trustee’s strengths and weaknesses will be less relevant.
 
 \pagebreak
 
 # Survey Methodology Overview
 In order to understand any analysis, it's important to first understand the data generation process. In the case of these data, participants completed an idiographically-tailored survey. 
 
-A traditional survey uses what's called a **nomothetic** approach, which aims to understand how groups of people act. These are the kinds of surveys people take all the time. For example, if you've ever completed a customer satisfaction survey that asked you questions like "On a scale of 1 to 5, how satisfied were you with the service you received?", then you have completed a nomothetically-designed survey. By contrast, an **idiographic** approach aims to understand the idiosyncracies of the individual. An example of an idiographically-designed customer satisfaction survey question might be something more along the lines of "What was the most important part of the service you received for why you gave the rating you did?", with an open-ended text box for people to write in their response.
+A traditional survey uses what's called a **nomothetic** approach, which aims to understand how groups of people act. These are the kinds of surveys people take all the time. For example, if you've ever completed a customer satisfaction survey that asked you questions like "On a scale of 1 to 5, how satisfied were you with the service you received?", then you have completed a nomothetically-designed survey. 
 
+By contrast, an **idiographic** approach aims to understand the idiosyncracies of the individual. An example of an idiographically-designed customer satisfaction survey question might be something more along the lines of "What was the most important part of the service you received for why you gave the rating you did?", with an open-ended text box for people to write in their response.
+
+## Method
 In idiographically-tailored survey from which we got our data, participants were asked about their goals and their best friend. Specifically, participants first listed the goals they were currently pursuing, and then they were asked to select their three most and three least important goals. Next, participants were asked to identify their best friend and their best friend's most descriptive strength and weakness. Afterwards, participants were asked to what extent their best friend's most descriptive strength and weakness were relevant to each of the participants' three most and three least important goals. Finally, participants were asked to what extent they would trust their best friend across their three most and three least important goals. The criterion variable of this study, or the thing we want to predict, is the trust participants placed in their best friend across those six goals.
 
 \pagebreak
@@ -147,6 +148,14 @@ data1$Goal6StrRel<-(apply(data1[, 1661:1695], 1, function(x) x[!is.na(x)][1]))-1
 # Goal 6 Weakness
 data1$Goal6WeakRel<-(apply(data1[, 1696:1730], 1, function(x) x[!is.na(x)][1]))-1
 ```
+
+Let's see if that worked.
+
+```{r}
+head(data1$Goal1StrRel:data1$Goal6StrRel)
+```
+
+Great! Now we have condensed our first set of predictors, and it's time to move onto the next set of variables.
 
 The variables that contained participants' trust in their best friend across each goal was similarly sparse, so I simply applied the same code to fix that here. However, the measures for goal-specific trust were a bit more complicated, so they require more code. Specifically, participants were first asked if they trusted their best friend or not for each goal, and then they were asked to what extent they trusted or distrusted their best friend, depending on whether they first selcted trust or distrust. Because we was a continuous measure for our analyses, we need to somehow combine those extent variables with the dichotomous measure. Below is the code for how I accomplished that. 
 
@@ -450,12 +459,7 @@ head(data3)
 tail(data3)
 ```
 
-Perfect! Now we're ready to explore and analyzing our data!
-
-\pagebreak
-
-# Plotting
-The first step whenever you analyze your data should always be to visualize what is going on. Your analyses will spit out numbers, but you have to see what those numbers represent to fully understand what the data are trying to tell you. To this end, I plot the histograms of my data and the relationships I will test with statistics. Before we can do that, however, we have one final pre-processing step: We need to center our predictor variables.
+Now that we have the data in the appropriate format, we only have a couple more pre-processing steps. First, we need to center our predictor variables.
 
 There are two ways I can choose to center my predictor variables, by **participant** or **globally**. **Globally-centered** variables will subtract the **grand mean**, or overall average of the variable, from each participant's value. The end result will be that the average value of that variable across all participants will be 0. **Participant-centered** variables subtract *each participant's* mean from each of their values. The end result of *this* process will be that the average for each participant on each variable is 0. Each of these centering strategies tells a different story, so it's important to choose whichever one makes the most sense for your research question. In this case, **participant-centered** variables makes the most sense. So that's what we're going to do!
 
@@ -495,7 +499,12 @@ Ok. They're correlated at about 0.80, which is not the best, but it does fall wi
 data3$trustRely <- (data3$Trust+data3$Rely)/2
 ```
 
-Now, a central tenet of the IGM is that trust is not static across the contours of a relationship. In other words, people can trust and distrust the same person depending on the goal. If that's true, then we should be able to see it in our data. Below, I randomly select 4 participants and plot the trust they place in their best friend across their three most and least important goals
+Perfect! Now we're ready to explore and analyzing our data!
+
+\pagebreak
+
+# Plotting
+A central tenet of the theory I'm testing is that trust is not static across the contours of a relationship. In other words, people can trust and distrust the same person depending on the goal. If that's true, then we should be able to see it in our data. Below, I randomly select 4 participants and plot the trust they place in their best friend across their three most and least important goals
 
 ```{r, , echo=FALSE, out.width='.49\\linewidth', fig.width=3, fig.height=3.25,fig.show='hold',fig.align='center'}
 # Set seed so everyone sees the same thing
@@ -607,7 +616,7 @@ impCheck
 
 Perfect. Participants completed the study as expected! Now let's check out our hypotheses.
 
-The first hypothesis of the IGM is that participants will trust their best friend less for more important than less important goals. Let's see if that's what the relationship looks like.
+The first hypothesis was that participants would trust their best friend less for more important than less important goals. Let's see if that's what the relationship looks like.
 
 ```{r, , echo=FALSE, out.width='.49\\linewidth', fig.width=3, fig.height=3.25,fig.show='hold',fig.align='center'}
 # Graphing Trust by Importance
@@ -670,7 +679,7 @@ relWeak
 
 That looks like a weak relationship but again in the opposite direction than predicted. This is another finding we'll keep a sharp eye on in our analyses.
 
-The final two predictions of the IGM are that the relationship between the relevance to strength and the relevance to weakness on goal-specific trust will only be for more important goals. There should be no relationship between the relevance to strength and the relevance to weakness on goal-specific trust for less important goals. Next I plot those predictions. We'll first take a look at the interaction between goal importance and the relevance to strength before examining the interaction between goal importance and the relevance to weakness.
+The final two hypotheses were that the relationships between the relevance to strength and the relevance to weakness on goal-specific trust would only show up for more important goals. There should be no relationship between the relevance to strength and the relevance to weakness on goal-specific trust for less important goals. Next I plot those predictions. We'll first take a look at the interaction between goal importance and the relevance to strength before examining the interaction between goal importance and the relevance to weakness.
 
 ```{r, , echo=FALSE, out.width='.49\\linewidth', fig.width=3, fig.height=3.25,fig.show='hold',fig.align='center'}
 relStrImp <- ggplot(data = data3, 
@@ -738,7 +747,7 @@ no_cor_random <- lmer(Importance ~ 1
 summary(no_cor_random)
 ```
 
-That worked! Notice how we didn't get anymore errors? This random structure does seem to fit our data a bit better. I also want you to notice that the residual variance increased ever so slightly. That's because we removed a random effect that was accounting for some of the variance (the correlation between the random slope and intercept). 
+That worked! Notice how we didn't get anymore errors? This random structure does seem to fit our data a bit better. I also want you to notice that the residual variance increased ever so slightly. That's because we removed a random effect that was accounting for some of the variance (the correlation between the random slope and intercept). It's important to keep a close eye on your residuals as you explore different model fits.
 
 Depending on the training you've received in MLMs, some would stop examining the random structure here. The argument goes that every reduction in the random structure has a potential (or inevitable) increase in the Type I error rate. However, I use parsimonious fitting (Bates, Kliegl, Vasishth, & Baayen, 2015) to systematically reduce the random terms and find the simplest model that does not sacrifice model fit. To do so, I will remove random effects one at a time and see the potential change in the residual of the model. The moment a model fits significantly worse, as determined by a Chi-square, I will stop and keep the more complex model. This process can be long, and it is indeed long for these data, so I will only show the first step.
 
@@ -769,7 +778,7 @@ main_effects <- lmer(trustRely ~ WeakRelC + StrRelC + impCat
 summary(main_effects)
 ```
 
-What do we notice? First, our relevance to strength measure strongly and significantly predicts goal-specific trust. This was the effect we noticed in our graphs above and confirms both our hypothesis and intuitions from the graph. Second, and in line with the graphs but against our hypothesis, goal importance is a significant and *positive* predictor of trust, and the relevance to weakness is a marginally (ugh, I hate that word too) significant and *positive* predictor of trust. I'm not going to go through the implications for the IGM here, so I encourage you to read my dissertation, if you're interested. :)
+What do we notice? First, our relevance to strength measure strongly and significantly predicts goal-specific trust. This was the effect we noticed in our graphs above and confirms both our hypothesis and intuitions from the graph. Second, and in line with the graphs but against our hypothesis, goal importance is a significant and *positive* predictor of trust, and the relevance to weakness is a marginally (ugh, I hate that word too) significant and *positive* predictor of trust. I'm not going to go through the implications for the theory here, so I encourage you to read my dissertation, if you're interested. :)
 
 Next, let's add each of the interactions in one-at-a-time. We will test whether the more complex model fits the data better than the simpler model after each step
 
@@ -807,7 +816,7 @@ The full model is not an improvement over either single interaction models.
 
 \pagebreak
 
-# Conclusion
+# Implications
 So what did we learn? 
 **First, trust varies within a relationship, and that variability is predictable.**
 
@@ -817,5 +826,8 @@ Third, **relevance to weakness** does not significantly predict trust, and **goa
 
 Fourth and finally, and in line with predictions, **relevance to strength** strongly and positively predicts trust. 
 
+\pagebreak
+
+# Conclusion
 I hope you have enjoyed and learned something from this overview and walkthrough of my dissertation logic and analyses! 
-Please feel free to contact me if you're interested in the IGM, the stats presented here, or just to have a friendly chat!! I love meeting new people and nerding out on these topics.
+Please feel free to contact me if you're interested in trust, the stats presented here, or just to have a friendly chat!! I love meeting new people and nerding out on these topics.
