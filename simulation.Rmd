@@ -235,7 +235,7 @@ plot(SCurve1)
 
 
 And here's the expected relationship between the relevance to weakness and importance on interpersonal trust.
-```{r}
+```{r, , echo=FALSE, out.width='.49\\linewidth', fig.width=2.25, fig.height=2.5,fig.show='hold',fig.align='center'}
 #####################################################
 ### Plotting Primary Analysis: RelWeak*Importance ###
 #####################################################
