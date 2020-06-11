@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>About Me</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Timothy S. Carsel</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="simulation.html">Simulating An RM Study</a>
+</li>
+<li>
+  <a href="dissertation.html">Contextual Trust Study</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">About Me</h1>
+
+</div>
+
+
+<p><strong>I am passionate about helping people become passionate about their work.</strong></p>
+<div id="a-story-about-work" class="section level2">
+<h2>A Story About Work</h2>
+<p>The next time you are at a social gathering, ask people whether they are happy with their job. Although you will sometimes find the rare individual who loves what they do, you will frequently get responses along the lines of “I hate my job.” If you probe further, you might find that every person’s story shares several points of similarity: The boss gets in the way of the work, subordinates don’t do the work they’re assigned, and HR serves only to infuriate supervisors and subordinates alike. We can put a man on the moon, but we still haven’t figured out how to help everyone enjoy what they do. Isn’t it about time that we fixed that?</p>
+</div>
+<div id="my-philosophy" class="section level2">
+<h2>My Philosophy</h2>
+<p>I believe that companies can get the most out of their people when their people love what they do. However, this often requires letting go of our intuitions about effective leadership and management strategies and adopting something new. I apply research, data, and experience to questions about effeective workplace policies and norms. Imagine what your people could do if they no longer complained about their job?</p>
+</div>
+<div id="my-background" class="section level2">
+<h2>My Background</h2>
+<p>I bring experience and expertise to solve problems of leadership and teamwork. I have a PhD in Social/Personality psychology, specializing in conflict and cooperation. My dissertation is on interpersonal trust, and in it I demonstrate–using a novel survey methodology that combines idiographic and nomothetic approaches–that the trust people place in another varies across the contours of the relationship. Importantly, I demonstrate that the varying trust between two people is predictable. Prior to my academic career, I served honorably in the U.S. military. Throughout my military career, I was highly decorated for my leadership and teamwork behaviors. Consequently, I know <em>what</em> supports effective teamwork and leadership and <em>how</em> to implement those systems.</p>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogJ0Fib3V0IE1lJw0Kb3V0cHV0Og0KICBodG1sX2RvY3VtZW50Og0KICAgIGNvZGVfZG93bmxvYWQ6IHllcw0KICAgIGZvbnRzaXplOiA4cHQNCiAgICBoaWdobGlnaHQ6IHRleHRtYXRlDQogICAgbnVtYmVyX3NlY3Rpb25zOiBubw0KICAgIHRoZW1lOiBmbGF0bHkNCiAgICB0b2M6IHllcw0KICAgIHRvY19mbG9hdDoNCiAgICAgIGNvbGxhcHNlZDogbm8NCi0tLQ0KDQogKipJIGFtIHBhc3Npb25hdGUgYWJvdXQgaGVscGluZyBwZW9wbGUgYmVjb21lIHBhc3Npb25hdGUgYWJvdXQgdGhlaXIgd29yay4qKiANCg0KDQoNCiMjIEEgU3RvcnkgQWJvdXQgV29yayANClRoZSBuZXh0IHRpbWUgeW91IGFyZSBhdCBhIHNvY2lhbCBnYXRoZXJpbmcsIGFzayBwZW9wbGUgd2hldGhlciB0aGV5IGFyZSBoYXBweSB3aXRoIHRoZWlyIGpvYi4gQWx0aG91Z2ggeW91IHdpbGwgc29tZXRpbWVzIGZpbmQgdGhlIHJhcmUgaW5kaXZpZHVhbCB3aG8gbG92ZXMgd2hhdCB0aGV5IGRvLCB5b3Ugd2lsbCBmcmVxdWVudGx5IGdldCByZXNwb25zZXMgYWxvbmcgdGhlIGxpbmVzIG9mICJJIGhhdGUgbXkgam9iLiIgSWYgeW91IHByb2JlIGZ1cnRoZXIsIHlvdSBtaWdodCBmaW5kIHRoYXQgZXZlcnkgcGVyc29uJ3Mgc3Rvcnkgc2hhcmVzIHNldmVyYWwgcG9pbnRzIG9mIHNpbWlsYXJpdHk6IFRoZSBib3NzIGdldHMgaW4gdGhlIHdheSBvZiB0aGUgd29yaywgc3Vib3JkaW5hdGVzIGRvbid0IGRvIHRoZSB3b3JrIHRoZXkncmUgYXNzaWduZWQsIGFuZCBIUiBzZXJ2ZXMgb25seSB0byBpbmZ1cmlhdGUgc3VwZXJ2aXNvcnMgYW5kIHN1Ym9yZGluYXRlcyBhbGlrZS4gV2UgY2FuIHB1dCBhIG1hbiBvbiB0aGUgbW9vbiwgYnV0IHdlIHN0aWxsIGhhdmVuJ3QgZmlndXJlZCBvdXQgaG93IHRvIGhlbHAgZXZlcnlvbmUgZW5qb3kgd2hhdCB0aGV5IGRvLiBJc24ndCBpdCBhYm91dCB0aW1lIHRoYXQgd2UgZml4ZWQgdGhhdD8NCg0KDQoNCiMjIE15IFBoaWxvc29waHkgDQpJIGJlbGlldmUgdGhhdCBjb21wYW5pZXMgY2FuIGdldCB0aGUgbW9zdCBvdXQgb2YgdGhlaXIgcGVvcGxlIHdoZW4gdGhlaXIgcGVvcGxlIGxvdmUgd2hhdCB0aGV5IGRvLiBIb3dldmVyLCB0aGlzIG9mdGVuIHJlcXVpcmVzIGxldHRpbmcgZ28gb2Ygb3VyIGludHVpdGlvbnMgYWJvdXQgZWZmZWN0aXZlIGxlYWRlcnNoaXAgYW5kIG1hbmFnZW1lbnQgc3RyYXRlZ2llcyBhbmQgYWRvcHRpbmcgc29tZXRoaW5nIG5ldy4gSSBhcHBseSByZXNlYXJjaCwgZGF0YSwgYW5kIGV4cGVyaWVuY2UgdG8gcXVlc3Rpb25zIGFib3V0IGVmZmVlY3RpdmUgd29ya3BsYWNlIHBvbGljaWVzIGFuZCBub3Jtcy4gSW1hZ2luZSB3aGF0IHlvdXIgcGVvcGxlIGNvdWxkIGRvIGlmIHRoZXkgbm8gbG9uZ2VyIGNvbXBsYWluZWQgYWJvdXQgdGhlaXIgam9iPyANCg0KDQoNCiMjIE15IEJhY2tncm91bmQNCkkgYnJpbmcgZXhwZXJpZW5jZSBhbmQgZXhwZXJ0aXNlIHRvIHNvbHZlIHByb2JsZW1zIG9mIGxlYWRlcnNoaXAgYW5kIHRlYW13b3JrLiBJIGhhdmUgYSBQaEQgaW4gU29jaWFsL1BlcnNvbmFsaXR5IHBzeWNob2xvZ3ksIHNwZWNpYWxpemluZyBpbiBjb25mbGljdCBhbmQgY29vcGVyYXRpb24uIE15IGRpc3NlcnRhdGlvbiBpcyBvbiBpbnRlcnBlcnNvbmFsIHRydXN0LCBhbmQgaW4gaXQgSSBkZW1vbnN0cmF0ZS0tdXNpbmcgYSBub3ZlbCBzdXJ2ZXkgbWV0aG9kb2xvZ3kgdGhhdCBjb21iaW5lcyBpZGlvZ3JhcGhpYyBhbmQgbm9tb3RoZXRpYyBhcHByb2FjaGVzLS10aGF0IHRoZSB0cnVzdCBwZW9wbGUgcGxhY2UgaW4gYW5vdGhlciB2YXJpZXMgYWNyb3NzIHRoZSBjb250b3VycyBvZiB0aGUgcmVsYXRpb25zaGlwLiBJbXBvcnRhbnRseSwgSSBkZW1vbnN0cmF0ZSB0aGF0IHRoZSB2YXJ5aW5nIHRydXN0IGJldHdlZW4gdHdvIHBlb3BsZSBpcyBwcmVkaWN0YWJsZS4gUHJpb3IgdG8gbXkgYWNhZGVtaWMgY2FyZWVyLCBJIHNlcnZlZCBob25vcmFibHkgaW4gdGhlIFUuUy4gbWlsaXRhcnkuIFRocm91Z2hvdXQgbXkgbWlsaXRhcnkgY2FyZWVyLCBJIHdhcyBoaWdobHkgZGVjb3JhdGVkIGZvciBteSBsZWFkZXJzaGlwIGFuZCB0ZWFtd29yayBiZWhhdmlvcnMuIENvbnNlcXVlbnRseSwgSSBrbm93ICp3aGF0KiBzdXBwb3J0cyBlZmZlY3RpdmUgdGVhbXdvcmsgYW5kIGxlYWRlcnNoaXAgYW5kICpob3cqIHRvIGltcGxlbWVudCB0aG9zZSBzeXN0ZW1zLg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("about.Rmd");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
