@@ -29,7 +29,7 @@ knitr::opts_chunk$set(results='hold')
 
 *Disclaimer*: The articles provided on this website as pdfs were published by journals and in edited volumes and thus copyrighted to them. These links are intended to facilitate the accepted practice that authors are allowed to distribute copies of their articles to interested parties for personal use. No commercial use may be made of the articles nor is mass production of the articles permitted.
 
-I believe that the best science is open and replicable. As such, you can access my projects from my Open Science page, found here. If you are interested in a project I have not yet uploaded, please contact me via email at timothy dot carsel at gmail dot com.
+I believe that the best science is open and replicable. As such, you can access my projects from my Open Science page, found [here](https://osf.io/6wxed). If you are interested in a project I have not yet uploaded, please contact me via email at timothy dot carsel at gmail dot com.
 
 
 
