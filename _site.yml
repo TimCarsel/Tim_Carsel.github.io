@@ -10,3 +10,5 @@ navbar:
       href: simulation.html
     - text: "Contextual Trust Study"
       href: dissertation.html
+    - text: "Scientific Publications"
+      href: scientific_articles.html
