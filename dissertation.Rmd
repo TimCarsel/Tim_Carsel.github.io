@@ -54,7 +54,7 @@ In my dissertation, I proposed and tested a goal-specific theory of interpersona
 
 Testing the hypotheses derived from the IGM required a methodology sensitive to the idiosyncratic goals and relationships of the participants. To this end, I employed a novel and ideographically-tailored survey in which participants described their current goals and best friend. After participants described their goals and best friend, they were asked to what extent they would trust their best friend across some of their most and least important goals.  
 
-On this page, I will walk you through the logic and main findings of my dissertation, including all necessary data pre-processing steps and my analyses. If you're interested in a more detailed account of my theory, hypotheses, and methods, then I encourage you to read my dissertation [COMING HERE SOON]
+On this page, I will walk you through the logic and main findings of my dissertation, including all necessary data pre-processing steps and my analyses. If you're interested in a more detailed account of my theory, hypotheses, and methods, then I encourage you to read my dissertation [here](Carsel_2020_Interdependent goal model of trust.pdf)
 
 \pagebreak
 
