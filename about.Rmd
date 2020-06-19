@@ -24,7 +24,7 @@ knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/
 ```
 
 ## My Philosophy 
-I believe that companies can get the most out of their people when their people love what they do. However, this often requires letting go of our intuitions about effective leadership and management strategies and adopting something new. I apply research, data, and experience to questions about effeective workplace policies and norms. Imagine what your people could do if they no longer complained about their job? 
+I believe that companies can get the most out of their people when their people love what they do. However, this often requires letting go of our intuitions about effective leadership and management strategies and adopting something new. I apply research, data, and experience to questions about effective workplace policies and norms. 
 
 ```{r, echo=FALSE,out.height='70%',out.width='70%'}
 knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/workplace_image.jpg")

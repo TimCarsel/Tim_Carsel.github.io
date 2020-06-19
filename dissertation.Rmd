@@ -47,7 +47,7 @@ data1<-read.csv("Dissertation_IdioTrust.csv", header = T, na.strings = c(""))
 
 \pagebreak
 
-# Brief Rationale of this study
+# Brief Rationale of my study
 Interpersonal trust is an important facet of relationships, but current theories and research paradigms on interpersonal trust may be incomplete. Trust has traditionally been studied as either a trait of the individual or a facet of a specific relationship between two people. Although both approaches highlight different and important aspects of the psychology of trust, both approaches are limited in their ability to uncover more minute dynamics. 
 
 In my dissertation, I proposed and tested a goal-specific theory of interpersonal trust, the Interdependent Goal Model of Interpersonal Trust (IGM). I argued that the trust between two people varies across the interdependent goals that are shared within a relationship and that this variability is important for understanding interpersonal relationships. 

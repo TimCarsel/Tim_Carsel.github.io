@@ -14,7 +14,7 @@ output:
       collapsed: no
 ---
 
-**Note:** I wrote this tutorial before tidyverse was a thing. I almost exclusively use those packages now for shaping my data, but the explanations here are still useful. Probably.
+**Note:** I wrote this tutorial before tidyverse was a thing. I almost exclusively use those packages now for shaping my data, but the explanations here might still be useful. 
 
 # Melting and Casting
 
