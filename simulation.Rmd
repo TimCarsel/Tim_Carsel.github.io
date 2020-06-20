@@ -37,15 +37,16 @@ library(effects)
 library(MuMIn)
 ```
 
-\pagebreak
 
 Statistical power is a tricky and occasionally confusing thing. Defined as the probability of rejecting a false null hypothesis, statistical power is a function of the size of the effect of interest, the size of the sample, and the alpha cut-off. 
 
 For simple designs, such as a *t*-test, determining the power of a study is relatively straightforward: Identify the area of the comparison distribution that lies beyond the cut-point defined by alpha. However, for more complicated designs, like those involving repeated measures, determining the power of a study is much more convoluted. Oftentimes, it is necessary to repeatedly simulate the expected results of the study under a variety of conditions. 
 
 Below, I walk you through the simulations and power analyses for my dissertation.
+<br/><br/><br/><br/>
 
-\pagebreak
+
+
 
 # Overview of Variables
 Here is the list of variables we will simulate:
@@ -56,9 +57,12 @@ Here is the list of variables we will simulate:
   + Relevance of best friend's strength to the goal (6 measurements for each participant)
   + Relevance of best friend's weakness to the goal (6 measurements for each participant)
   + Categorical Measure of Goal importance of 6 Goals (2 levels: MOst Important, Least Important)
+<br/><br/><br/><br/>
+
+
+
 
 # Setting the Initial Values
-
 For our simulations, we will need to create a sample of generated data. Think of these as computer people who will act in the way we tell them to. These values stay the same throughout all of the simulations except where explicitly mentioned.
 ```{r}
 ########################################################
@@ -85,11 +89,14 @@ b1 <- c(0,0,.05,-.05,.1,-.15)                          #
 - Finally, I initialized the beta values for my eventual model, starting with the intercept, moving through the main effects, and ending with two, two-way interactions. 
 
 As you can see, other than the last interaction, I set my expected betas to be pretty weak. This allowed me to have a conservative estimate of a priori power.
+<br/><br/><br/><br/>
 
-## First Set of Simulations: Varying the covariance between predictors
+
+# Changing Predictor Correlations
 The degree to which a set of predictors covary affects your ability to reject a false null hypothesis (i.e., it affects your power). In these first three simulations, I am going to change the correlation among my predictors in a principled way and observe how that affects my power.
+<br/><br/><br/>
 
-# Simulation 1
+## Simulation 1
 In this first simulation, I will set the correlation between the relevance of the best friend's strength to the goal (hereafter referred to as relevance of strength) and the relevance of the best friend's weakness to the goal (heareafter referred to as relevance to weakness) to be weak and negative.
 
 If people view others at least implicitly as a potential means to goal pursuit (Orehek et al., 2018), then they may differentiate their best friend’s strengths and weaknesses across goals. In other words, it is possible that people will view their friend’s strengths and weaknesses as relevant to different goal contexts. Therefore, in line with this reasoning, I set the correlation between the predictors in this first simulation to be weak and negative (-0.10).
@@ -285,8 +292,10 @@ SCurve2
 plot(SCurve2)
 
 ```
+<br/><br/><br/>
 
-# Simulation 2
+
+## Simulation 2
 In contrast to the potential situation just characterized, whereby people were expected to view their friend’s strengths and weaknesses as weakly and negative related, the next simulation estimates the effect of friend attributes’ goal relevance being positive correlated. In the study’s design, participants were first asked to identify and describe their personal projects and then to identify and describe their best friend. Therefore, the methods pressed for participants to imagine their personal projects, free from whom they may choose to rely upon. Consequently, it seemed possible that the same constellation of friend attributes may be perceived as both a strength and a weakness and relevant to similar situations. For example, perhaps Tim believes that Andy is a “free spirit.” Consequently, he may believe that Andy’s biggest strength is that he is good at generating novel solutions to problems, but Tim may believe Andy’s greatest weakness is that he is unreliable. To model this potential outcome in Simulation 2, I set a moderate and positive (0.40) correlation between the relevance of the best friends’ strengths and weaknesses to the goal.
 
 
@@ -345,8 +354,11 @@ SCurve2b
 plot(SCurve2b)
 
 ```
+<br/><br/><br/>
 
-# Simulation 3
+
+
+## Simulation 3
 In Simulation 3, I set a strong and positive (0.80) correlation between the relevance of the best friends’ strengths and weaknesses to the goal. This would be a worst-case scenario, not simply because of multicollinearity issues but because my predictions the effect of the relevance to strength and relevance to weakness on trust were in the opposite directions. Consequently, if Simulation 3 was true, then my hypotheses would certainly not be supported.
 
 ```{r}
@@ -405,9 +417,16 @@ SCurve2C<-powerCurve(SimInter1c, fixed("impcat:relweak", "lr"),
 SCurve2C
 plot(SCurve2C)
 ```
+<br/><br/><br/><br/>
+
+
+
 
 # Increasing the Residual Variance
 The second two simulations (M4, M5) modeled the effect of increasing the residual variance in the models on a priori power. Specifically, the total random variance was set to 1 and was allocated between the variance attributed to the random intercept, the random slope, the correlation between the random intercept and the slope, and the residual. In the first three models a large proportion of the variance was attributed to the random intercept (0.60), followed by the random slope (0.20), the residual (0.15), and the correlation between the random intercept and the slope (0.05). This specification assumes that much of the variability in trust is attributable to the individual’s general level of trust for their best friend. In other words, these models account for the fact that people really do tend to trust at varying levels (e.g., Rotter, 1980).
+<br/><br/><br/>
+
+
 
 ## Simulation 4
 In M4, the amount of variance attributed to the random intercept was decreased to 0.40. Because the random intercept was allocated most of the random variance, it was the easiest term to reduce while ensuring interpretability between previous models. Moreover, it’s initial setting represented the more unrealistic parameter setting because it assumed 60% of the random variance was attributable to average levels of trust between individuals. The result of this change was that the residual variance was increased from 0.15 to 0.35 for M4.
@@ -469,6 +488,9 @@ SCurve2
 plot(SCurve2)
 
 ```
+<br/><br/><br/>
+
+
 
 ## Simulation 5
 In M5, I further reduced the amount of variance attributable to the random intercept to 0.20. This model assumes that the majority of the random variance is attributable to the residual and is therefore left unpredicted (0.55). However, the random intercept is kept as one of the most predictive specified term in the random structure, but in M5 it is assumed to be equivalent to the random slope between goal importance and trust.
@@ -528,6 +550,10 @@ SCurve2b<-powerCurve(SimInter2b, fixed("impcat:relweak", "lr"),
 SCurve2b
 plot(SCurve2b)
 ```
+<br/><br/><br/><br/>
+
+
+
 
 # The Study Goes to Hell
 
@@ -580,14 +606,13 @@ plot(SCurve3b)
 ```
 
 
-# Graphing power of N = 400 across all simulations
-```{r}
+# Graphing Power Across Simulations
+```{r,echo=FALSE}
 Power400S<-c(100, 100, 88.8, 92.4, 80.2, 45)
 Power400w<-c(100, 100, 99.8, 100, 98.4, 78)
 ```
 
-
-Here's the expected power at N = 400 for the interaction between the relevance to strength and importance across all 6 simulations.
+After looking at the results from all of the simulations, it seemed as though a sample size of 400 balanced a priopri statistical power with the pragmatics of data collection. Here's the expected power at N = 400 for the interaction between the relevance to strength and importance across all 6 simulations.
 ```{r,echo=FALSE}
 plot(Power400S, type= "b", xlab="Expected Power", ylab="Simulation")
 ```

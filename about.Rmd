@@ -9,25 +9,36 @@ output:
     theme: flatly
 ---
 
- **I am passionate about helping people become passionate about their work.** 
-
-
-
-## A Story About Work 
-The next time you are at a social gathering, ask people whether they are happy with their job. Although you will sometimes find the rare individual who loves what they do, you will frequently get responses along the lines of "I hate my job." If you probe further, you might find that every person's story shares several points of similarity: The boss gets in the way of the work, subordinates don't do the work they're assigned, and HR serves only to infuriate supervisors and subordinates alike. We can put a man on the moon, but we still haven't figured out how to help everyone enjoy what they do. Isn't it about time that we fixed that?
-
-```{r, echo=FALSE,out.height='70%',out.width='70%'}
-knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/frustrated.jpg")
+```{r, echo = FALSE, out.height = '50%', out.width = '50%', fig.align='center'}
+knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/Head Shot2.jpg")
 ```
 
-## My Philosophy 
-I believe that companies can get the most out of their people when their people love what they do. However, this often requires letting go of our intuitions about effective leadership and management strategies and adopting something new. I apply research, data, and experience to questions about effective leadership and workplace norms. 
-
-```{r, echo=FALSE,out.height='70%',out.width='70%'}
-knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/workplace_image.jpg")
-```
-
-## My Background
+<center>
+**I am passionate about helping people become passionate about their work.** 
+</center>
 I bring experience and expertise to solve problems of leadership and teamwork. I have a PhD in Social/Personality Psychology, specializing in conflict and cooperation. My dissertation is on interpersonal trust, and in it I demonstrate--using a novel survey methodology that combines idiographic and nomothetic approaches--that the trust people place in another varies across the contours of the relationship. Importantly, I demonstrate that the varying trust between two people is predictable. 
 
 Prior to my academic career, I served honorably in the U.S. military. Throughout my military career, I was highly decorated for my leadership and teamwork behaviors. Consequently, I know *what* supports effective teamwork and leadership and *how* to implement those systems.
+<br/><br/><br/><br/>
+
+
+## A Story About Work 
+```{r, echo = FALSE, out.height = '70%', out.width = '70%', fig.align = 'left'}
+knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/frustrated.jpg")
+```
+
+
+The next time you are at a social gathering, ask people whether they are happy with their job. Although you will sometimes find the rare individual who loves what they do, you will frequently get responses along the lines of "I hate my job." If you probe further, you might find that every person's story shares several points of similarity: The boss gets in the way of the work, subordinates don't do the work they're assigned, and HR serves only to infuriate supervisors and subordinates alike. We can put a man on the moon, but we still haven't figured out how to help everyone enjoy what they do. Isn't it about time that we fixed that?
+<br/><br/><br/><br/>
+
+
+
+
+## My Philosophy 
+```{r, echo = FALSE, out.height = '70%', out.width = '70%', fig.align = 'left'}
+knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/workplace_image.jpg")
+```
+
+I believe that companies can get the most out of their people when their people love what they do. However, this often requires letting go of our intuitions about effective leadership and management strategies and adopting something new. I apply research, data, and experience to questions about effective leadership and workplace norms. 
+<br/><br/><br/><br/>
+
