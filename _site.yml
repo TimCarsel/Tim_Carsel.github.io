@@ -1,6 +1,5 @@
 name: "my-website"
 navbar:
-  title: "Timothy S. Carsel"
   left:
     - text: "Home"
       href: index.html
@@ -19,3 +18,5 @@ navbar:
       href: mailto:timothy.carsel@gmail.com
     - icon: fa-linkedin
       href: https://www.linkedin.com/in/timcarsel/
+    - icon: fa-twitter
+      href: https://twitter.com/TCarsel
