@@ -1,8 +1,6 @@
 ---
 title: "Contextual Trust Study"
 output:
-  pdf_document:
-    toc: yes
   html_document:
     code_download: yes
     fontsize: 8pt
@@ -45,8 +43,6 @@ data1<-read.csv("Dissertation_IdioTrust.csv", header = T, na.strings = c(""))
 ```
 
 
-\pagebreak
-
 # Brief Rationale of my study
 Interpersonal trust is an important facet of relationships, but current theories and research paradigms on interpersonal trust may be incomplete. Trust has traditionally been studied as either a trait of the individual or a facet of a specific relationship between two people. Although both approaches highlight different and important aspects of the psychology of trust, both approaches are limited in their ability to uncover more minute dynamics. 
 
@@ -55,8 +51,10 @@ In my dissertation, I proposed and tested a goal-specific theory of interpersona
 Testing the hypotheses derived from the IGM required a methodology sensitive to the idiosyncratic goals and relationships of the participants. To this end, I employed a novel and ideographically-tailored survey in which participants described their current goals and best friend. After participants described their goals and best friend, they were asked to what extent they would trust their best friend across some of their most and least important goals.  
 
 On this page, I will walk you through the logic and main findings of my dissertation, including all necessary data pre-processing steps and my analyses. If you're interested in a more detailed account of my theory, hypotheses, and methods, then I encourage you to read my dissertation [here](Carsel_2020_Interdependent goal model of trust.pdf)
+<br/><br/><br/><br/>
 
-\pagebreak
+
+
 
 # Hypotheses
 - The first hypothesis of the present study is that interpersonal trust will increase as the relevance of a best friend’s strength to a given task increases, and interpersonal trust will decrease as the relevance of a best friend’s weakness to a given task increases. 
@@ -64,8 +62,10 @@ On this page, I will walk you through the logic and main findings of my disserta
 - The second hypothesis of the present study is that individuals will place lower trust in another person on average across a range of highly important goals relative to goals of lower importance.
 
 - The third hypothesis of the present study is that for more important goals, people will be more likely to trust an important relational partner (e.g., best friend) if they believe the trustee’s strengths are relevant to the task and less likely to trust that relational partner if they believe the trustee’s weaknesses are relevant to the task. For goals that are less important, beliefs about the trustee’s strengths and weaknesses will be less relevant.
+<br/><br/><br/><br/>
 
-\pagebreak
+
+
 
 # Survey Methodology Overview
 In order to understand any analysis, it's important to first understand the data generation process. In the case of these data, participants completed an idiographically-tailored survey. 
@@ -73,11 +73,14 @@ In order to understand any analysis, it's important to first understand the data
 A traditional survey uses what's called a **nomothetic** approach, which aims to understand how groups of people act. These are the kinds of surveys people take all the time. For example, if you've ever completed a customer satisfaction survey that asked you questions like "On a scale of 1 to 5, how satisfied were you with the service you received?", then you have completed a nomothetically-designed survey. 
 
 By contrast, an **idiographic** approach aims to understand the idiosyncracies of the individual. An example of an idiographically-designed customer satisfaction survey question might be something more along the lines of "What was the most important part of the service you received for why you gave the rating you did?", with an open-ended text box for people to write in their response.
+<br/><br/><br/>
 
 ## Method
 In idiographically-tailored survey from which we got our data, participants were asked about their goals and their best friend. Specifically, participants first listed the goals they were currently pursuing, and then they were asked to select their three most and three least important goals. Next, participants were asked to identify their best friend and their best friend's most descriptive strength and weakness. Afterwards, participants were asked to what extent their best friend's most descriptive strength and weakness were relevant to each of the participants' three most and three least important goals. Finally, participants were asked to what extent they would trust their best friend across their three most and three least important goals. The criterion variable of this study, or the thing we want to predict, is the trust participants placed in their best friend across those six goals.
+<br/><br/><br/><br/>
 
-\pagebreak
+
+
 
 # Data Pre-processing
 The first step in analyzing data in ```R``` is to set your working environment and then load your data and required packages. I have already done that in the background, so I encourage you to download the code for this page if you would like to see that step. I will only show one example of code for each pre-processing step to save precious internet space.
@@ -500,8 +503,10 @@ data3$trustRely <- (data3$Trust+data3$Rely)/2
 ```
 
 Perfect! Now we're ready to explore and analyzing our data!
+<br/><br/><br/><br/>
 
-\pagebreak
+
+
 
 # Plotting
 A central tenet of the theory I'm testing is that trust is not static across the contours of a relationship. In other words, people can trust and distrust the same person depending on the goal. If that's true, then we should be able to see it in our data. Below, I randomly select 4 participants and plot the trust they place in their best friend across their three most and least important goals
@@ -532,11 +537,17 @@ byGoal3
 B-e-a-utiful!! Whereas some people seem to be pretty consistent in their trust in their best friend, others appear to calibrate their trust in their friend across the goals in their lives.
 
 Now that we've checked to see whether this was all probably a waste of time or whether there might be somemthing there, let's check out the other variables.
+<br/><br/><br/>
+
+
 
 ## Histograms
 Ok, now that we've centered our data, let's take a look at the histograms of our variables. First, let's look at the distribution of the relevance to strength measure.
+<br/><br/><br/>
 
-### Relevance to Strength Histogram
+
+
+### Relevance to Strength
 ```{r, , echo=FALSE, out.width='.49\\linewidth', fig.width=3, fig.height=3.25,fig.show='hold',fig.align='center'}
 rel_str_Hist <- data3 %>%
   ggplot(aes(x = StRel)) +
@@ -553,9 +564,10 @@ rel_str_Hist
 ```
 
 That loooks decent. It's a bit positively-skewed, which means that their are more values on the lower end of the scale than the higher end, but it doesn't look terrible. Now let's take a look at the relevance to weakness measure
+<br/><br/>
 
 
-### Relevance to Weakness Histogram
+### Relevance to Weakness
 ```{r, , echo=FALSE, out.width='.49\\linewidth', fig.width=3, fig.height=3.25,fig.show='hold',fig.align='center'}
 rel_weak_Hist <- data3 %>%
   ggplot(aes(x = WeakRel)) +
@@ -574,8 +586,10 @@ rel_weak_Hist
 That is *much* worse. Notice how nearly all of the values are at the lowest end of the scale? Not only is this extremely positively-skewed, it also looks like we're seeing a **floor effect**. A **Floor effect** is when the distribution of your variable is clustered at the lower bound of the variable range. This is not a good distribution, and it tells us that any potential failure to find an effect may be due to the hypothesis *or* the **floor effect**. That's not good, but it is what we have, so we'll see what we see.
 
 Finally, let's check out the distribution of the continuous measure of goal importance.
+<br/><br/>
 
-### Goal Importance Histogram
+
+### Goal Importance
 ```{r, , echo=FALSE, out.width='.49\\linewidth', fig.width=3, fig.height=3.25,fig.show='hold',fig.align='center'}
 rel_weak_Hist <- data3 %>%
   ggplot(aes(x = Importance)) +
@@ -594,10 +608,16 @@ rel_weak_Hist
 In contrast to the last two histograms, this variable is a bit **negatively-skewed**, which means that most of the values are at the higher end of the scale. However, like the relevance to strength measure, this distribution is not worrisome. 
 
 Now that we've checked the distributions of our predictor variables, let's plot out the relationships we plan to test.
+<br/><br/><br/>
+
+
 
 ## Predicted Relationships
 Before we plot the hypothesized relationships, let's first check to make sure that participants' most important goals were actually more important than their least important goals.
+<br/><br/>
 
+
+### Manipulation Check
 ```{r, , echo=FALSE, out.width='.49\\linewidth', fig.width=3, fig.height=3.25,fig.show='hold',fig.align='center'}
 impCheck <- ggplot(data = data3,aes(x = Goal, y=ImportanceC))+
   geom_point(aes(colour = PIN))+
@@ -617,7 +637,10 @@ impCheck
 Perfect. Participants completed the study as expected! Now let's check out our hypotheses.
 
 The first hypothesis was that participants would trust their best friend less for more important than less important goals. Let's see if that's what the relationship looks like.
+<br/><br/>
 
+
+### Trust By Importance
 ```{r, , echo=FALSE, out.width='.49\\linewidth', fig.width=3, fig.height=3.25,fig.show='hold',fig.align='center'}
 # Graphing Trust by Importance
 ImpTrust <- ggplot(data = data3, 
@@ -640,7 +663,10 @@ ImpTrust
 Well, there doesn't appear to be much of a relationship there. In fact, it kinda looks like the slope is in the opposite direction than predicted. This is definitely something to look for in the stats we'll run in a bit.
 
 The second hypothesis was that participants would trust their best friend *more* the more their friend's strength was relevant to the goal. Let's take a look.
+<br/><br/>
 
+
+### Trust By Strength
 ```{r, , echo=FALSE, out.width='.49\\linewidth', fig.width=3, fig.height=3.25,fig.show='hold',fig.align='center'}
 relStr <- ggplot(data = data3, 
   aes(x = StrRelC, y=trustRely))+ 
@@ -660,7 +686,10 @@ relStr
 That looks like a strong relationship in the direction we predicted! Yay!! 
 
 The third prediction was that participants would trust their best friend *less* the more their friend's weakness was relevant to the goal.
+<br/><br/>
 
+
+### Trust By Weakness
 ```{r, , echo=FALSE, out.width='.49\\linewidth', fig.width=3, fig.height=3.25,fig.show='hold',fig.align='center'}
 relWeak <- ggplot(data = data3, 
   aes(x = WeakRelC, y=trustRely))+ 
@@ -680,7 +709,10 @@ relWeak
 That looks like a weak relationship but again in the opposite direction than predicted. This is another finding we'll keep a sharp eye on in our analyses.
 
 The final two hypotheses were that the relationships between the relevance to strength and the relevance to weakness on goal-specific trust would only show up for more important goals. There should be no relationship between the relevance to strength and the relevance to weakness on goal-specific trust for less important goals. Next I plot those predictions. We'll first take a look at the interaction between goal importance and the relevance to strength before examining the interaction between goal importance and the relevance to weakness.
+<br/><br/>
 
+
+### Interactions
 ```{r, , echo=FALSE, out.width='.49\\linewidth', fig.width=3, fig.height=3.25,fig.show='hold',fig.align='center'}
 relStrImp <- ggplot(data = data3, 
   aes(x = StrRelC, y=trustRely))+ 
@@ -714,8 +746,10 @@ relWeakImp
 ```
 
 Welp. It looks like neither prediction was supported. Time to go run the statistical analyses to check what our graphs are telling us.
+<br/><br/><br/><br/>
 
-\pagebreak
+
+
 
 # Analyses
 Now that we've graphed our data and gotten insight into our variables' distributions and the relationships between our predictor and criterion variables, it's time to run statistical analyses to formally test our hypotheses. 
@@ -725,6 +759,9 @@ The analyses that I will do below are linear multilevel (or mixed effects) model
 As a side note, the most appropriate analyses for these data are actually ordinal logistic multilevel models. The criterion variable, goal-specific trust, is on an **ordinal scale**. Ordinal scales are where the distance between scale points are not even. By contrast, in **interval** or **ratio scales**, the distance between scale points is the same. An example of an interval scale is temperature in degrees Fahrenheit. The difference between 1$^\circ$ and 2$^\circ$ Fahrenheit is the same as the difference between 101$^\circ$ and 102$^\circ$ Fahrenheit. By contrast, is the difference between "slightly trust" and "moderately trust" the same as the difference between "moderately trust" and "very much trust?" I don't know, but probably not. Technically, linear MLMs require interval or ratio criterion variables whereas ordinal logistic MLMs require ordinal criterion variables. However, I ran both sets of analyses, and the conclusions remain the same. Consequently, I demonstrate linear MLMs here because they are generally easier to understand.
 
 These analyses are a bit complicated and require us to carefully monitor changes in our output as a funciton of changes in our fixed and random effects. I will explain each step.
+<br/><br/><br/>
+
+
 
 ## Random Effects
 The first step in running MLMs is to examine your random structure. To do this, we will include only the criterion variable and an intercept in our model and systematically change our random effects. This part might be a bit easier to understand while doing it than me explaining it, so let's just dive right in.
@@ -768,6 +805,9 @@ anova(no_cor_random, no_intercept_random)
 As expected, the no intercepts model fits significantly worse. Normally, that would mean that I would keep the more complex model. However, when I added in the main effects, those models failed to converge with the more complex random structures. After hours of pouring through many many models, it turned out that the simplest model was the only one that converged across all analyses. Because you *must* have the same random structure to compare between models, that is the structure I will use here. The final random structure, then, only includes a random intercept.
 
 Now that we've examined our random structure, let's start actually testing our hypotheses.
+<br/><br/><br/>
+
+
 
 ## Fixed effects
 In MLMs, fixed effects refer to the effects of interest. In other words, our fixed effects are the relationships between our predictor variables and our criterion variable. In the case of this study, our fixed effects are **goal importance**, **relevance to strength**, **relevance to weakness**, and the two-way interactions between **goal importance** and the two **relevance** variables. We will need four different models to examine all of our hypotheses, starting with a model that only includes the main effects of our predictor variables.
@@ -813,8 +853,10 @@ anova(weakness_importance, full_model)
 ```
 
 The full model is not an improvement over either single interaction models.
+<br/><br/><br/><br/>
 
-\pagebreak
+
+
 
 # Implications
 So what did we learn? 
@@ -825,8 +867,10 @@ Second, the main effects only model was the best fit for the data. Consequently,
 Third, **relevance to weakness** does not significantly predict trust, and **goal importance** positively predicts trust, both of which are counter to expectations. 
 
 Fourth and finally, and in line with predictions, **relevance to strength** strongly and positively predicts trust. 
+<br/><br/><br/><br/>
 
-\pagebreak
+
+
 
 # Conclusion
 I hope you have enjoyed and learned something from this overview and walkthrough of my dissertation logic and analyses! 

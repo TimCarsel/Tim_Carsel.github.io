@@ -16,9 +16,7 @@ output:
 
 **Note:** I wrote this tutorial before tidyverse was a thing. I almost exclusively use those packages now for shaping my data, but the explanations here might still be useful. 
 
-# Melting and Casting
-
-## Why Reshape Your Data
+# Why Reshape Your Data
 
 Reshape2 is a package that allows us to easily transform our data into whatever structure we may need. Many of us are used to seeing our data structured so that corresponds to a single participant and each column corresponds to a variable. This type of data structure is known as **wide format**. However, many of the packages in R require that we stretch our data so that a single participant may occupy multiple rows. This type of data structure is known as **long format**. For example, ```ggplot2``` and some data analysis functions require **long format**. Any of you who have tried to restructure their data using Excel or SPSS will immediately recognize the immense power of this package. Therefore, without further ado, let's get to it.
 
@@ -37,9 +35,12 @@ rm(list=ls())
 #install.packages("reshape2")
 library(reshape2)
 ```
+<br/><br/><br/><br/>
 
 
-## R Help
+
+
+# R Help
 
 Running the following code will give you the description of the reshape2 package
 
@@ -48,9 +49,12 @@ Running the following code will give you the description of the reshape2 package
 #or
 ?cast
 ```
+<br/><br/><br/><br/>
 
 
-## Data Frame
+
+
+# Data Frame
 
 Great job! Now, we need a data frame to play with.
 The code below will create one for you with two within-subjects factors and one between subjects factor. 
@@ -72,9 +76,12 @@ mind<-cbind.data.frame(ID, WTN1, WTN2, BTW) #Combining variables into a datafram
 mind                                        #Let's view this data set
 str(mind)
 ```
+<br/><br/><br/><br/>
 
 
-## Melting
+
+
+# Melting
 
 Below is the generic code for ```melt```ing.
 
@@ -93,6 +100,8 @@ melt.mind<-melt(mind)
 head(melt.mind)                            #Look at this! 
 tail(melt.mind)                            #Look at that!
 ```
+<br/><br/><br/>
+
 
 
 ## Explanation 
@@ -149,8 +158,12 @@ tail(melted.mind)                          #Look at that!
 
 
 Cool cool cool. We've successfully ```melt```ed our ```mind``` in a way that we'd like. Our data is structured so that each row represents an instance of the **within-subjects** variable, ```WTN```, and we've maintained the variables ```ID``` and ```BTW```. Now, let's continue this magical journey onto the wondrous land of ```cast```ing.
+<br/><br/><br/><br/>
 
-## Casting
+
+
+
+# Casting
 
 ```Cast```ing will transform **long format** back into **wide format**. This will, essentially, make your data look as it did in the beginning (or in any other way you'd prefer). 
 
@@ -181,6 +194,9 @@ cast.mind<-dcast(melted.mind, ID+BTW~WTN)
 cast.mind                                 #Look at this! 
 
 ```
+<br/><br/><br/>
+
+
 
 ## Explanation 
 
@@ -193,7 +209,6 @@ cast.mind2<-dcast(melted.mind, BTW+ID~WTN)
 
 cast.mind2                                 #Look at that! 
 ```
-
 
 
 We can also choose to specify only one side of the ```cast```ing formula, like this...
@@ -257,12 +272,20 @@ mind.summary                                #Look at that!
 You could have actually included any function after the ```fun.aggregate``` function, including a local function. I chose to demonstrate the ```mean``` function simply because it was easy and may be useful to you in the future. 
 
 Well, that's it. Read on for more useful links and information.
+<br/><br/><br/><br/>
 
-## Final Words
+
+
+
+# Final Words
 
 This is it for my introduction to the ```reshape2``` package, but there are a *ton* of things you can do with ```cast``` that I did not get around to describing. I recommend that you play around with this package and figure out what works best for you. And, if you need any other help, or if my explanations were too ridiculous for your serious ```mind```, then you can go to the sources below for additional help...
+<br/><br/><br/><br/>
 
-## Sources that were immensely helpful in the creation of my tutorial
+
+
+
+# Sources 
 
 http://seananderson.ca/2013/10/19/reshape.html                  
 This tutorial is amazing
