@@ -1,6 +1,5 @@
 name: "my-website"
 navbar:
-  title: "Timothy S. Carsel"
   left:
     - text: "Home"
       href: index.html
