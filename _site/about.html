@@ -19,14 +19,11 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
-<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -70,9 +67,6 @@ h6 {
 }
 .table th:not([align]) {
   text-align: left;
-}
-#rmd-source-code {
-  display: none;
 }
 </style>
 
@@ -253,79 +247,7 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
-
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
 
 
 
@@ -335,16 +257,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -381,20 +293,24 @@ div.tocify {
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="mailto:timothy.carsel@gmail.com">
+    <span class="fa fa-envelope"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/timcarsel/">
+    <span class="fa fa-linkedin"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
 <div class="fluid-row" id="header">
-
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
-<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
-</ul>
-</div>
 
 
 
@@ -411,7 +327,7 @@ div.tocify {
 </div>
 <div id="my-philosophy" class="section level2">
 <h2>My Philosophy</h2>
-<p>I believe that companies can get the most out of their people when their people love what they do. However, this often requires letting go of our intuitions about effective leadership and management strategies and adopting something new. I apply research, data, and experience to questions about effective workplace policies and norms.</p>
+<p>I believe that companies can get the most out of their people when their people love what they do. However, this often requires letting go of our intuitions about effective leadership and management strategies and adopting something new. I apply research, data, and experience to questions about effective leadership and workplace norms.</p>
 <p><img src="workplace_image.jpg" width="70%" height="70%" /></p>
 </div>
 <div id="my-background" class="section level2">
@@ -420,11 +336,8 @@ div.tocify {
 <p>Prior to my academic career, I served honorably in the U.S. military. Throughout my military career, I was highly decorated for my leadership and teamwork behaviors. Consequently, I know <em>what</em> supports effective teamwork and leadership and <em>how</em> to implement those systems.</p>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogJ0Fib3V0IE1lJw0Kb3V0cHV0Og0KICBodG1sX2RvY3VtZW50Og0KICAgIGNvZGVfZG93bmxvYWQ6IHllcw0KICAgIGZvbnRzaXplOiA4cHQNCiAgICBoaWdobGlnaHQ6IHRleHRtYXRlDQogICAgbnVtYmVyX3NlY3Rpb25zOiBubw0KICAgIHRoZW1lOiBmbGF0bHkNCiAgICB0b2M6IHllcw0KICAgIHRvY19mbG9hdDoNCiAgICAgIGNvbGxhcHNlZDogbm8NCi0tLQ0KDQogKipJIGFtIHBhc3Npb25hdGUgYWJvdXQgaGVscGluZyBwZW9wbGUgYmVjb21lIHBhc3Npb25hdGUgYWJvdXQgdGhlaXIgd29yay4qKiANCg0KDQoNCiMjIEEgU3RvcnkgQWJvdXQgV29yayANClRoZSBuZXh0IHRpbWUgeW91IGFyZSBhdCBhIHNvY2lhbCBnYXRoZXJpbmcsIGFzayBwZW9wbGUgd2hldGhlciB0aGV5IGFyZSBoYXBweSB3aXRoIHRoZWlyIGpvYi4gQWx0aG91Z2ggeW91IHdpbGwgc29tZXRpbWVzIGZpbmQgdGhlIHJhcmUgaW5kaXZpZHVhbCB3aG8gbG92ZXMgd2hhdCB0aGV5IGRvLCB5b3Ugd2lsbCBmcmVxdWVudGx5IGdldCByZXNwb25zZXMgYWxvbmcgdGhlIGxpbmVzIG9mICJJIGhhdGUgbXkgam9iLiIgSWYgeW91IHByb2JlIGZ1cnRoZXIsIHlvdSBtaWdodCBmaW5kIHRoYXQgZXZlcnkgcGVyc29uJ3Mgc3Rvcnkgc2hhcmVzIHNldmVyYWwgcG9pbnRzIG9mIHNpbWlsYXJpdHk6IFRoZSBib3NzIGdldHMgaW4gdGhlIHdheSBvZiB0aGUgd29yaywgc3Vib3JkaW5hdGVzIGRvbid0IGRvIHRoZSB3b3JrIHRoZXkncmUgYXNzaWduZWQsIGFuZCBIUiBzZXJ2ZXMgb25seSB0byBpbmZ1cmlhdGUgc3VwZXJ2aXNvcnMgYW5kIHN1Ym9yZGluYXRlcyBhbGlrZS4gV2UgY2FuIHB1dCBhIG1hbiBvbiB0aGUgbW9vbiwgYnV0IHdlIHN0aWxsIGhhdmVuJ3QgZmlndXJlZCBvdXQgaG93IHRvIGhlbHAgZXZlcnlvbmUgZW5qb3kgd2hhdCB0aGV5IGRvLiBJc24ndCBpdCBhYm91dCB0aW1lIHRoYXQgd2UgZml4ZWQgdGhhdD8NCg0KYGBge3IsIGVjaG89RkFMU0Usb3V0LmhlaWdodD0nNzAlJyxvdXQud2lkdGg9JzcwJSd9DQprbml0cjo6aW5jbHVkZV9ncmFwaGljcygiQzovVXNlcnMvdGNhcnNlMi9Eb2N1bWVudHMvR2l0SHViL1RpbV9DYXJzZWwuZ2l0aHViLmlvL2ZydXN0cmF0ZWQuanBnIikNCmBgYA0KDQojIyBNeSBQaGlsb3NvcGh5IA0KSSBiZWxpZXZlIHRoYXQgY29tcGFuaWVzIGNhbiBnZXQgdGhlIG1vc3Qgb3V0IG9mIHRoZWlyIHBlb3BsZSB3aGVuIHRoZWlyIHBlb3BsZSBsb3ZlIHdoYXQgdGhleSBkby4gSG93ZXZlciwgdGhpcyBvZnRlbiByZXF1aXJlcyBsZXR0aW5nIGdvIG9mIG91ciBpbnR1aXRpb25zIGFib3V0IGVmZmVjdGl2ZSBsZWFkZXJzaGlwIGFuZCBtYW5hZ2VtZW50IHN0cmF0ZWdpZXMgYW5kIGFkb3B0aW5nIHNvbWV0aGluZyBuZXcuIEkgYXBwbHkgcmVzZWFyY2gsIGRhdGEsIGFuZCBleHBlcmllbmNlIHRvIHF1ZXN0aW9ucyBhYm91dCBlZmZlY3RpdmUgd29ya3BsYWNlIHBvbGljaWVzIGFuZCBub3Jtcy4gDQoNCmBgYHtyLCBlY2hvPUZBTFNFLG91dC5oZWlnaHQ9JzcwJScsb3V0LndpZHRoPSc3MCUnfQ0Ka25pdHI6OmluY2x1ZGVfZ3JhcGhpY3MoIkM6L1VzZXJzL3RjYXJzZTIvRG9jdW1lbnRzL0dpdEh1Yi9UaW1fQ2Fyc2VsLmdpdGh1Yi5pby93b3JrcGxhY2VfaW1hZ2UuanBnIikNCmBgYA0KDQojIyBNeSBCYWNrZ3JvdW5kDQpJIGJyaW5nIGV4cGVyaWVuY2UgYW5kIGV4cGVydGlzZSB0byBzb2x2ZSBwcm9ibGVtcyBvZiBsZWFkZXJzaGlwIGFuZCB0ZWFtd29yay4gSSBoYXZlIGEgUGhEIGluIFNvY2lhbC9QZXJzb25hbGl0eSBQc3ljaG9sb2d5LCBzcGVjaWFsaXppbmcgaW4gY29uZmxpY3QgYW5kIGNvb3BlcmF0aW9uLiBNeSBkaXNzZXJ0YXRpb24gaXMgb24gaW50ZXJwZXJzb25hbCB0cnVzdCwgYW5kIGluIGl0IEkgZGVtb25zdHJhdGUtLXVzaW5nIGEgbm92ZWwgc3VydmV5IG1ldGhvZG9sb2d5IHRoYXQgY29tYmluZXMgaWRpb2dyYXBoaWMgYW5kIG5vbW90aGV0aWMgYXBwcm9hY2hlcy0tdGhhdCB0aGUgdHJ1c3QgcGVvcGxlIHBsYWNlIGluIGFub3RoZXIgdmFyaWVzIGFjcm9zcyB0aGUgY29udG91cnMgb2YgdGhlIHJlbGF0aW9uc2hpcC4gSW1wb3J0YW50bHksIEkgZGVtb25zdHJhdGUgdGhhdCB0aGUgdmFyeWluZyB0cnVzdCBiZXR3ZWVuIHR3byBwZW9wbGUgaXMgcHJlZGljdGFibGUuIA0KDQpQcmlvciB0byBteSBhY2FkZW1pYyBjYXJlZXIsIEkgc2VydmVkIGhvbm9yYWJseSBpbiB0aGUgVS5TLiBtaWxpdGFyeS4gVGhyb3VnaG91dCBteSBtaWxpdGFyeSBjYXJlZXIsIEkgd2FzIGhpZ2hseSBkZWNvcmF0ZWQgZm9yIG15IGxlYWRlcnNoaXAgYW5kIHRlYW13b3JrIGJlaGF2aW9ycy4gQ29uc2VxdWVudGx5LCBJIGtub3cgKndoYXQqIHN1cHBvcnRzIGVmZmVjdGl2ZSB0ZWFtd29yayBhbmQgbGVhZGVyc2hpcCBhbmQgKmhvdyogdG8gaW1wbGVtZW50IHRob3NlIHN5c3RlbXMu</div>
 
 
-</div>
-</div>
 
 </div>
 
@@ -456,38 +369,7 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeSourceEmbed("about.Rmd");
-});
-</script>
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

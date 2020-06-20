@@ -2,7 +2,7 @@
 title: 'Welcome To My Website'
 output:
   html_document:
-    code_download: yes
+    code_download: no
     fontsize: 8pt
     highlight: textmate
     number_sections: no
@@ -20,5 +20,3 @@ I built this website in R, and my code and data are all available.
 knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/Head Shot2.jpg")
 ```
 
-
-email at timothy dot carsel at gmail dot com

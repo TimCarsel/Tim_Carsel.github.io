@@ -23,10 +23,10 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
-<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -70,9 +70,6 @@ h6 {
 }
 .table th:not([align]) {
   text-align: left;
-}
-#rmd-source-code {
-  display: none;
 }
 </style>
 
@@ -253,9 +250,6 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
 
 
@@ -381,20 +375,24 @@ div.tocify {
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="mailto:timothy.carsel@gmail.com">
+    <span class="fa fa-envelope"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/timcarsel/">
+    <span class="fa fa-linkedin"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
 <div class="fluid-row" id="header">
-
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
-<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
-</ul>
-</div>
 
 
 
@@ -405,9 +403,7 @@ div.tocify {
 
 <p>I built this website in R, and my code and data are all available.</p>
 <p><img src="Head%20Shot2.jpg" width="50%" height="50%" /></p>
-<p>email at timothy dot carsel at gmail dot com</p>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogJ1dlbGNvbWUgVG8gTXkgV2Vic2l0ZScNCm91dHB1dDoNCiAgaHRtbF9kb2N1bWVudDoNCiAgICBjb2RlX2Rvd25sb2FkOiB5ZXMNCiAgICBmb250c2l6ZTogOHB0DQogICAgaGlnaGxpZ2h0OiB0ZXh0bWF0ZQ0KICAgIG51bWJlcl9zZWN0aW9uczogbm8NCiAgICB0aGVtZTogZmxhdGx5DQogICAgdG9jOiB5ZXMNCiAgICB0b2NfZmxvYXQ6DQogICAgICBjb2xsYXBzZWQ6IG5vDQotLS0NCg0KSSBidWlsdCB0aGlzIHdlYnNpdGUgaW4gUiwgYW5kIG15IGNvZGUgYW5kIGRhdGEgYXJlIGFsbCBhdmFpbGFibGUuDQoNCg0KDQpgYGB7ciBwcmVzc3VyZSwgZWNobz1GQUxTRSxvdXQuaGVpZ2h0PSc1MCUnLG91dC53aWR0aD0nNTAlJ30NCmtuaXRyOjppbmNsdWRlX2dyYXBoaWNzKCJDOi9Vc2Vycy90Y2Fyc2UyL0RvY3VtZW50cy9HaXRIdWIvVGltX0NhcnNlbC5naXRodWIuaW8vSGVhZCBTaG90Mi5qcGciKQ0KYGBgDQoNCg0KZW1haWwgYXQgdGltb3RoeSBkb3QgY2Fyc2VsIGF0IGdtYWlsIGRvdCBjb20=</div>
 
 
 </div>
@@ -443,11 +439,6 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeSourceEmbed("index.Rmd");
-});
-</script>
 
 <script>
 $(document).ready(function ()  {

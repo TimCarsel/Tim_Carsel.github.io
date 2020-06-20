@@ -1,17 +1,12 @@
 ---
 title: "Scientific Publications"
 output:
-  pdf_document:
-    toc: yes
   html_document:
-    code_download: yes
+    code_download: no
     fontsize: 8pt
     highlight: textmate
     number_sections: no
     theme: flatly
-    toc: yes
-    toc_float:
-      collapsed: no
 ---
 
 ```{r setup, include=FALSE}

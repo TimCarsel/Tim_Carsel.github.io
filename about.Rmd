@@ -2,14 +2,11 @@
 title: 'About Me'
 output:
   html_document:
-    code_download: yes
+    code_download: no
     fontsize: 8pt
     highlight: textmate
     number_sections: no
     theme: flatly
-    toc: yes
-    toc_float:
-      collapsed: no
 ---
 
  **I am passionate about helping people become passionate about their work.** 
@@ -24,7 +21,7 @@ knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/
 ```
 
 ## My Philosophy 
-I believe that companies can get the most out of their people when their people love what they do. However, this often requires letting go of our intuitions about effective leadership and management strategies and adopting something new. I apply research, data, and experience to questions about effective workplace policies and norms. 
+I believe that companies can get the most out of their people when their people love what they do. However, this often requires letting go of our intuitions about effective leadership and management strategies and adopting something new. I apply research, data, and experience to questions about effective leadership and workplace norms. 
 
 ```{r, echo=FALSE,out.height='70%',out.width='70%'}
 knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/workplace_image.jpg")
