@@ -14,21 +14,25 @@ knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/
 ```
 
 <center>
-**I am passionate about helping people become passionate about their work.** 
+**I apply research, data, and experience to answer questions about effective leadership and teamwork in the workplace.** 
 </center>
-I bring experience and expertise to solve problems of leadership and teamwork. I have a PhD in Social/Personality Psychology, specializing in conflict and cooperation. My dissertation is on interpersonal trust, and in it I demonstrate--using a novel survey methodology that combines idiographic and nomothetic approaches--that the trust people place in another varies across the contours of the relationship. Importantly, I demonstrate that the varying trust between two people is predictable. 
+I have a PhD in Social/Personality Psychology, specializing in conflict and cooperation. My primary research is on when and why people might trust and distrust the same person, and I leverage this understanding to identify areas of potential improvement in the way people work together. 
 
-Prior to my academic career, I served honorably in the U.S. military. Throughout my military career, I was highly decorated for my leadership and teamwork behaviors. Consequently, I know *what* supports effective teamwork and leadership and *how* to implement those systems.
+Prior to my academic career I served honorably in the U.S. military. During my military career, I was awarded the Joint Service Commendation Medal and the Navy and Marine Corps Achievement Medal (among others) for my leadership and teamwork behaviors. Consequently, I know *what* supports effective teamwork and leadership and *how* to implement those systems.
 <br/><br/><br/><br/>
 
 
-## A Story About Work 
+
+
+## People Work 
 ```{r, echo = FALSE, out.height = '70%', out.width = '70%', fig.align = 'left'}
 knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/frustrated.jpg")
 ```
 
+Everybody has had to engage in "People Work" at some point in their lives. Maybe the boss got in the way, or maybe your subordinates didn't do their work. Whenever you have to strategize about how to deal with someone else instead of being able to focus on your job, you are engaging in People Work. 
 
-The next time you are at a social gathering, ask people whether they are happy with their job. Although you will sometimes find the rare individual who loves what they do, you will frequently get responses along the lines of "I hate my job." If you probe further, you might find that every person's story shares several points of similarity: The boss gets in the way of the work, subordinates don't do the work they're assigned, and HR serves only to infuriate supervisors and subordinates alike. We can put a man on the moon, but we still haven't figured out how to help everyone enjoy what they do. Isn't it about time that we fixed that?
+People Work is exhausting. It is emotionally and psychologically draining to constantly be thinking about how you will respond when So-And-So stabs you in the back or when What’s-Their-Face fails to do the bare minimum again and you have to pick up their slack. I can help you eliminate the People Work.
+
 <br/><br/><br/><br/>
 
 
@@ -39,6 +43,7 @@ The next time you are at a social gathering, ask people whether they are happy w
 knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/workplace_image.jpg")
 ```
 
-I believe that companies can get the most out of their people when their people love what they do. However, this often requires letting go of our intuitions about effective leadership and management strategies and adopting something new. I apply research, data, and experience to questions about effective leadership and workplace norms. 
+I believe that companies can get the most out of their people when their people love what they do. When employees are fully engaged in their work, everyone benefits. Companies benefit because they get more for their money, and employees benefit because they can trust that their teammates will pull their weight. By applying the latest research on interpersonal trust, I help teams be more effective by reducing the amount of time your employees engage in People Work. 
 <br/><br/><br/><br/>
+
 
