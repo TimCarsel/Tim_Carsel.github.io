@@ -6,7 +6,7 @@ output:
     fontsize: 8pt
     highlight: textmate
     number_sections: no
-    theme: flatly
+    theme: cosmo
     toc: yes
     toc_float:
       collapsed: no
@@ -56,7 +56,7 @@ Here is the list of variables we will simulate:
 * Predictors
   + Relevance of best friend's strength to the goal (6 measurements for each participant)
   + Relevance of best friend's weakness to the goal (6 measurements for each participant)
-  + Categorical Measure of Goal importance of 6 Goals (2 levels: MOst Important, Least Important)
+  + Categorical Measure of Goal importance of 6 Goals (2 levels: Most Important, Least Important)
 <br/><br/><br/><br/>
 
 
