@@ -6,7 +6,7 @@ output:
     fontsize: 8pt
     highlight: textmate
     number_sections: no
-    theme: flatly
+    theme: cosmo
     toc_float:
       collapsed: no
 ---

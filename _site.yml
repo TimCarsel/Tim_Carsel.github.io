@@ -5,19 +5,23 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
-    - text: "Melting & Casting"
-      href: melt_cast.html
-    - text: "Simulating An RM Study"
-      href: simulation.html
-    - text: "Contextual Trust Study"
-      href: dissertation.html
-    - text: "Scientific Publications"
-      href: scientific_articles.html
+    - text: "Data Manipulation"  
+    - menu:
+      - text: "Melting & Casting"
+        href: melt_cast.html
+    - text: "Research"
+    - menu:
+      - text: "Simulating An RM Study"
+        href: simulation.html
+      - text: "Contextual Trust Study"
+        href: dissertation.html
+      - text: "Scientific Publications"
+        href: scientific_articles.html
   right:
-    - icon: fa-envelope
-      href: mailto:timothy.carsel@gmail.com
     - icon: fa-file
       href: Timothy Carsel_6-17-2020.pdf
+    - icon: fa-envelope
+      href: mailto:timothy.carsel@gmail.com
     - icon: fa-linkedin
       href: https://www.linkedin.com/in/timcarsel/
     - icon: fa-twitter

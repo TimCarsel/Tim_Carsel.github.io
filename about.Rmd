@@ -6,7 +6,7 @@ output:
     fontsize: 8pt
     highlight: textmate
     number_sections: no
-    theme: flatly
+    theme: cosmo
 ---
 
 ```{r, echo = FALSE, out.height = '50%', out.width = '50%', fig.align='center'}
