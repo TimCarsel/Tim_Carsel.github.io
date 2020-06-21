@@ -16,6 +16,8 @@ navbar:
   right:
     - icon: fa-envelope
       href: mailto:timothy.carsel@gmail.com
+    - icon: fa-file
+      href: Timothy Carsel_6-17-2020.pdf
     - icon: fa-linkedin
       href: https://www.linkedin.com/in/timcarsel/
     - icon: fa-twitter
