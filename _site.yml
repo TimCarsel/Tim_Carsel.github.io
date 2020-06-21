@@ -6,11 +6,11 @@ navbar:
     - text: "About"
       href: about.html
     - text: "Data Manipulation"  
-    - menu:
+      menu:
       - text: "Melting & Casting"
         href: melt_cast.html
     - text: "Research"
-    - menu:
+      menu:
       - text: "Simulating An RM Study"
         href: simulation.html
       - text: "Contextual Trust Study"
