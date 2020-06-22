@@ -1,0 +1,59 @@
+---
+title: "Probability, Odds, and Error"
+output:
+  html_document:
+    code_download: yes
+    fontsize: 8pt
+    highlight: textmate
+    number_sections: no
+    theme: cosmo
+    toc: yes
+    toc_float:
+      collapsed: no
+---
+<br/><br/>
+
+
+```{r, echo = FALSE, out.height = '130%', out.width = '130%', fig.align = 'center'}
+knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/dice.jpg")
+```
+<br/><br/>
+
+<center>
+# UNDER CONSTRUCTION
+</center>
+
+# Probability
+Probability is a mathematical concept used to predict how likely an event is to occur by assigning a number to represent whether something is definitely going to happen, definitely not going to happen, or anywhere in between. Although there are a lot of complicated things we can do with probability, the equation is simply the ratio of outcomes of interest to total outcomes and ranges from 0 (definitely won’t happen) to 1 (definitely will happen).
+
+Although most of the concepts of probability are fairly simple, they are very often counterintuitive. Take for example the following question. 
+**Forewarning:** I will try to trick you.
+<br/><br/>
+
+
+Let’s say you have just met with your doctor who has informed you that you have tested positive for a fatal disease.  To make things worse, this test is accurate 95% of the time. 
+-	What is the probability you will die from this disease?
+
+```{r, echo = FALSE, out.height = '50%', out.width = '50%', fig.align = 'center'}
+knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/medical-test.jpg")
+```
+<br/><br/>
+
+This question makes use of the base rate fallacy, which occurs when someone misjudges the likelihood of an event because they don’t take into account other relevant information. In this case, the relevant information is *how infrequently the disease occurs in the population*. Let’s take a look at Table 1 Below:
+
+|  |  |Table 1|    |
+|:-----:|:-----:|:-----:|:-----:|
+|       |Actually Sick|Actually Healthy|Probability of Having the Disease|
+|Test Positive|95|4,995|1.90%|
+|Test Nagative|5|94,905|0.01%|
+
+The columns labeled “Actually Sick” and “Actually Healthy” represent the number of people out of 100,000 that either really do have this fake illness or do not, respectively. The rows marked “Test Positive” and “Test Negative” indicate the number of people out of that 100,000 whose test told them they had the disease or not, respectively. In other words, the columns tell us about reality and the rows tell us about the test. 
+<br/><br/>
+
+
+As you can see, 5 people who actually have the disease got test results that told them they were healthy, and 4,995 people who are healthy were told that they actually have the disease. If you add those groups up, you will find that 5% of the total number of people who took the test received wrong results (5,000/100,000). The test makers were not being inaccurate when they told you that their test was correct 95% of the time, they just failed to mention that the overwhelming majority of wrong tests happen when somebody who is actually healthy receives a test result that tells them they will die. Therefore, if you received those test results, you actually only have about a 1.90% chance of actually having the disease.
+
+In order to know the probability of whatever it is you are interested in, you have to know the total number of possible outcomes. Sometimes figuring that out is easy. For example, the probability of rolling a ```1``` on a single role of a six-sided die is 1 out of 6 because there are 6 total possible outcomes. In the above example, the total number was 100,000 people. When I go over error later in this post, I will show tricks that statisticians have learned to essentially guess the total number of outcomes based on only knowing the details about a sample.
+
+What happens if the thing we’re trying to predict is not a discrete outcome, like whether somebody is sick or not, and instead is continuous, like how many hours a consultant might bill next week based off their billing for the last month? The general equation for probability remains the same here, but now we look at **area** instead of **counts.**
+

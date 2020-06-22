@@ -5,8 +5,22 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
+    - text: "Stats for Business"
+      menu: 
+      - text: "Overview"
+        href: biz-stats_home.html
+      - text: "Probability & Odds"
+        #href: prob-odds.html
+      - text: "Inference, Description, & Error"
+        #href: infer-describe-error.html
+      - text: "Between Groups"
+        #href: btw-groups.html
+      - text: "Repeated Measures"
+        #href: rm-designs.html
+      - text: "Covariance"
+        #href: covariance.html
     - text: "Data Manipulation"  
-      menu:
+      menu: 
       - text: "Melting & Casting"
         href: melt_cast.html
     - text: "Research"
@@ -17,6 +31,7 @@ navbar:
         href: dissertation.html
       - text: "Scientific Publications"
         href: scientific_articles.html
+
   right:
     - icon: fa-file
       href: Timothy Carsel_6-17-2020.pdf
