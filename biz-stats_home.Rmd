@@ -1,0 +1,25 @@
+---
+title: "Stats for Business"
+output:
+  pdf_document:
+    toc: yes
+  html_document:
+    code_download: no
+    fontsize: 8pt
+    highlight: textmate
+    number_sections: no
+    theme: cosmo
+---
+<center>
+# COMING SOON
+</center>
+
+Welcome to the Stats for Business part of my website! In these pages, I overview common statistical terms and concepts and apply them in business contexts. The target audiences are the leaders and managers who have data scientists on their team and those data scientists. I hope that by reading these resources, both your data scientists and your managers will be better able to communicate with each other.
+
+The following pages are arranged in roughly the same order as the topics in the statistics course I taught to university undergraduates. However, I combine some topics and drop others because the goal of these pages is **not** to teach you statistics. The goal, as mentioned above, is to give managers a basic understanding of statistics and terminology and data scientists a model for how to talk about their findings with their managers. If you are interested in a more thorough understanding of basic statistics, you can check out the course I taught [here](https://osf.io/um82z/). 
+
+-	Inference or Description
+-	Probability, Odds, and Error
+-	Between Groups
+-	Repeated Measures
+-	Covariance
