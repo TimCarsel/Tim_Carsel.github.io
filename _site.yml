@@ -9,10 +9,10 @@ navbar:
       menu: 
       - text: "Overview"
         href: biz-stats_home.html
-      - text: "Inference or Description"
-        #href: infer-describe.html
-      - text: "Probability, Odds, & Error"
-        href: prob-odds-error.html
+      - text: "Probability & Odds"
+        #href: prob-odds.html
+      - text: "Inference, Description, & Error"
+        #href: infer-describe-error.html
       - text: "Between Groups"
         #href: btw-groups.html
       - text: "Repeated Measures"
