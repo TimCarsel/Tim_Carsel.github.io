@@ -11,8 +11,10 @@ output:
     toc_float:
       collapsed: no
 ---
+<br/><br/>
 
-```{r, echo = FALSE, out.height = '100%', out.width = '100%', fig.align = 'center'}
+
+```{r, echo = FALSE, out.height = '130%', out.width = '130%', fig.align = 'center'}
 knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/dice.jpg")
 ```
 <br/><br/>
@@ -31,6 +33,11 @@ Although most of the concepts of probability are fairly simple, they are very of
 
 Let’s say you have just met with your doctor who has informed you that you have tested positive for a fatal disease.  To make things worse, this test is accurate 95% of the time. 
 -	What is the probability you will die from this disease?
+
+```{r, echo = FALSE, out.height = '50%', out.width = '50%', fig.align = 'center'}
+knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/medical-test.jpg")
+```
+<br/><br/>
 
 This question makes use of the base rate fallacy, which occurs when someone misjudges the likelihood of an event because they don’t take into account other relevant information. In this case, the relevant information is *how infrequently the disease occurs in the population*. Let’s take a look at Table 1 Below:
 
