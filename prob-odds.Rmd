@@ -2,13 +2,25 @@
 title: "Probability, Odds, and Error"
 output:
   html_document:
-    code_download: yes
+    code_download: no
     fontsize: 8pt
     highlight: textmate
     number_sections: no
     theme: cosmo
+    toc: yes
+    toc_float:
+      collapsed: no
 ---
-<br/><br/>
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning =  FALSE)
+knitr::opts_chunk$set(fig.width=3.25)
+knitr::opts_chunk$set(fig.height=2.75)
+knitr::opts_chunk$set(fig.align='center') 
+knitr::opts_chunk$set(results='hold') 
+```
 
 
 ```{r, echo = FALSE, out.height = '130%', out.width = '130%', fig.align = 'center'}
