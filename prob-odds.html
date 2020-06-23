@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Probability, Odds, and Error</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Stats for Business
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="biz-stats_home.html">Overview</a>
+    </li>
+    <li>
+      <a href="prob-odds.html">Probability &amp; Odds</a>
+    </li>
+    <li class="dropdown-header">Inference, Description, &amp; Error</li>
+    <li class="dropdown-header">Between Groups</li>
+    <li class="dropdown-header">Repeated Measures</li>
+    <li class="dropdown-header">Covariance</li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Data Manipulation
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="melt_cast.html">Melting &amp; Casting</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Research
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="simulation.html">Simulating An RM Study</a>
+    </li>
+    <li>
+      <a href="dissertation.html">Contextual Trust Study</a>
+    </li>
+    <li>
+      <a href="scientific_articles.html">Scientific Publications</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="Timothy Carsel_6-17-2020.pdf">
+    <span class="fa fa-file"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="mailto:timothy.carsel@gmail.com">
+    <span class="fa fa-envelope"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/timcarsel/">
+    <span class="fa fa-linkedin"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/TCarsel">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Probability, Odds, and Error</h1>
+
+</div>
+
+
+<p><img src="dice.jpg" width="130%" height="130%" style="display: block; margin: auto;" /> <br/><br/></p>
+<center>
+<div id="under-construction" class="section level1">
+<h1>UNDER CONSTRUCTION</h1>
+</center>
+</div>
+<div id="probability" class="section level1">
+<h1>Probability</h1>
+<p>Probability is a mathematical concept used to predict how likely an event is to occur by assigning a number to represent whether something is definitely going to happen, definitely not going to happen, or anywhere in between. Although there are a lot of complicated things we can do with probability, the equation is simply the ratio of outcomes of interest to total outcomes and ranges from 0 (definitely won’t happen) to 1 (definitely will happen).</p>
+<p>Although most of the concepts of probability are fairly simple, they acan be counterintuitive. Take for example the following question.</p>
+<p><strong>Forewarning:</strong> I will try to trick you. <br/><br/></p>
+<p>Let’s say you have just met with your doctor who has informed you that you have tested positive for a fatal disease. To make things worse, this test is accurate 95% of the time.</p>
+<ul>
+<li>What is the probability you will die from this disease?</li>
+</ul>
+<p><img src="medical-test.jpg" width="50%" height="50%" style="display: block; margin: auto;" /> <br/><br/></p>
+<p>This question makes use of the base rate fallacy, which occurs when someone misjudges the likelihood of an event because they don’t take into account other relevant information. In this case, the relevant information is <em>how infrequently the disease occurs in the population</em>. Let’s take a look at Table 1 Below:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center"></th>
+<th align="center">Table 1</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">Actually Sick</td>
+<td align="center">Actually Healthy</td>
+<td align="center">Probability of Having the Disease</td>
+</tr>
+<tr class="even">
+<td align="center">Test Positive</td>
+<td align="center">95</td>
+<td align="center">4,995</td>
+<td align="center">1.90%</td>
+</tr>
+<tr class="odd">
+<td align="center">Test Nagative</td>
+<td align="center">5</td>
+<td align="center">94,905</td>
+<td align="center">0.01%</td>
+</tr>
+</tbody>
+</table>
+<p>The columns labeled “Actually Sick” and “Actually Healthy” represent the number of people out of 100,000 that either really do have this fake illness or do not, respectively. The rows marked “Test Positive” and “Test Negative” indicate the number of people out of that 100,000 whose test told them they had the disease or not, respectively. In other words, the columns tell us about reality and the rows tell us about the test. <br/><br/></p>
+<p>As you can see, 5 people who actually have the disease got test results that told them they were healthy, and 4,995 people who are healthy were told that they actually have the disease. If you add those groups up, you will find that 5% of the total number of people who took the test received wrong results (<span class="math inline">\(\frac{5,000}{100,000}\)</span>). The test makers were not being inaccurate when they told you that their test was correct 95% of the time, they just failed to mention that the overwhelming majority of wrong tests happen when somebody who is actually healthy receives a test result that tells them they will die. Therefore, if you received those test results, you actually only have about a 1.90% chance of actually having the disease.</p>
+<p>In order to know the probability of whatever it is you are interested in, you have to know the total number of possible outcomes (<span class="math inline">\(\frac{Outcome-of-Interest}{Total-Number-of-Possible-Outcomes}\)</span>). Sometimes figuring that out is easy. For example, the probability of rolling a <code>1</code> on a single role of a six-sided die is <span class="math inline">\(\frac{1}{6}\)</span> because there are 6 total possible outcomes. In the above example, the total number was 100,000 people. When I go over error later in this post, I will show tricks that statisticians have learned to essentially guess the total number of outcomes based on only knowing the details about a sample.</p>
+<p>What happens if the thing we’re trying to predict is not a discrete outcome, like whether somebody is sick or not, and instead is continuous, like how many hours a consultant might bill next week based off their billing for the last month? The general equation for probability remains the same here, but now we look at <strong>area</strong> instead of <strong>counts.</strong></p>
+<p>Look at the graph below. There are many names for this distribution, but the two most common are the Normal Distribution and the Gaussian Distribution. I will use both terms interchangeably.</p>
+<p><img src="prob-odds_files/figure-html/unnamed-chunk-3-1.png" width=".49\linewidth" style="display: block; margin: auto;" /></p>
+<p>A lot of natural phenomena are normally distributed, like height and IQ. That’s pretty great because the normal distribution has a number of features that make things a bit easier when estimating probabilities and relationships, but those features are a bit out of the scope of this tutorial.</p>
+<p>Because the normal distribution makes things a bit easier on estimating probabilities, statisticians, data scientists, and researchers often assume that an unknown distribution is normally distributed. <strong>Note:</strong> Good statisticians, data scientists, and researchers will always check those assumptions.</p>
+<p>One of those benefits is that the normal distribution is precisely defined by an equation. As a consequence, you can define the probability of something by identifying the area of the normal distribution that corresponds to what you’re interested and divide that area by the total area. Ok, there’s a lot in this, so let’s step back and go over it slowly.</p>
+<p>Let’s take a look at the normal distribution again, but this time I want you to notice the labels on the x- and y-axes.</p>
+<p><img src="prob-odds_files/figure-html/unnamed-chunk-4-1.png" width=".49\linewidth" style="display: block; margin: auto;" /></p>
+<p>Along the Y-axis is plotted the proportion of the distribution that has that value. In other words, the taller that part of the curve, the more likely is that value. It’s clear, then, that if you have no other information about a distribution than its mean and that it’s normally distributed, your best guess is the mean of the distribution.</p>
+<p>Along the X-axis, you’ll notice that it’s centered at 0 and goes from -4 to +4, and the axis is labeled “Z.” I’ve generated what’s called a “z-curve,” which is a way to standardize values from different distributions. It’s not necessary to fully understand what this means, but a quick example might help.</p>
+<p>Imagine you want to see whether men are paid more than women in your organization for different types of employees (e.g., C-suite and customer-facing). Obviously, these two types of employees have very different salary expectations, so how would you compare the pay of C-suite with the pay of your cashiers? A “z-score” is a common way to place values from different distributions on a common scale.</p>
+<p><img src="money.jpg" width="50%" height="50%" style="display: block; margin: auto;" /></p>
+<p>Although the details are unnecessary for these purposes, it is important to know that there are specific probabilities associated with each z-score. For example, between the average of a distribution and +/-1 z-score is about 68% of the distribution. Between the average and +/- 2 z-scores is about 95% of the distribution.</p>
+<p>Now, back to the question at hand. If we know that the area between +1 and -1 z-score is ~68% of the distribution, then we know that the area outside +1 and -1 z-score is ~32% of the population (100% - 68% = 32%). Because that area is on both sides of the curve, then there’s ~16% of the distribution that is greater than +1 z-score and ~16% of the distribution that is less than -1 z-score. That means we can convert the pay of all of our employees into z-scores and look at whether men are disproportionally represented in the top of the distribution across all positions (<em>Spoiler:</em> They probably are, and that’s a problem).</p>
+<p>In fact, by converting your raw scores to z-scores, you can start to estimate the probability of randomly drawing a value that’s “greater than X,” or “between X and Z.” <em>That</em> is how you estimate probabilities when you are dealing with continuous values and not counts. And you thought you’d never have to think about area problems again! <br/><br/></p>
+</div>
+<div id="odds" class="section level1">
+<h1>Odds</h1>
+<p>As we just discussed, probability is the ratio of (<span class="math inline">\(\frac{Outcome-of-Interest}{Total-Number-of-Possible-Outcomes}\)</span>). So if we wanted to know the probability of rolling a 1 on a six-sided die, the ratio would be <span class="math inline">\(\frac{1}{6}\)</span></p>
+<p>Odds are a ratio of ratios. Specifically, the odds of an event are the ratio of the probability an outcome <strong>will</strong> happen to the probability that an outcome will <strong>not</strong> happen (<span class="math inline">\(\frac{Prob.-Outcome-WILL-Happen}{ Prob.-Outcome-Will-NOT-Happen }\)</span>), and is often written as the probabilities separated by a colon. To go back to the die example, we now know that the <em>probability</em> of rolling a <code>1</code> is <span class="math inline">\(\frac{1}{6}\)</span>. The odds of rolling a <code>1</code> is 1:5.</p>
+<p>Odds are useful because when they are combined into an <strong>odds ratio</strong>, they allow us to use a single number to express a constant relationship between a continuous predictor (like salary) and a categorical outcome variable (like whether an employee stayed with the company or left). But we’ll get to that when we discuss logistic regression.</p>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlByb2JhYmlsaXR5LCBPZGRzLCBhbmQgRXJyb3IiDQpvdXRwdXQ6DQogIGh0bWxfZG9jdW1lbnQ6DQogICAgY29kZV9kb3dubG9hZDogeWVzDQogICAgZm9udHNpemU6IDhwdA0KICAgIGhpZ2hsaWdodDogdGV4dG1hdGUNCiAgICBudW1iZXJfc2VjdGlvbnM6IG5vDQogICAgdGhlbWU6IGNvc21vDQogICAgdG9jOiB5ZXMNCiAgICB0b2NfZmxvYXQ6DQogICAgICBjb2xsYXBzZWQ6IG5vDQotLS0NCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGNhY2hlID0gVFJVRSkNCmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkNCmtuaXRyOjpvcHRzX2NodW5rJHNldChtZXNzYWdlID0gRkFMU0UpDQprbml0cjo6b3B0c19jaHVuayRzZXQod2FybmluZyA9ICBGQUxTRSkNCmtuaXRyOjpvcHRzX2NodW5rJHNldChmaWcud2lkdGg9My4yNSkNCmtuaXRyOjpvcHRzX2NodW5rJHNldChmaWcuaGVpZ2h0PTIuNzUpDQprbml0cjo6b3B0c19jaHVuayRzZXQoZmlnLmFsaWduPSdjZW50ZXInKSANCmtuaXRyOjpvcHRzX2NodW5rJHNldChyZXN1bHRzPSdob2xkJykgDQpgYGANCg0KDQpgYGB7ciwgZWNobyA9IEZBTFNFLCBvdXQuaGVpZ2h0ID0gJzEzMCUnLCBvdXQud2lkdGggPSAnMTMwJScsIGZpZy5hbGlnbiA9ICdjZW50ZXInfQ0Ka25pdHI6OmluY2x1ZGVfZ3JhcGhpY3MoIkM6L1VzZXJzL3RjYXJzZTIvRG9jdW1lbnRzL0dpdEh1Yi9UaW1fQ2Fyc2VsLmdpdGh1Yi5pby9kaWNlLmpwZyIpDQpgYGANCjxici8+PGJyLz4NCg0KPGNlbnRlcj4NCiMgVU5ERVIgQ09OU1RSVUNUSU9ODQo8L2NlbnRlcj4NCg0KIyBQcm9iYWJpbGl0eQ0KUHJvYmFiaWxpdHkgaXMgYSBtYXRoZW1hdGljYWwgY29uY2VwdCB1c2VkIHRvIHByZWRpY3QgaG93IGxpa2VseSBhbiBldmVudCBpcyB0byBvY2N1ciBieSBhc3NpZ25pbmcgYSBudW1iZXIgdG8gcmVwcmVzZW50IHdoZXRoZXIgc29tZXRoaW5nIGlzIGRlZmluaXRlbHkgZ29pbmcgdG8gaGFwcGVuLCBkZWZpbml0ZWx5IG5vdCBnb2luZyB0byBoYXBwZW4sIG9yIGFueXdoZXJlIGluIGJldHdlZW4uIEFsdGhvdWdoIHRoZXJlIGFyZSBhIGxvdCBvZiBjb21wbGljYXRlZCB0aGluZ3Mgd2UgY2FuIGRvIHdpdGggcHJvYmFiaWxpdHksIHRoZSBlcXVhdGlvbiBpcyBzaW1wbHkgdGhlIHJhdGlvIG9mIG91dGNvbWVzIG9mIGludGVyZXN0IHRvIHRvdGFsIG91dGNvbWVzIGFuZCByYW5nZXMgZnJvbSAwIChkZWZpbml0ZWx5IHdvbuKAmXQgaGFwcGVuKSB0byAxIChkZWZpbml0ZWx5IHdpbGwgaGFwcGVuKS4NCg0KQWx0aG91Z2ggbW9zdCBvZiB0aGUgY29uY2VwdHMgb2YgcHJvYmFiaWxpdHkgYXJlIGZhaXJseSBzaW1wbGUsIHRoZXkgYWNhbiBiZSBjb3VudGVyaW50dWl0aXZlLiBUYWtlIGZvciBleGFtcGxlIHRoZSBmb2xsb3dpbmcgcXVlc3Rpb24uIA0KDQoqKkZvcmV3YXJuaW5nOioqIEkgd2lsbCB0cnkgdG8gdHJpY2sgeW91Lg0KPGJyLz48YnIvPg0KDQoNCkxldOKAmXMgc2F5IHlvdSBoYXZlIGp1c3QgbWV0IHdpdGggeW91ciBkb2N0b3Igd2hvIGhhcyBpbmZvcm1lZCB5b3UgdGhhdCB5b3UgaGF2ZSB0ZXN0ZWQgcG9zaXRpdmUgZm9yIGEgZmF0YWwgZGlzZWFzZS4gIFRvIG1ha2UgdGhpbmdzIHdvcnNlLCB0aGlzIHRlc3QgaXMgYWNjdXJhdGUgOTUlIG9mIHRoZSB0aW1lLiANCg0KLQlXaGF0IGlzIHRoZSBwcm9iYWJpbGl0eSB5b3Ugd2lsbCBkaWUgZnJvbSB0aGlzIGRpc2Vhc2U/DQoNCmBgYHtyLCBlY2hvID0gRkFMU0UsIG91dC5oZWlnaHQgPSAnNTAlJywgb3V0LndpZHRoID0gJzUwJScsIGZpZy5hbGlnbiA9ICdjZW50ZXInfQ0Ka25pdHI6OmluY2x1ZGVfZ3JhcGhpY3MoIkM6L1VzZXJzL3RjYXJzZTIvRG9jdW1lbnRzL0dpdEh1Yi9UaW1fQ2Fyc2VsLmdpdGh1Yi5pby9tZWRpY2FsLXRlc3QuanBnIikNCmBgYA0KPGJyLz48YnIvPg0KDQpUaGlzIHF1ZXN0aW9uIG1ha2VzIHVzZSBvZiB0aGUgYmFzZSByYXRlIGZhbGxhY3ksIHdoaWNoIG9jY3VycyB3aGVuIHNvbWVvbmUgbWlzanVkZ2VzIHRoZSBsaWtlbGlob29kIG9mIGFuIGV2ZW50IGJlY2F1c2UgdGhleSBkb27igJl0IHRha2UgaW50byBhY2NvdW50IG90aGVyIHJlbGV2YW50IGluZm9ybWF0aW9uLiBJbiB0aGlzIGNhc2UsIHRoZSByZWxldmFudCBpbmZvcm1hdGlvbiBpcyAqaG93IGluZnJlcXVlbnRseSB0aGUgZGlzZWFzZSBvY2N1cnMgaW4gdGhlIHBvcHVsYXRpb24qLiBMZXTigJlzIHRha2UgYSBsb29rIGF0IFRhYmxlIDEgQmVsb3c6DQoNCnwgICAgICAgICAgICAgfCAgICAgICAgICAgICAgfFRhYmxlIDEgICAgICAgIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8DQp8Oi0tLS0tOiAgICAgIHw6LS0tLS06ICAgICAgIHw6LS0tLS06ICAgICAgICB8Oi0tLS0tOiAgICAgICAgICAgICAgICAgICAgICAgICAgfA0KfCAgICAgICAgICAgICB8QWN0dWFsbHkgU2lja3xBY3R1YWxseSBIZWFsdGh5fFByb2JhYmlsaXR5IG9mIEhhdmluZyB0aGUgRGlzZWFzZXwNCnxUZXN0IFBvc2l0aXZlfDk1ICAgICAgICAgICB8NCw5OTUgICAgICAgICAgIHwxLjkwJSAgICAgICAgICAgICAgICAgICAgICAgICAgICB8DQp8VGVzdCBOYWdhdGl2ZXw1ICAgICAgICAgICAgfDk0LDkwNSAgICAgICAgICB8MC4wMSUgICAgICAgICAgICAgICAgICAgICAgICAgICAgfA0KDQpUaGUgY29sdW1ucyBsYWJlbGVkIOKAnEFjdHVhbGx5IFNpY2vigJ0gYW5kIOKAnEFjdHVhbGx5IEhlYWx0aHnigJ0gcmVwcmVzZW50IHRoZSBudW1iZXIgb2YgcGVvcGxlIG91dCBvZiAxMDAsMDAwIHRoYXQgZWl0aGVyIHJlYWxseSBkbyBoYXZlIHRoaXMgZmFrZSBpbGxuZXNzIG9yIGRvIG5vdCwgcmVzcGVjdGl2ZWx5LiBUaGUgcm93cyBtYXJrZWQg4oCcVGVzdCBQb3NpdGl2ZeKAnSBhbmQg4oCcVGVzdCBOZWdhdGl2ZeKAnSBpbmRpY2F0ZSB0aGUgbnVtYmVyIG9mIHBlb3BsZSBvdXQgb2YgdGhhdCAxMDAsMDAwIHdob3NlIHRlc3QgdG9sZCB0aGVtIHRoZXkgaGFkIHRoZSBkaXNlYXNlIG9yIG5vdCwgcmVzcGVjdGl2ZWx5LiBJbiBvdGhlciB3b3JkcywgdGhlIGNvbHVtbnMgdGVsbCB1cyBhYm91dCByZWFsaXR5IGFuZCB0aGUgcm93cyB0ZWxsIHVzIGFib3V0IHRoZSB0ZXN0LiANCjxici8+PGJyLz4NCg0KDQpBcyB5b3UgY2FuIHNlZSwgNSBwZW9wbGUgd2hvIGFjdHVhbGx5IGhhdmUgdGhlIGRpc2Vhc2UgZ290IHRlc3QgcmVzdWx0cyB0aGF0IHRvbGQgdGhlbSB0aGV5IHdlcmUgaGVhbHRoeSwgYW5kIDQsOTk1IHBlb3BsZSB3aG8gYXJlIGhlYWx0aHkgd2VyZSB0b2xkIHRoYXQgdGhleSBhY3R1YWxseSBoYXZlIHRoZSBkaXNlYXNlLiBJZiB5b3UgYWRkIHRob3NlIGdyb3VwcyB1cCwgeW91IHdpbGwgZmluZCB0aGF0IDUlIG9mIHRoZSB0b3RhbCBudW1iZXIgb2YgcGVvcGxlIHdobyB0b29rIHRoZSB0ZXN0IHJlY2VpdmVkIHdyb25nIHJlc3VsdHMgKCRcZnJhY3s1LDAwMH17MTAwLDAwMH0kKS4gVGhlIHRlc3QgbWFrZXJzIHdlcmUgbm90IGJlaW5nIGluYWNjdXJhdGUgd2hlbiB0aGV5IHRvbGQgeW91IHRoYXQgdGhlaXIgdGVzdCB3YXMgY29ycmVjdCA5NSUgb2YgdGhlIHRpbWUsIHRoZXkganVzdCBmYWlsZWQgdG8gbWVudGlvbiB0aGF0IHRoZSBvdmVyd2hlbG1pbmcgbWFqb3JpdHkgb2Ygd3JvbmcgdGVzdHMgaGFwcGVuIHdoZW4gc29tZWJvZHkgd2hvIGlzIGFjdHVhbGx5IGhlYWx0aHkgcmVjZWl2ZXMgYSB0ZXN0IHJlc3VsdCB0aGF0IHRlbGxzIHRoZW0gdGhleSB3aWxsIGRpZS4gVGhlcmVmb3JlLCBpZiB5b3UgcmVjZWl2ZWQgdGhvc2UgdGVzdCByZXN1bHRzLCB5b3UgYWN0dWFsbHkgb25seSBoYXZlIGFib3V0IGEgMS45MCUgY2hhbmNlIG9mIGFjdHVhbGx5IGhhdmluZyB0aGUgZGlzZWFzZS4NCg0KSW4gb3JkZXIgdG8ga25vdyB0aGUgcHJvYmFiaWxpdHkgb2Ygd2hhdGV2ZXIgaXQgaXMgeW91IGFyZSBpbnRlcmVzdGVkIGluLCB5b3UgaGF2ZSB0byBrbm93IHRoZSB0b3RhbCBudW1iZXIgb2YgcG9zc2libGUgb3V0Y29tZXMgKCRcZnJhY3tPdXRjb21lLW9mLUludGVyZXN0fXtUb3RhbC1OdW1iZXItb2YtUG9zc2libGUtT3V0Y29tZXN9JCkuIFNvbWV0aW1lcyBmaWd1cmluZyB0aGF0IG91dCBpcyBlYXN5LiBGb3IgZXhhbXBsZSwgdGhlIHByb2JhYmlsaXR5IG9mIHJvbGxpbmcgYSBgMWAgb24gYSBzaW5nbGUgcm9sZSBvZiBhIHNpeC1zaWRlZCBkaWUgaXMgJFxmcmFjezF9ezZ9JCBiZWNhdXNlIHRoZXJlIGFyZSA2IHRvdGFsIHBvc3NpYmxlIG91dGNvbWVzLiBJbiB0aGUgYWJvdmUgZXhhbXBsZSwgdGhlIHRvdGFsIG51bWJlciB3YXMgMTAwLDAwMCBwZW9wbGUuIFdoZW4gSSBnbyBvdmVyIGVycm9yIGxhdGVyIGluIHRoaXMgcG9zdCwgSSB3aWxsIHNob3cgdHJpY2tzIHRoYXQgc3RhdGlzdGljaWFucyBoYXZlIGxlYXJuZWQgdG8gZXNzZW50aWFsbHkgZ3Vlc3MgdGhlIHRvdGFsIG51bWJlciBvZiBvdXRjb21lcyBiYXNlZCBvbiBvbmx5IGtub3dpbmcgdGhlIGRldGFpbHMgYWJvdXQgYSBzYW1wbGUuDQoNCldoYXQgaGFwcGVucyBpZiB0aGUgdGhpbmcgd2XigJlyZSB0cnlpbmcgdG8gcHJlZGljdCBpcyBub3QgYSBkaXNjcmV0ZSBvdXRjb21lLCBsaWtlIHdoZXRoZXIgc29tZWJvZHkgaXMgc2ljayBvciBub3QsIGFuZCBpbnN0ZWFkIGlzIGNvbnRpbnVvdXMsIGxpa2UgaG93IG1hbnkgaG91cnMgYSBjb25zdWx0YW50IG1pZ2h0IGJpbGwgbmV4dCB3ZWVrIGJhc2VkIG9mZiB0aGVpciBiaWxsaW5nIGZvciB0aGUgbGFzdCBtb250aD8gVGhlIGdlbmVyYWwgZXF1YXRpb24gZm9yIHByb2JhYmlsaXR5IHJlbWFpbnMgdGhlIHNhbWUgaGVyZSwgYnV0IG5vdyB3ZSBsb29rIGF0ICoqYXJlYSoqIGluc3RlYWQgb2YgKipjb3VudHMuKioNCg0KTG9vayBhdCB0aGUgZ3JhcGggYmVsb3cuIFRoZXJlIGFyZSBtYW55IG5hbWVzIGZvciB0aGlzIGRpc3RyaWJ1dGlvbiwgYnV0IHRoZSB0d28gbW9zdCBjb21tb24gYXJlIHRoZSBOb3JtYWwgRGlzdHJpYnV0aW9uIGFuZCB0aGUgR2F1c3NpYW4gRGlzdHJpYnV0aW9uLiBJIHdpbGwgdXNlIGJvdGggdGVybXMgaW50ZXJjaGFuZ2VhYmx5Lg0KDQpgYGB7ciwgZWNobyA9IEZBTFNFLCBvdXQud2lkdGggPScuNDlcXGxpbmV3aWR0aCcsIGZpZy53aWR0aCA9IDMsIGZpZy5oZWlnaHQgPSAzLCBmaWcuc2hvdyA9ICdob2xkJywgZmlnLmFsaWduID0gJ2NlbnRlcid9DQpaIDwtIHNlcSgtNCwgKzQsIGxlbmd0aD0xMDAwMCkNClByb2JhYmlsaXR5IDwtIGRub3JtKFosIG1lYW4gPSAwLCBzZCA9IDEpDQpwbG90KFosIFByb2JhYmlsaXR5LCB0eXBlPSJsIiwgbHdkID0gMSkNCmBgYA0KDQpBIGxvdCBvZiBuYXR1cmFsIHBoZW5vbWVuYSBhcmUgbm9ybWFsbHkgZGlzdHJpYnV0ZWQsIGxpa2UgaGVpZ2h0IGFuZCBJUS4gVGhhdOKAmXMgcHJldHR5IGdyZWF0IGJlY2F1c2UgdGhlIG5vcm1hbCBkaXN0cmlidXRpb24gaGFzIGEgbnVtYmVyIG9mIGZlYXR1cmVzIHRoYXQgbWFrZSB0aGluZ3MgYSBiaXQgZWFzaWVyIHdoZW4gZXN0aW1hdGluZyBwcm9iYWJpbGl0aWVzIGFuZCByZWxhdGlvbnNoaXBzLCBidXQgdGhvc2UgZmVhdHVyZXMgYXJlIGEgYml0IG91dCBvZiB0aGUgc2NvcGUgb2YgdGhpcyB0dXRvcmlhbC4NCg0KQmVjYXVzZSB0aGUgbm9ybWFsIGRpc3RyaWJ1dGlvbiBtYWtlcyB0aGluZ3MgYSBiaXQgZWFzaWVyIG9uIGVzdGltYXRpbmcgcHJvYmFiaWxpdGllcywgc3RhdGlzdGljaWFucywgZGF0YSBzY2llbnRpc3RzLCBhbmQgcmVzZWFyY2hlcnMgb2Z0ZW4gYXNzdW1lIHRoYXQgYW4gdW5rbm93biBkaXN0cmlidXRpb24gaXMgbm9ybWFsbHkgZGlzdHJpYnV0ZWQuICoqTm90ZToqKiBHb29kIHN0YXRpc3RpY2lhbnMsIGRhdGEgc2NpZW50aXN0cywgYW5kIHJlc2VhcmNoZXJzIHdpbGwgYWx3YXlzIGNoZWNrIHRob3NlIGFzc3VtcHRpb25zLiANCg0KT25lIG9mIHRob3NlIGJlbmVmaXRzIGlzIHRoYXQgdGhlIG5vcm1hbCBkaXN0cmlidXRpb24gaXMgcHJlY2lzZWx5IGRlZmluZWQgYnkgYW4gZXF1YXRpb24uIEFzIGEgY29uc2VxdWVuY2UsIHlvdSBjYW4gZGVmaW5lIHRoZSBwcm9iYWJpbGl0eSBvZiBzb21ldGhpbmcgYnkgaWRlbnRpZnlpbmcgdGhlIGFyZWEgb2YgdGhlIG5vcm1hbCBkaXN0cmlidXRpb24gdGhhdCBjb3JyZXNwb25kcyB0byB3aGF0IHlvdeKAmXJlIGludGVyZXN0ZWQgYW5kIGRpdmlkZSB0aGF0IGFyZWEgYnkgdGhlIHRvdGFsIGFyZWEuIE9rLCB0aGVyZeKAmXMgYSBsb3QgaW4gdGhpcywgc28gbGV04oCZcyBzdGVwIGJhY2sgYW5kIGdvIG92ZXIgaXQgc2xvd2x5Lg0KDQpMZXQncyB0YWtlIGEgbG9vayBhdCB0aGUgbm9ybWFsIGRpc3RyaWJ1dGlvbiBhZ2FpbiwgYnV0IHRoaXMgdGltZSBJIHdhbnQgeW91IHRvIG5vdGljZSB0aGUgbGFiZWxzIG9uIHRoZSB4LSBhbmQgeS1heGVzLg0KDQpgYGB7ciwgZWNobyA9IEZBTFNFLCBvdXQud2lkdGggPScuNDlcXGxpbmV3aWR0aCcsIGZpZy53aWR0aCA9IDMsIGZpZy5oZWlnaHQgPSAzLCBmaWcuc2hvdyA9ICdob2xkJywgZmlnLmFsaWduID0gJ2NlbnRlcid9DQpaIDwtIHNlcSgtNCwgKzQsIGxlbmd0aD0xMDAwMCkNClByb2JhYmlsaXR5IDwtIGRub3JtKFosIG1lYW4gPSAwLCBzZCA9IDEpDQpwbG90KFosIFByb2JhYmlsaXR5LCB0eXBlPSJsIiwgbHdkID0gMSkNCmBgYA0KDQpBbG9uZyB0aGUgWS1heGlzIGlzIHBsb3R0ZWQgdGhlIHByb3BvcnRpb24gb2YgdGhlIGRpc3RyaWJ1dGlvbiB0aGF0IGhhcyB0aGF0IHZhbHVlLiBJbiBvdGhlciB3b3JkcywgdGhlIHRhbGxlciB0aGF0IHBhcnQgb2YgdGhlIGN1cnZlLCB0aGUgbW9yZSBsaWtlbHkgaXMgdGhhdCB2YWx1ZS4gSXTigJlzIGNsZWFyLCB0aGVuLCB0aGF0IGlmIHlvdSBoYXZlIG5vIG90aGVyIGluZm9ybWF0aW9uIGFib3V0IGEgZGlzdHJpYnV0aW9uIHRoYW4gaXRzIG1lYW4gYW5kIHRoYXQgaXTigJlzIG5vcm1hbGx5IGRpc3RyaWJ1dGVkLCB5b3VyIGJlc3QgZ3Vlc3MgaXMgdGhlIG1lYW4gb2YgdGhlIGRpc3RyaWJ1dGlvbi4NCg0KQWxvbmcgdGhlIFgtYXhpcywgeW91J2xsIG5vdGljZSB0aGF0IGl0J3MgY2VudGVyZWQgYXQgMCBhbmQgZ29lcyBmcm9tIC00IHRvICs0LCBhbmQgdGhlIGF4aXMgaXMgbGFiZWxlZCAiWi4iIEkndmUgZ2VuZXJhdGVkIHdoYXQncyBjYWxsZWQgYSAiei1jdXJ2ZSwiIHdoaWNoIGlzIGEgd2F5IHRvIHN0YW5kYXJkaXplIHZhbHVlcyBmcm9tIGRpZmZlcmVudCBkaXN0cmlidXRpb25zLiBJdOKAmXMgbm90IG5lY2Vzc2FyeSB0byBmdWxseSB1bmRlcnN0YW5kIHdoYXQgdGhpcyBtZWFucywgYnV0IGEgcXVpY2sgZXhhbXBsZSBtaWdodCBoZWxwLg0KDQpJbWFnaW5lIHlvdSB3YW50IHRvIHNlZSB3aGV0aGVyIG1lbiBhcmUgcGFpZCBtb3JlIHRoYW4gd29tZW4gaW4geW91ciBvcmdhbml6YXRpb24gZm9yIGRpZmZlcmVudCB0eXBlcyBvZiBlbXBsb3llZXMgKGUuZy4sIEMtc3VpdGUgYW5kIGN1c3RvbWVyLWZhY2luZykuIE9idmlvdXNseSwgdGhlc2UgdHdvIHR5cGVzIG9mIGVtcGxveWVlcyBoYXZlIHZlcnkgZGlmZmVyZW50IHNhbGFyeSBleHBlY3RhdGlvbnMsIHNvIGhvdyB3b3VsZCB5b3UgY29tcGFyZSB0aGUgcGF5IG9mIEMtc3VpdGUgd2l0aCB0aGUgcGF5IG9mIHlvdXIgY2FzaGllcnM/IEEg4oCcei1zY29yZeKAnSBpcyBhIGNvbW1vbiB3YXkgdG8gcGxhY2UgdmFsdWVzIGZyb20gZGlmZmVyZW50IGRpc3RyaWJ1dGlvbnMgb24gYSBjb21tb24gc2NhbGUuIA0KDQpgYGB7ciwgZWNobyA9IEZBTFNFLCBvdXQuaGVpZ2h0ID0gJzUwJScsIG91dC53aWR0aCA9ICc1MCUnLCBmaWcuYWxpZ24gPSAnY2VudGVyJ30NCmtuaXRyOjppbmNsdWRlX2dyYXBoaWNzKCJDOi9Vc2Vycy90Y2Fyc2UyL0RvY3VtZW50cy9HaXRIdWIvVGltX0NhcnNlbC5naXRodWIuaW8vbW9uZXkuanBnIikNCmBgYA0KDQpBbHRob3VnaCB0aGUgZGV0YWlscyBhcmUgdW5uZWNlc3NhcnkgZm9yIHRoZXNlIHB1cnBvc2VzLCBpdCBpcyBpbXBvcnRhbnQgdG8ga25vdyB0aGF0IHRoZXJlIGFyZSBzcGVjaWZpYyBwcm9iYWJpbGl0aWVzIGFzc29jaWF0ZWQgd2l0aCBlYWNoIHotc2NvcmUuIEZvciBleGFtcGxlLCBiZXR3ZWVuIHRoZSBhdmVyYWdlIG9mIGEgZGlzdHJpYnV0aW9uIGFuZCArLy0xIHotc2NvcmUgaXMgYWJvdXQgNjglIG9mIHRoZSBkaXN0cmlidXRpb24uIEJldHdlZW4gdGhlIGF2ZXJhZ2UgYW5kICsvLSAyIHotc2NvcmVzIGlzIGFib3V0IDk1JSBvZiB0aGUgZGlzdHJpYnV0aW9uLiANCg0KTm93LCBiYWNrIHRvIHRoZSBxdWVzdGlvbiBhdCBoYW5kLiBJZiB3ZSBrbm93IHRoYXQgdGhlIGFyZWEgYmV0d2VlbiArMSBhbmQgLTEgei1zY29yZSBpcyB+NjglIG9mIHRoZSBkaXN0cmlidXRpb24sIHRoZW4gd2Uga25vdyB0aGF0IHRoZSBhcmVhIG91dHNpZGUgKzEgYW5kIC0xIHotc2NvcmUgaXMgfjMyJSBvZiB0aGUgcG9wdWxhdGlvbiAoMTAwJSAtIDY4JSA9IDMyJSkuIEJlY2F1c2UgdGhhdCBhcmVhIGlzIG9uIGJvdGggc2lkZXMgb2YgdGhlIGN1cnZlLCB0aGVuIHRoZXJl4oCZcyB+MTYlIG9mIHRoZSBkaXN0cmlidXRpb24gdGhhdCBpcyBncmVhdGVyIHRoYW4gKzEgei1zY29yZSBhbmQgfjE2JSBvZiB0aGUgZGlzdHJpYnV0aW9uIHRoYXQgaXMgbGVzcyB0aGFuIC0xIHotc2NvcmUuIFRoYXQgbWVhbnMgd2UgY2FuIGNvbnZlcnQgdGhlIHBheSBvZiBhbGwgb2Ygb3VyIGVtcGxveWVlcyBpbnRvIHotc2NvcmVzIGFuZCBsb29rIGF0IHdoZXRoZXIgbWVuIGFyZSBkaXNwcm9wb3J0aW9uYWxseSByZXByZXNlbnRlZCBpbiB0aGUgdG9wIG9mIHRoZSBkaXN0cmlidXRpb24gYWNyb3NzIGFsbCBwb3NpdGlvbnMgKCpTcG9pbGVyOiogVGhleSBwcm9iYWJseSBhcmUsIGFuZCB0aGF04oCZcyBhIHByb2JsZW0pLiANCg0KSW4gZmFjdCwgYnkgY29udmVydGluZyB5b3VyIHJhdyBzY29yZXMgdG8gei1zY29yZXMsIHlvdSBjYW4gc3RhcnQgdG8gZXN0aW1hdGUgdGhlIHByb2JhYmlsaXR5IG9mIHJhbmRvbWx5IGRyYXdpbmcgYSB2YWx1ZSB0aGF04oCZcyDigJxncmVhdGVyIHRoYW4gWCzigJ0gb3Ig4oCcYmV0d2VlbiBYIGFuZCBaLuKAnSAqVGhhdCogaXMgaG93IHlvdSBlc3RpbWF0ZSBwcm9iYWJpbGl0aWVzIHdoZW4geW91IGFyZSBkZWFsaW5nIHdpdGggY29udGludW91cyB2YWx1ZXMgYW5kIG5vdCBjb3VudHMuIEFuZCB5b3UgdGhvdWdodCB5b3XigJlkIG5ldmVyIGhhdmUgdG8gdGhpbmsgYWJvdXQgYXJlYSBwcm9ibGVtcyBhZ2FpbiENCjxici8+PGJyLz4NCg0KIyBPZGRzDQpBcyB3ZSBqdXN0IGRpc2N1c3NlZCwgcHJvYmFiaWxpdHkgaXMgdGhlIHJhdGlvIG9mICgkXGZyYWN7T3V0Y29tZS1vZi1JbnRlcmVzdH17VG90YWwtTnVtYmVyLW9mLVBvc3NpYmxlLU91dGNvbWVzfSQpLiBTbyBpZiB3ZSB3YW50ZWQgdG8ga25vdyB0aGUgcHJvYmFiaWxpdHkgb2Ygcm9sbGluZyBhIDEgb24gYSBzaXgtc2lkZWQgZGllLCB0aGUgcmF0aW8gd291bGQgYmUgJFxmcmFjezF9ezZ9JA0KDQpPZGRzIGFyZSBhIHJhdGlvIG9mIHJhdGlvcy4gU3BlY2lmaWNhbGx5LCB0aGUgb2RkcyBvZiBhbiBldmVudCBhcmUgdGhlIHJhdGlvIG9mIHRoZSBwcm9iYWJpbGl0eSBhbiBvdXRjb21lICoqd2lsbCoqIGhhcHBlbiB0byB0aGUgcHJvYmFiaWxpdHkgdGhhdCBhbiBvdXRjb21lIHdpbGwgKipub3QqKiBoYXBwZW4gKCRcZnJhY3tQcm9iLi1PdXRjb21lLVdJTEwtSGFwcGVufXsgUHJvYi4tT3V0Y29tZS1XaWxsLU5PVC1IYXBwZW4gfSQpLCBhbmQgaXMgb2Z0ZW4gd3JpdHRlbiBhcyB0aGUgcHJvYmFiaWxpdGllcyBzZXBhcmF0ZWQgYnkgYSBjb2xvbi4gVG8gZ28gYmFjayB0byB0aGUgZGllIGV4YW1wbGUsIHdlIG5vdyBrbm93IHRoYXQgdGhlICpwcm9iYWJpbGl0eSogb2Ygcm9sbGluZyBhIGAxYCBpcyAkXGZyYWN7MX17Nn0kLiBUaGUgb2RkcyBvZiByb2xsaW5nIGEgYDFgIGlzIDE6NS4NCg0KT2RkcyBhcmUgdXNlZnVsIGJlY2F1c2Ugd2hlbiB0aGV5IGFyZSBjb21iaW5lZCBpbnRvIGFuICoqb2RkcyByYXRpbyoqLCB0aGV5IGFsbG93IHVzIHRvIHVzZSBhIHNpbmdsZSBudW1iZXIgdG8gZXhwcmVzcyBhIGNvbnN0YW50IHJlbGF0aW9uc2hpcCBiZXR3ZWVuIGEgY29udGludW91cyBwcmVkaWN0b3IgKGxpa2Ugc2FsYXJ5KSBhbmQgYSBjYXRlZ29yaWNhbCBvdXRjb21lIHZhcmlhYmxlIChsaWtlIHdoZXRoZXIgYW4gZW1wbG95ZWUgc3RheWVkIHdpdGggdGhlIGNvbXBhbnkgb3IgbGVmdCkuIEJ1dCB3ZeKAmWxsIGdldCB0byB0aGF0IHdoZW4gd2UgZGlzY3VzcyBsb2dpc3RpYyByZWdyZXNzaW9uLg0KDQo=</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("prob-odds.Rmd");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

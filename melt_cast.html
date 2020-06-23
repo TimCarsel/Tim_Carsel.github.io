@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Melting &amp; Casting</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Stats for Business
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="biz-stats_home.html">Overview</a>
+    </li>
+    <li>
+      <a href="prob-odds.html">Probability &amp; Odds</a>
+    </li>
+    <li class="dropdown-header">Inference, Description, &amp; Error</li>
+    <li class="dropdown-header">Between Groups</li>
+    <li class="dropdown-header">Repeated Measures</li>
+    <li class="dropdown-header">Covariance</li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Data Manipulation
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="melt_cast.html">Melting &amp; Casting</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Research
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="simulation.html">Simulating An RM Study</a>
+    </li>
+    <li>
+      <a href="dissertation.html">Contextual Trust Study</a>
+    </li>
+    <li>
+      <a href="scientific_articles.html">Scientific Publications</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="Timothy Carsel_6-17-2020.pdf">
+    <span class="fa fa-file"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="mailto:timothy.carsel@gmail.com">
+    <span class="fa fa-envelope"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/timcarsel/">
+    <span class="fa fa-linkedin"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/TCarsel">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Melting &amp; Casting</h1>
+
+</div>
+
+
+<p><strong>Note:</strong> I wrote this tutorial before tidyverse was a thing. I almost exclusively use those packages now for shaping my data, but the explanations here might still be useful.</p>
+<div id="why-reshape-your-data" class="section level1">
+<h1>Why Reshape Your Data</h1>
+<p>Reshape2 is a package that allows us to easily transform our data into whatever structure we may need. Many of us are used to seeing our data structured so that corresponds to a single participant and each column corresponds to a variable. This type of data structure is known as <strong>wide format</strong>. However, many of the packages in R require that we stretch our data so that a single participant may occupy multiple rows. This type of data structure is known as <strong>long format</strong>. For example, <code>ggplot2</code> and some data analysis functions require <strong>long format</strong>. Any of you who have tried to restructure their data using Excel or SPSS will immediately recognize the immense power of this package. Therefore, without further ado, let’s get to it.</p>
+<p>As a quick note, this tutorial will be heavily based around learning from examples. Therefore, I strongly encourage you to follow along with the example data and code provided below. Before we can begin our demonstration, it will be helpful to clear our environment, set our working directory, load the necessary packages, and take a quick glance at the description of melting and casting as described by the wondrous RStudio helper window.</p>
+<p>So please, join me on this magical journey by running the code below.</p>
+<pre class="r"><code>#First, remove all your stuff
+rm(list=ls())
+
+#Make sure to set your working directory
+#setwd(&quot;PATH&quot;)
+
+#Next, you need to download and install the reshape pachage
+#install.packages(&quot;reshape2&quot;)
+library(reshape2)</code></pre>
+<p><br/><br/><br/><br/></p>
+</div>
+<div id="r-help" class="section level1">
+<h1>R Help</h1>
+<p>Running the following code will give you the description of the reshape2 package</p>
+<pre class="r"><code>?melt
+#or
+?cast</code></pre>
+<p><br/><br/><br/><br/></p>
+</div>
+<div id="data-frame" class="section level1">
+<h1>Data Frame</h1>
+<p>Great job! Now, we need a data frame to play with. The code below will create one for you with two within-subjects factors and one between subjects factor.</p>
+<pre class="r"><code>#Creating a toy data set to melt
+## Run everything below TOGETHER
+ID&lt;-c(1:6)                                  #Creating an ID variable for 6 participants
+set.seed(66)                                #Setting a seed so we can all have the same values
+WTN1&lt;-runif(6, min = 1, max = 7)            #Creating a within-Subjects variable
+set.seed(16)                                #Setting a seed so we can all have the same values
+WTN2&lt;-runif(6, min = 1, max = 7)            #Creating a within-Subjects variable
+BTW&lt;- replicate(3,1:2, simplify = T)        #Creating a between subjects variable
+BTW&lt;-as.vector(BTW)                         #Turning between-Subjects variable into a vector
+mind&lt;-cbind.data.frame(ID, WTN1, WTN2, BTW) #Combining variables into a dataframe
+#mind$BTW&lt;-as.factor(mind$BTW)              #Turning between-subjects variable into a factor
+#mind$ID&lt;-as.factor(mind$I)                 #Turning ID into a factor
+
+mind                                        #Let&#39;s view this data set
+str(mind)</code></pre>
+<pre><code>##   ID     WTN1     WTN2 BTW
+## 1  1 6.939619 5.098660   1
+## 2  2 5.978156 2.464705   2
+## 3  3 4.515321 3.700668   1
+## 4  4 3.502277 2.376611   2
+## 5  5 4.972581 6.181047   1
+## 6  6 3.275813 2.867202   2
+## &#39;data.frame&#39;:    6 obs. of  4 variables:
+##  $ ID  : int  1 2 3 4 5 6
+##  $ WTN1: num  6.94 5.98 4.52 3.5 4.97 ...
+##  $ WTN2: num  5.1 2.46 3.7 2.38 6.18 ...
+##  $ BTW : int  1 2 1 2 1 2</code></pre>
+<p><br/><br/><br/><br/></p>
+</div>
+<div id="melting" class="section level1">
+<h1>Melting</h1>
+<p>Below is the generic code for <code>melt</code>ing.</p>
+<pre class="r"><code>#This is commented out so that the generic code does not run
+#melt(data, ..., na.rm = FALSE, value.name = &quot;value&quot;)</code></pre>
+<p>Ok, now that we have a dataframe, let’s <code>melt</code> the sucker!</p>
+<pre class="r"><code>#Melt your mind!
+melt.mind&lt;-melt(mind)                  
+
+head(melt.mind)                            #Look at this! 
+tail(melt.mind)                            #Look at that!</code></pre>
+<pre><code>##   variable value
+## 1       ID     1
+## 2       ID     2
+## 3       ID     3
+## 4       ID     4
+## 5       ID     5
+## 6       ID     6
+##    variable value
+## 19      BTW     1
+## 20      BTW     2
+## 21      BTW     1
+## 22      BTW     2
+## 23      BTW     1
+## 24      BTW     2</code></pre>
+<p><br/><br/><br/></p>
+<div id="explanation" class="section level2">
+<h2>Explanation</h2>
+<p>So what just happened?</p>
+<p>The melt function took our data frame that had a column for each variable, and created a data frame with only <strong>TWO</strong> columns: One column named <code>variable</code> and one column named <code>value</code>.</p>
+<p>As psychologists, we are often used to seeing things in <strong>wide format</strong> because SPSS defaults to <strong>wide format</strong>.</p>
+<p><strong>Wide format</strong> has a column for each variable, and every row is an instance of the variable <strong>participant</strong>, that is, each row represents one <strong>participant</strong>.</p>
+<p>However, it is often useful, even occasionally necessary, to stretch out the data frame so that each row is an instance of a different variable. But what does that mean?</p>
+<p>When we <code>melt</code>ed the data frame <code>mind</code>, we told R that we wanted each row to be a single instance of a value. In order to do that, we needed to collapse across all other variables into the new variables: <code>variable</code> and <code>value</code>. We stretched out our dataset so that it was <strong>longer</strong>, or into <strong>long format</strong>.</p>
+<p>In <strong>long format</strong>, each row no longer represents a single participant. In our example, each participant was stretched into four rows, one row for each variable: one <strong>between-subjects</strong> variable, one <code>ID</code> variable, and two <strong>within-subjects</strong> variables.</p>
+<p>But what if we wanted to maintain some other columns? For example, what if we wanted <code>ID</code> and our <strong>between-subjects</strong> variable <code>BTW</code> to be, well, <strong>between-subjects</strong>?</p>
+<pre class="r"><code>melt.mind2&lt;-melt(mind, id=c(&quot;ID&quot;,&quot;BTW&quot;))
+
+melt.mind2                                 #Look at this! </code></pre>
+<pre><code>##    ID BTW variable    value
+## 1   1   1     WTN1 6.939619
+## 2   2   2     WTN1 5.978156
+## 3   3   1     WTN1 4.515321
+## 4   4   2     WTN1 3.502277
+## 5   5   1     WTN1 4.972581
+## 6   6   2     WTN1 3.275813
+## 7   1   1     WTN2 5.098660
+## 8   2   2     WTN2 2.464705
+## 9   3   1     WTN2 3.700668
+## 10  4   2     WTN2 2.376611
+## 11  5   1     WTN2 6.181047
+## 12  6   2     WTN2 2.867202</code></pre>
+<p>In the <code>melt</code> function, you can specify your <code>ID</code>, or <strong>between-subjects</strong> variables, as in the previous line of code. R is smart and will assume all other variables are to be collapsed into each other.</p>
+<p>By specifying that <code>ID</code> and <code>BTW</code> were <strong>between-subjects</strong> variables, we told R that we wanted our dataset structured so that each row is an instance of one of the <strong>within-subjects</strong> variables. This means that we now have two rows per subject because each subject experienced both of the levels of the <strong>within-subjects</strong> variable. Neat, right?</p>
+<p>Now, what if we wanted to name our <strong>within-subjects</strong> variable to something other than <code>variable</code>? Try this…</p>
+<pre class="r"><code>melt.mind3&lt;-melt(mind,id=c(&quot;ID&quot;,&quot;BTW&quot;), 
+                 variable.name = &quot;WTN&quot;)
+
+melt.mind3                                 #Look at that! </code></pre>
+<pre><code>##    ID BTW  WTN    value
+## 1   1   1 WTN1 6.939619
+## 2   2   2 WTN1 5.978156
+## 3   3   1 WTN1 4.515321
+## 4   4   2 WTN1 3.502277
+## 5   5   1 WTN1 4.972581
+## 6   6   2 WTN1 3.275813
+## 7   1   1 WTN2 5.098660
+## 8   2   2 WTN2 2.464705
+## 9   3   1 WTN2 3.700668
+## 10  4   2 WTN2 2.376611
+## 11  5   1 WTN2 6.181047
+## 12  6   2 WTN2 2.867202</code></pre>
+<p>As you can see, all we needed to do was specify that we would name our variable with the command <code>variable.name</code>. Easy-peasy!</p>
+<p>And if we also wanted to name our <code>values</code>?</p>
+<pre class="r"><code>melted.mind&lt;-melt(mind,id=c(&quot;ID&quot;,&quot;BTW&quot;), 
+                  variable.name = &quot;WTN&quot;, 
+                  value.name = &quot;Results&quot;)
+
+head(melted.mind)                          #Look at this! 
+tail(melted.mind)                          #Look at that! </code></pre>
+<pre><code>##   ID BTW  WTN  Results
+## 1  1   1 WTN1 6.939619
+## 2  2   2 WTN1 5.978156
+## 3  3   1 WTN1 4.515321
+## 4  4   2 WTN1 3.502277
+## 5  5   1 WTN1 4.972581
+## 6  6   2 WTN1 3.275813
+##    ID BTW  WTN  Results
+## 7   1   1 WTN2 5.098660
+## 8   2   2 WTN2 2.464705
+## 9   3   1 WTN2 3.700668
+## 10  4   2 WTN2 2.376611
+## 11  5   1 WTN2 6.181047
+## 12  6   2 WTN2 2.867202</code></pre>
+<p>Cool cool cool. We’ve successfully <code>melt</code>ed our <code>mind</code> in a way that we’d like. Our data is structured so that each row represents an instance of the <strong>within-subjects</strong> variable, <code>WTN</code>, and we’ve maintained the variables <code>ID</code> and <code>BTW</code>. Now, let’s continue this magical journey onto the wondrous land of <code>cast</code>ing. <br/><br/><br/><br/></p>
+</div>
+</div>
+<div id="casting" class="section level1">
+<h1>Casting</h1>
+<p><code>Cast</code>ing will transform <strong>long format</strong> back into <strong>wide format</strong>. This will, essentially, make your data look as it did in the beginning (or in any other way you’d prefer).</p>
+<p>There are multiple <code>cast</code> functions depending on the structures of your data. If you want to <code>cast</code> your data into a data frame, use <code>dcast</code>, and if you want to <code>cast</code> your data into vector/matrix/array, then use <code>acast</code>.</p>
+<p>Because we will be working with a data frame, we will use <code>dcast</code>. The generic code for both types is below.</p>
+<pre class="r"><code>#These have been commented out so that they do not run.
+
+#dcast(data, formula, fun.aggregate = NULL, ..., margins = NULL,
+#  subset = NULL, fill = NULL, drop = TRUE,
+#  value.var = guess_value(data))
+
+#acast(data, formula, fun.aggregate = NULL, ..., margins = NULL,
+#  subset = NULL, fill = NULL, drop = TRUE,
+#  value.var = guess_value(data))</code></pre>
+<p>Before we begin, it’s important to note that <code>cast</code>ing is much more challenging than <code>melt</code>ing. This may often take some trial and error, and you should not feel bad about that. Just remember: <strong>You’re awesome</strong>. Feeling good about yourself? Good. <em>Good</em>.</p>
+<p>Now, let’s <code>cast</code> our data</p>
+<pre class="r"><code>cast.mind&lt;-dcast(melted.mind, ID+BTW~WTN)
+
+cast.mind                                 #Look at this! </code></pre>
+<pre><code>##   ID BTW     WTN1     WTN2
+## 1  1   1 6.939619 5.098660
+## 2  2   2 5.978156 2.464705
+## 3  3   1 4.515321 3.700668
+## 4  4   2 3.502277 2.376611
+## 5  5   1 4.972581 6.181047
+## 6  6   2 3.275813 2.867202</code></pre>
+<p><br/><br/><br/></p>
+<div id="explanation-1" class="section level2">
+<h2>Explanation</h2>
+<p>Al-righty then. First, we needed to specify the data frame we would be using. Here, we used the <code>melted.mind</code> data frame.</p>
+<p>Next, we put in our <code>cast</code>ing formula. Now, R is pretty smart, and it assumes that the order in which you put the variables is meaningful. The description will tell you that whichever variable you put in first will be the <em>“slowest varying”</em> variable. In our case, the slowest varying is actually the <strong>between-subjects</strong> variable <code>BTW</code> because there are only 2 levels. In other words, our <code>BTW</code> variable will vary only once. However, if we put that in first, then the <code>ID</code> numbers would be out of order. Like this…</p>
+<pre class="r"><code>cast.mind2&lt;-dcast(melted.mind, BTW+ID~WTN)
+
+cast.mind2                                 #Look at that! </code></pre>
+<pre><code>##   BTW ID     WTN1     WTN2
+## 1   1  1 6.939619 5.098660
+## 2   1  3 4.515321 3.700668
+## 3   1  5 4.972581 6.181047
+## 4   2  2 5.978156 2.464705
+## 5   2  4 3.502277 2.376611
+## 6   2  6 3.275813 2.867202</code></pre>
+<p>We can also choose to specify only one side of the <code>cast</code>ing formula, like this…</p>
+<pre class="r"><code>cast.mind3&lt;-dcast(melted.mind, ID+BTW~...)
+
+cast.mind3                                 #Look at this! </code></pre>
+<pre><code>##   ID BTW     WTN1     WTN2
+## 1  1   1 6.939619 5.098660
+## 2  2   2 5.978156 2.464705
+## 3  3   1 4.515321 3.700668
+## 4  4   2 3.502277 2.376611
+## 5  5   1 4.972581 6.181047
+## 6  6   2 3.275813 2.867202</code></pre>
+<p>…or this…</p>
+<pre class="r"><code>cast.mind4&lt;-dcast(melted.mind, ...~WTN)
+
+cast.mind4                                 #Look at that! </code></pre>
+<pre><code>##   ID BTW     WTN1     WTN2
+## 1  1   1 6.939619 5.098660
+## 2  2   2 5.978156 2.464705
+## 3  3   1 4.515321 3.700668
+## 4  4   2 3.502277 2.376611
+## 5  5   1 4.972581 6.181047
+## 6  6   2 3.275813 2.867202</code></pre>
+<p>Now, we could have started from the original dataset <code>melt.mind</code>, but we will need to do something extra to recover something close to the original <strong>wide</strong> data. How about you run the code below, and I’ll walk you through what you see? Sound good? Ok, go for it. I’ll wait.</p>
+<pre class="r"><code>cast.mind5&lt;-dcast(melt.mind, ID+BTW+WTN1+WTN2~&quot;Row&quot;)
+
+cast.mind5                                 #Look at this! </code></pre>
+<pre><code>##   ID BTW     WTN1     WTN2 Row
+## 1  1   1 6.939619 5.098660   1
+## 2  2   2 5.978156 2.464705   2
+## 3  3   1 4.515321 3.700668   3
+## 4  4   2 3.502277 2.376611   4
+## 5  5   1 4.972581 6.181047   5
+## 6  6   2 3.275813 2.867202   6</code></pre>
+<p>As you can see, we have a new column named “<code>Row</code>”. Why did I do that? In our original dataset <code>mind</code>, I did not specify that <code>ID</code> and <code>BTW</code> were factors. If you’ll scroll back up to the section where I called the structure of the <code>mind</code> data, the variable types for <code>ID</code> and <code>BTW</code> are <code>int</code>. This is why the two variables get folded into each other in the <code>melt.mind</code> data. If you’ll go back <em>even farther</em> to the code where we were creating our data frame, I commented out two lines that would have converted <code>ID</code> and <code>BTW</code> into factors. If you run that code prior to creating the <code>melt.mind</code> data, then it will look exactly like the <code>melt.mind2</code> data. Don’t believe me? You can try it, if you’d like. If you do try it, however, you should probably rename the datasets you create something else so you can keep everything straight.</p>
+<p>Now, what happens if you forget to include a variable in your casting formula? Well, that all depends on which variable you forget. If you forget to include your between-subjects, <code>BTW</code> variable, then it may disappear from your casted data. Like this…</p>
+<pre class="r"><code>error.mind&lt;-dcast(melted.mind, ID~WTN)
+
+error.mind                                 #Look at that! </code></pre>
+<pre><code>##   ID     WTN1     WTN2
+## 1  1 6.939619 5.098660
+## 2  2 5.978156 2.464705
+## 3  3 4.515321 3.700668
+## 4  4 3.502277 2.376611
+## 5  5 4.972581 6.181047
+## 6  6 3.275813 2.867202</code></pre>
+<p>Notice how the <code>BTW</code> variable just disappeared? That is something you should be aware of and keep an eye out for. Personally, I always double-check my work after <code>melt</code>ing and <code>cast</code>ing.</p>
+<p>What happens if you forget the subject <code>ID</code> variable? Well, this will result in a very different result. Check it out…</p>
+<pre class="r"><code>error.mind2&lt;-dcast(melted.mind, BTW~WTN)
+
+error.mind2                                 #Look at this! </code></pre>
+<pre><code>##   BTW WTN1 WTN2
+## 1   1    3    3
+## 2   2    3    3</code></pre>
+<p>Notice the error message <code>Aggregation function missing: defaulting to length</code>? Notice that there are now only 2 rows, one for each level of your <code>BTW</code> variable, and the values in under each <code>WTN</code> level is <code>3</code>? That’s because <code>defaulting to length</code> appears to have meant that <code>R</code> will collapse all values that you used to have into just the number of columns in your dataset. Now, maybe you want to collapse across all participants. Hey, it’s possible. But what if instead of a worthless number, like the number of columns in you data, you wanted the average for each within-subjects variable at each between-subjects variable? Now that sounds like some info that could be useful!! To do this, we will need to use the <code>fun.aggregate</code> function in the <code>cast</code>ing formula. Like this…</p>
+<pre class="r"><code>mind.summary&lt;-dcast(melted.mind, BTW~WTN, fun.aggregate = mean)
+
+mind.summary                                #Look at that! </code></pre>
+<pre><code>##   BTW     WTN1     WTN2
+## 1   1 5.475841 4.993459
+## 2   2 4.252082 2.569506</code></pre>
+<p>You could have actually included any function after the <code>fun.aggregate</code> function, including a local function. I chose to demonstrate the <code>mean</code> function simply because it was easy and may be useful to you in the future.</p>
+<p>Well, that’s it. Read on for more useful links and information. <br/><br/><br/><br/></p>
+</div>
+</div>
+<div id="final-words" class="section level1">
+<h1>Final Words</h1>
+<p>This is it for my introduction to the <code>reshape2</code> package, but there are a <em>ton</em> of things you can do with <code>cast</code> that I did not get around to describing. I recommend that you play around with this package and figure out what works best for you. And, if you need any other help, or if my explanations were too ridiculous for your serious <code>mind</code>, then you can go to the sources below for additional help… <br/><br/><br/><br/></p>
+</div>
+<div id="sources" class="section level1">
+<h1>Sources</h1>
+<p><a href="http://seananderson.ca/2013/10/19/reshape.html" class="uri">http://seananderson.ca/2013/10/19/reshape.html</a><br />
+This tutorial is amazing</p>
+<p><a href="https://cran.r-project.org/web/packages/reshape2/reshape2.pdf" class="uri">https://cran.r-project.org/web/packages/reshape2/reshape2.pdf</a><br />
+This one is pretty good too</p>
+<p><a href="http://had.co.nz/reshape/" class="uri">http://had.co.nz/reshape/</a><br />
+This is the <code>reshape2</code> website</p>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-98878793-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1lbHRpbmcgJiBDYXN0aW5nIg0Kb3V0cHV0Og0KICBwZGZfZG9jdW1lbnQ6DQogICAgdG9jOiB5ZXMNCiAgaHRtbF9kb2N1bWVudDoNCiAgICBjb2RlX2Rvd25sb2FkOiB5ZXMNCiAgICBmb250c2l6ZTogOHB0DQogICAgaGlnaGxpZ2h0OiB0ZXh0bWF0ZQ0KICAgIG51bWJlcl9zZWN0aW9uczogbm8NCiAgICB0aGVtZTogY29zbW8NCiAgICB0b2M6IHllcw0KICAgIHRvY19mbG9hdDoNCiAgICAgIGNvbGxhcHNlZDogbm8NCi0tLQ0KDQpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0NCmtuaXRyOjpvcHRzX2NodW5rJHNldChjYWNoZSA9IFRSVUUpDQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQprbml0cjo6b3B0c19jaHVuayRzZXQobWVzc2FnZSA9IEZBTFNFKQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KHdhcm5pbmcgPSAgRkFMU0UpDQprbml0cjo6b3B0c19jaHVuayRzZXQoZmlnLndpZHRoPTMuMjUpDQprbml0cjo6b3B0c19jaHVuayRzZXQoZmlnLmhlaWdodD0yLjc1KQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGZpZy5hbGlnbj0nY2VudGVyJykgDQprbml0cjo6b3B0c19jaHVuayRzZXQocmVzdWx0cz0naG9sZCcpIA0KYGBgDQoNCioqTm90ZToqKiBJIHdyb3RlIHRoaXMgdHV0b3JpYWwgYmVmb3JlIHRpZHl2ZXJzZSB3YXMgYSB0aGluZy4gSSBhbG1vc3QgZXhjbHVzaXZlbHkgdXNlIHRob3NlIHBhY2thZ2VzIG5vdyBmb3Igc2hhcGluZyBteSBkYXRhLCBidXQgdGhlIGV4cGxhbmF0aW9ucyBoZXJlIG1pZ2h0IHN0aWxsIGJlIHVzZWZ1bC4gDQoNCiMgV2h5IFJlc2hhcGUgWW91ciBEYXRhDQoNClJlc2hhcGUyIGlzIGEgcGFja2FnZSB0aGF0IGFsbG93cyB1cyB0byBlYXNpbHkgdHJhbnNmb3JtIG91ciBkYXRhIGludG8gd2hhdGV2ZXIgc3RydWN0dXJlIHdlIG1heSBuZWVkLiBNYW55IG9mIHVzIGFyZSB1c2VkIHRvIHNlZWluZyBvdXIgZGF0YSBzdHJ1Y3R1cmVkIHNvIHRoYXQgY29ycmVzcG9uZHMgdG8gYSBzaW5nbGUgcGFydGljaXBhbnQgYW5kIGVhY2ggY29sdW1uIGNvcnJlc3BvbmRzIHRvIGEgdmFyaWFibGUuIFRoaXMgdHlwZSBvZiBkYXRhIHN0cnVjdHVyZSBpcyBrbm93biBhcyAqKndpZGUgZm9ybWF0KiouIEhvd2V2ZXIsIG1hbnkgb2YgdGhlIHBhY2thZ2VzIGluIFIgcmVxdWlyZSB0aGF0IHdlIHN0cmV0Y2ggb3VyIGRhdGEgc28gdGhhdCBhIHNpbmdsZSBwYXJ0aWNpcGFudCBtYXkgb2NjdXB5IG11bHRpcGxlIHJvd3MuIFRoaXMgdHlwZSBvZiBkYXRhIHN0cnVjdHVyZSBpcyBrbm93biBhcyAqKmxvbmcgZm9ybWF0KiouIEZvciBleGFtcGxlLCBgYGBnZ3Bsb3QyYGBgIGFuZCBzb21lIGRhdGEgYW5hbHlzaXMgZnVuY3Rpb25zIHJlcXVpcmUgKipsb25nIGZvcm1hdCoqLiBBbnkgb2YgeW91IHdobyBoYXZlIHRyaWVkIHRvIHJlc3RydWN0dXJlIHRoZWlyIGRhdGEgdXNpbmcgRXhjZWwgb3IgU1BTUyB3aWxsIGltbWVkaWF0ZWx5IHJlY29nbml6ZSB0aGUgaW1tZW5zZSBwb3dlciBvZiB0aGlzIHBhY2thZ2UuIFRoZXJlZm9yZSwgd2l0aG91dCBmdXJ0aGVyIGFkbywgbGV0J3MgZ2V0IHRvIGl0Lg0KDQpBcyBhIHF1aWNrIG5vdGUsIHRoaXMgdHV0b3JpYWwgd2lsbCBiZSBoZWF2aWx5IGJhc2VkIGFyb3VuZCBsZWFybmluZyBmcm9tIGV4YW1wbGVzLiBUaGVyZWZvcmUsIEkgc3Ryb25nbHkgZW5jb3VyYWdlIHlvdSB0byBmb2xsb3cgYWxvbmcgd2l0aCB0aGUgZXhhbXBsZSBkYXRhIGFuZCBjb2RlIHByb3ZpZGVkIGJlbG93LiBCZWZvcmUgd2UgY2FuIGJlZ2luIG91ciBkZW1vbnN0cmF0aW9uLCBpdCB3aWxsIGJlIGhlbHBmdWwgdG8gY2xlYXIgb3VyIGVudmlyb25tZW50LCBzZXQgb3VyIHdvcmtpbmcgZGlyZWN0b3J5LCBsb2FkIHRoZSBuZWNlc3NhcnkgcGFja2FnZXMsIGFuZCB0YWtlIGEgcXVpY2sgZ2xhbmNlIGF0IHRoZSBkZXNjcmlwdGlvbiBvZiBtZWx0aW5nIGFuZCBjYXN0aW5nIGFzIGRlc2NyaWJlZCBieSB0aGUgd29uZHJvdXMgUlN0dWRpbyBoZWxwZXIgd2luZG93LiAgDQoNClNvIHBsZWFzZSwgam9pbiBtZSBvbiB0aGlzIG1hZ2ljYWwgam91cm5leSBieSBydW5uaW5nIHRoZSBjb2RlIGJlbG93Lg0KDQpgYGB7ciwgbWVzc2FnZT1GQUxTRX0NCiNGaXJzdCwgcmVtb3ZlIGFsbCB5b3VyIHN0dWZmDQpybShsaXN0PWxzKCkpDQoNCiNNYWtlIHN1cmUgdG8gc2V0IHlvdXIgd29ya2luZyBkaXJlY3RvcnkNCiNzZXR3ZCgiUEFUSCIpDQoNCiNOZXh0LCB5b3UgbmVlZCB0byBkb3dubG9hZCBhbmQgaW5zdGFsbCB0aGUgcmVzaGFwZSBwYWNoYWdlDQojaW5zdGFsbC5wYWNrYWdlcygicmVzaGFwZTIiKQ0KbGlicmFyeShyZXNoYXBlMikNCmBgYA0KPGJyLz48YnIvPjxici8+PGJyLz4NCg0KDQoNCg0KIyBSIEhlbHANCg0KUnVubmluZyB0aGUgZm9sbG93aW5nIGNvZGUgd2lsbCBnaXZlIHlvdSB0aGUgZGVzY3JpcHRpb24gb2YgdGhlIHJlc2hhcGUyIHBhY2thZ2UNCg0KYGBge3IsIGV2YWw9RkFMU0V9DQo/bWVsdA0KI29yDQo/Y2FzdA0KYGBgDQo8YnIvPjxici8+PGJyLz48YnIvPg0KDQoNCg0KDQojIERhdGEgRnJhbWUNCg0KR3JlYXQgam9iISBOb3csIHdlIG5lZWQgYSBkYXRhIGZyYW1lIHRvIHBsYXkgd2l0aC4NClRoZSBjb2RlIGJlbG93IHdpbGwgY3JlYXRlIG9uZSBmb3IgeW91IHdpdGggdHdvIHdpdGhpbi1zdWJqZWN0cyBmYWN0b3JzIGFuZCBvbmUgYmV0d2VlbiBzdWJqZWN0cyBmYWN0b3IuIA0KDQpgYGB7ciwgbWVzc2FnZT1GQUxTRX0NCiNDcmVhdGluZyBhIHRveSBkYXRhIHNldCB0byBtZWx0DQojIyBSdW4gZXZlcnl0aGluZyBiZWxvdyBUT0dFVEhFUg0KSUQ8LWMoMTo2KSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjQ3JlYXRpbmcgYW4gSUQgdmFyaWFibGUgZm9yIDYgcGFydGljaXBhbnRzDQpzZXQuc2VlZCg2NikgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICNTZXR0aW5nIGEgc2VlZCBzbyB3ZSBjYW4gYWxsIGhhdmUgdGhlIHNhbWUgdmFsdWVzDQpXVE4xPC1ydW5pZig2LCBtaW4gPSAxLCBtYXggPSA3KSAgICAgICAgICAgICNDcmVhdGluZyBhIHdpdGhpbi1TdWJqZWN0cyB2YXJpYWJsZQ0Kc2V0LnNlZWQoMTYpICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjU2V0dGluZyBhIHNlZWQgc28gd2UgY2FuIGFsbCBoYXZlIHRoZSBzYW1lIHZhbHVlcw0KV1ROMjwtcnVuaWYoNiwgbWluID0gMSwgbWF4ID0gNykgICAgICAgICAgICAjQ3JlYXRpbmcgYSB3aXRoaW4tU3ViamVjdHMgdmFyaWFibGUNCkJUVzwtIHJlcGxpY2F0ZSgzLDE6Miwgc2ltcGxpZnkgPSBUKSAgICAgICAgI0NyZWF0aW5nIGEgYmV0d2VlbiBzdWJqZWN0cyB2YXJpYWJsZQ0KQlRXPC1hcy52ZWN0b3IoQlRXKSAgICAgICAgICAgICAgICAgICAgICAgICAjVHVybmluZyBiZXR3ZWVuLVN1YmplY3RzIHZhcmlhYmxlIGludG8gYSB2ZWN0b3INCm1pbmQ8LWNiaW5kLmRhdGEuZnJhbWUoSUQsIFdUTjEsIFdUTjIsIEJUVykgI0NvbWJpbmluZyB2YXJpYWJsZXMgaW50byBhIGRhdGFmcmFtZQ0KI21pbmQkQlRXPC1hcy5mYWN0b3IobWluZCRCVFcpICAgICAgICAgICAgICAjVHVybmluZyBiZXR3ZWVuLXN1YmplY3RzIHZhcmlhYmxlIGludG8gYSBmYWN0b3INCiNtaW5kJElEPC1hcy5mYWN0b3IobWluZCRJKSAgICAgICAgICAgICAgICAgI1R1cm5pbmcgSUQgaW50byBhIGZhY3Rvcg0KDQptaW5kICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICNMZXQncyB2aWV3IHRoaXMgZGF0YSBzZXQNCnN0cihtaW5kKQ0KYGBgDQo8YnIvPjxici8+PGJyLz48YnIvPg0KDQoNCg0KDQojIE1lbHRpbmcNCg0KQmVsb3cgaXMgdGhlIGdlbmVyaWMgY29kZSBmb3IgYGBgbWVsdGBgYGluZy4NCg0KYGBge3IsIG1lc3NhZ2U9RkFMU0V9DQojVGhpcyBpcyBjb21tZW50ZWQgb3V0IHNvIHRoYXQgdGhlIGdlbmVyaWMgY29kZSBkb2VzIG5vdCBydW4NCiNtZWx0KGRhdGEsIC4uLiwgbmEucm0gPSBGQUxTRSwgdmFsdWUubmFtZSA9ICJ2YWx1ZSIpDQpgYGANCg0KDQpPaywgbm93IHRoYXQgd2UgaGF2ZSBhIGRhdGFmcmFtZSwgbGV0J3MgYGBgbWVsdGBgYCB0aGUgc3Vja2VyIQ0KDQpgYGB7ciwgbWVzc2FnZT1GQUxTRX0NCiNNZWx0IHlvdXIgbWluZCENCm1lbHQubWluZDwtbWVsdChtaW5kKSAgICAgICAgICAgICAgICAgIA0KDQpoZWFkKG1lbHQubWluZCkgICAgICAgICAgICAgICAgICAgICAgICAgICAgI0xvb2sgYXQgdGhpcyEgDQp0YWlsKG1lbHQubWluZCkgICAgICAgICAgICAgICAgICAgICAgICAgICAgI0xvb2sgYXQgdGhhdCENCmBgYA0KPGJyLz48YnIvPjxici8+DQoNCg0KDQojIyBFeHBsYW5hdGlvbiANCg0KU28gd2hhdCBqdXN0IGhhcHBlbmVkPw0KDQpUaGUgbWVsdCBmdW5jdGlvbiB0b29rIG91ciBkYXRhIGZyYW1lIHRoYXQgaGFkIGEgY29sdW1uIGZvciBlYWNoIHZhcmlhYmxlLCBhbmQgY3JlYXRlZCBhIGRhdGEgZnJhbWUgd2l0aCBvbmx5ICoqVFdPKiogY29sdW1uczogT25lIGNvbHVtbiBuYW1lZCBgYGB2YXJpYWJsZWBgYCBhbmQgb25lIGNvbHVtbiBuYW1lZCBgYGB2YWx1ZWBgYC4NCg0KQXMgcHN5Y2hvbG9naXN0cywgd2UgYXJlIG9mdGVuIHVzZWQgdG8gc2VlaW5nIHRoaW5ncyBpbiAqKndpZGUgZm9ybWF0KiogYmVjYXVzZSBTUFNTIGRlZmF1bHRzIHRvICoqd2lkZSBmb3JtYXQqKi4NCg0KKipXaWRlIGZvcm1hdCoqIGhhcyBhIGNvbHVtbiBmb3IgZWFjaCB2YXJpYWJsZSwgYW5kIGV2ZXJ5IHJvdyBpcyBhbiBpbnN0YW5jZSBvZiB0aGUgdmFyaWFibGUgKipwYXJ0aWNpcGFudCoqLCB0aGF0IGlzLCBlYWNoIHJvdyByZXByZXNlbnRzIG9uZSAqKnBhcnRpY2lwYW50KiouDQoNCkhvd2V2ZXIsIGl0IGlzIG9mdGVuIHVzZWZ1bCwgZXZlbiBvY2Nhc2lvbmFsbHkgbmVjZXNzYXJ5LCB0byBzdHJldGNoIG91dCB0aGUgZGF0YSBmcmFtZSBzbyB0aGF0IGVhY2ggcm93IGlzIGFuIGluc3RhbmNlIG9mIGEgZGlmZmVyZW50IHZhcmlhYmxlLiBCdXQgd2hhdCBkb2VzIHRoYXQgbWVhbj8NCg0KV2hlbiB3ZSBgYGBtZWx0YGBgZWQgdGhlIGRhdGEgZnJhbWUgYGBgbWluZGBgYCwgd2UgdG9sZCBSIHRoYXQgd2Ugd2FudGVkIGVhY2ggcm93IHRvIGJlIGEgc2luZ2xlIGluc3RhbmNlIG9mIGEgdmFsdWUuIEluIG9yZGVyIHRvIGRvIHRoYXQsIHdlIG5lZWRlZCB0byBjb2xsYXBzZSBhY3Jvc3MgYWxsIG90aGVyIHZhcmlhYmxlcyBpbnRvIHRoZSBuZXcgdmFyaWFibGVzOiBgYGB2YXJpYWJsZWBgYCBhbmQgYGBgdmFsdWVgYGAuIFdlIHN0cmV0Y2hlZCBvdXQgb3VyIGRhdGFzZXQgc28gdGhhdCBpdCB3YXMgKipsb25nZXIqKiwgb3IgaW50byAqKmxvbmcgZm9ybWF0KiouDQoNCkluICoqbG9uZyBmb3JtYXQqKiwgZWFjaCByb3cgbm8gbG9uZ2VyIHJlcHJlc2VudHMgYSBzaW5nbGUgcGFydGljaXBhbnQuIEluIG91ciBleGFtcGxlLCBlYWNoIHBhcnRpY2lwYW50IHdhcyBzdHJldGNoZWQgaW50byBmb3VyIHJvd3MsIG9uZSByb3cgZm9yIGVhY2ggdmFyaWFibGU6IG9uZSAqKmJldHdlZW4tc3ViamVjdHMqKiB2YXJpYWJsZSwgb25lIGBgYElEYGBgIHZhcmlhYmxlLCBhbmQgdHdvICoqd2l0aGluLXN1YmplY3RzKiogdmFyaWFibGVzLg0KDQpCdXQgd2hhdCBpZiB3ZSB3YW50ZWQgdG8gbWFpbnRhaW4gc29tZSBvdGhlciBjb2x1bW5zPyBGb3IgZXhhbXBsZSwgd2hhdCBpZiB3ZSB3YW50ZWQgYGBgSURgYGAgYW5kIG91ciAqKmJldHdlZW4tc3ViamVjdHMqKiB2YXJpYWJsZSBgYGBCVFdgYGAgdG8gYmUsIHdlbGwsICoqYmV0d2Vlbi1zdWJqZWN0cyoqPw0KDQpgYGB7ciwgbWVzc2FnZT1GQUxTRX0NCm1lbHQubWluZDI8LW1lbHQobWluZCwgaWQ9YygiSUQiLCJCVFciKSkNCg0KbWVsdC5taW5kMiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICNMb29rIGF0IHRoaXMhIA0KYGBgDQoNCg0KSW4gdGhlIGBgYG1lbHRgYGAgZnVuY3Rpb24sIHlvdSBjYW4gc3BlY2lmeSB5b3VyIGBgYElEYGBgLCBvciAqKmJldHdlZW4tc3ViamVjdHMqKiB2YXJpYWJsZXMsIGFzIGluIHRoZSBwcmV2aW91cyBsaW5lIG9mIGNvZGUuIFIgaXMgc21hcnQgYW5kIHdpbGwgYXNzdW1lIGFsbCBvdGhlciB2YXJpYWJsZXMgYXJlIHRvIGJlIGNvbGxhcHNlZCBpbnRvIGVhY2ggb3RoZXIuDQoNCkJ5IHNwZWNpZnlpbmcgdGhhdCBgYGBJRGBgYCBhbmQgYGBgQlRXYGBgIHdlcmUgKipiZXR3ZWVuLXN1YmplY3RzKiogdmFyaWFibGVzLCB3ZSB0b2xkIFIgdGhhdCB3ZSB3YW50ZWQgb3VyIGRhdGFzZXQgc3RydWN0dXJlZCBzbyB0aGF0IGVhY2ggcm93IGlzIGFuIGluc3RhbmNlIG9mIG9uZSBvZiB0aGUgKip3aXRoaW4tc3ViamVjdHMqKiB2YXJpYWJsZXMuIFRoaXMgbWVhbnMgdGhhdCB3ZSBub3cgaGF2ZSB0d28gcm93cyBwZXIgc3ViamVjdCBiZWNhdXNlIGVhY2ggc3ViamVjdCBleHBlcmllbmNlZCBib3RoIG9mIHRoZSBsZXZlbHMgb2YgdGhlICoqd2l0aGluLXN1YmplY3RzKiogdmFyaWFibGUuIE5lYXQsIHJpZ2h0Pw0KDQpOb3csIHdoYXQgaWYgd2Ugd2FudGVkIHRvIG5hbWUgb3VyICoqd2l0aGluLXN1YmplY3RzKiogdmFyaWFibGUgdG8gc29tZXRoaW5nIG90aGVyIHRoYW4gYGBgdmFyaWFibGVgYGA/IFRyeSB0aGlzLi4uDQoNCmBgYHtyLCBtZXNzYWdlPUZBTFNFfQ0KbWVsdC5taW5kMzwtbWVsdChtaW5kLGlkPWMoIklEIiwiQlRXIiksIA0KICAgICAgICAgICAgICAgICB2YXJpYWJsZS5uYW1lID0gIldUTiIpDQoNCm1lbHQubWluZDMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjTG9vayBhdCB0aGF0ISANCmBgYA0KDQoNCkFzIHlvdSBjYW4gc2VlLCBhbGwgd2UgbmVlZGVkIHRvIGRvIHdhcyBzcGVjaWZ5IHRoYXQgd2Ugd291bGQgbmFtZSBvdXIgdmFyaWFibGUgd2l0aCB0aGUgY29tbWFuZCBgYGB2YXJpYWJsZS5uYW1lYGBgLiBFYXN5LXBlYXN5IQ0KDQpBbmQgaWYgd2UgYWxzbyB3YW50ZWQgdG8gbmFtZSBvdXIgYGBgdmFsdWVzYGBgPw0KDQpgYGB7ciwgbWVzc2FnZT1GQUxTRX0NCm1lbHRlZC5taW5kPC1tZWx0KG1pbmQsaWQ9YygiSUQiLCJCVFciKSwgDQogICAgICAgICAgICAgICAgICB2YXJpYWJsZS5uYW1lID0gIldUTiIsIA0KICAgICAgICAgICAgICAgICAgdmFsdWUubmFtZSA9ICJSZXN1bHRzIikNCg0KaGVhZChtZWx0ZWQubWluZCkgICAgICAgICAgICAgICAgICAgICAgICAgICNMb29rIGF0IHRoaXMhIA0KdGFpbChtZWx0ZWQubWluZCkgICAgICAgICAgICAgICAgICAgICAgICAgICNMb29rIGF0IHRoYXQhIA0KYGBgDQoNCg0KQ29vbCBjb29sIGNvb2wuIFdlJ3ZlIHN1Y2Nlc3NmdWxseSBgYGBtZWx0YGBgZWQgb3VyIGBgYG1pbmRgYGAgaW4gYSB3YXkgdGhhdCB3ZSdkIGxpa2UuIE91ciBkYXRhIGlzIHN0cnVjdHVyZWQgc28gdGhhdCBlYWNoIHJvdyByZXByZXNlbnRzIGFuIGluc3RhbmNlIG9mIHRoZSAqKndpdGhpbi1zdWJqZWN0cyoqIHZhcmlhYmxlLCBgYGBXVE5gYGAsIGFuZCB3ZSd2ZSBtYWludGFpbmVkIHRoZSB2YXJpYWJsZXMgYGBgSURgYGAgYW5kIGBgYEJUV2BgYC4gTm93LCBsZXQncyBjb250aW51ZSB0aGlzIG1hZ2ljYWwgam91cm5leSBvbnRvIHRoZSB3b25kcm91cyBsYW5kIG9mIGBgYGNhc3RgYGBpbmcuDQo8YnIvPjxici8+PGJyLz48YnIvPg0KDQoNCg0KDQojIENhc3RpbmcNCg0KYGBgQ2FzdGBgYGluZyB3aWxsIHRyYW5zZm9ybSAqKmxvbmcgZm9ybWF0KiogYmFjayBpbnRvICoqd2lkZSBmb3JtYXQqKi4gVGhpcyB3aWxsLCBlc3NlbnRpYWxseSwgbWFrZSB5b3VyIGRhdGEgbG9vayBhcyBpdCBkaWQgaW4gdGhlIGJlZ2lubmluZyAob3IgaW4gYW55IG90aGVyIHdheSB5b3UnZCBwcmVmZXIpLiANCg0KVGhlcmUgYXJlIG11bHRpcGxlIGBgYGNhc3RgYGAgZnVuY3Rpb25zIGRlcGVuZGluZyBvbiB0aGUgc3RydWN0dXJlcyBvZiB5b3VyIGRhdGEuIElmIHlvdSB3YW50IHRvIGBgYGNhc3RgYGAgeW91ciBkYXRhIGludG8gYSBkYXRhIGZyYW1lLCB1c2UgYGBgZGNhc3RgYGAsIGFuZCBpZiB5b3Ugd2FudCB0byBgYGBjYXN0YGBgIHlvdXIgZGF0YSBpbnRvIHZlY3Rvci9tYXRyaXgvYXJyYXksIHRoZW4gdXNlIGBgYGFjYXN0YGBgLg0KDQpCZWNhdXNlIHdlIHdpbGwgYmUgd29ya2luZyB3aXRoIGEgZGF0YSBmcmFtZSwgd2Ugd2lsbCB1c2UgYGBgZGNhc3RgYGAuIFRoZSBnZW5lcmljIGNvZGUgZm9yIGJvdGggdHlwZXMgaXMgYmVsb3cuDQoNCmBgYHtyLCBtZXNzYWdlPUZBTFNFfQ0KI1RoZXNlIGhhdmUgYmVlbiBjb21tZW50ZWQgb3V0IHNvIHRoYXQgdGhleSBkbyBub3QgcnVuLg0KDQojZGNhc3QoZGF0YSwgZm9ybXVsYSwgZnVuLmFnZ3JlZ2F0ZSA9IE5VTEwsIC4uLiwgbWFyZ2lucyA9IE5VTEwsDQojICBzdWJzZXQgPSBOVUxMLCBmaWxsID0gTlVMTCwgZHJvcCA9IFRSVUUsDQojICB2YWx1ZS52YXIgPSBndWVzc192YWx1ZShkYXRhKSkNCg0KI2FjYXN0KGRhdGEsIGZvcm11bGEsIGZ1bi5hZ2dyZWdhdGUgPSBOVUxMLCAuLi4sIG1hcmdpbnMgPSBOVUxMLA0KIyAgc3Vic2V0ID0gTlVMTCwgZmlsbCA9IE5VTEwsIGRyb3AgPSBUUlVFLA0KIyAgdmFsdWUudmFyID0gZ3Vlc3NfdmFsdWUoZGF0YSkpDQpgYGANCg0KDQpCZWZvcmUgd2UgYmVnaW4sIGl0J3MgaW1wb3J0YW50IHRvIG5vdGUgdGhhdCBgYGBjYXN0YGBgaW5nIGlzIG11Y2ggbW9yZSBjaGFsbGVuZ2luZyB0aGFuIGBgYG1lbHRgYGBpbmcuIFRoaXMgbWF5IG9mdGVuIHRha2Ugc29tZSB0cmlhbCBhbmQgZXJyb3IsIGFuZCB5b3Ugc2hvdWxkIG5vdCBmZWVsIGJhZCBhYm91dCB0aGF0LiBKdXN0IHJlbWVtYmVyOiAqKllvdSdyZSBhd2Vzb21lKiouIEZlZWxpbmcgZ29vZCBhYm91dCB5b3Vyc2VsZj8gR29vZC4gKkdvb2QqLg0KDQpOb3csIGxldCdzIGBgYGNhc3RgYGAgb3VyIGRhdGENCg0KYGBge3IsIG1lc3NhZ2U9RkFMU0V9DQpjYXN0Lm1pbmQ8LWRjYXN0KG1lbHRlZC5taW5kLCBJRCtCVFd+V1ROKQ0KDQpjYXN0Lm1pbmQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjTG9vayBhdCB0aGlzISANCg0KYGBgDQo8YnIvPjxici8+PGJyLz4NCg0KDQoNCiMjIEV4cGxhbmF0aW9uIA0KDQpBbC1yaWdodHkgdGhlbi4gRmlyc3QsIHdlIG5lZWRlZCB0byBzcGVjaWZ5IHRoZSBkYXRhIGZyYW1lIHdlIHdvdWxkIGJlIHVzaW5nLiBIZXJlLCB3ZSB1c2VkIHRoZSBgYGBtZWx0ZWQubWluZGBgYCBkYXRhIGZyYW1lLiANCg0KTmV4dCwgd2UgcHV0IGluIG91ciBgYGBjYXN0YGBgaW5nIGZvcm11bGEuIE5vdywgUiBpcyBwcmV0dHkgc21hcnQsIGFuZCBpdCBhc3N1bWVzIHRoYXQgdGhlIG9yZGVyIGluIHdoaWNoIHlvdSBwdXQgdGhlIHZhcmlhYmxlcyBpcyBtZWFuaW5nZnVsLiBUaGUgZGVzY3JpcHRpb24gd2lsbCB0ZWxsIHlvdSB0aGF0IHdoaWNoZXZlciB2YXJpYWJsZSB5b3UgcHV0IGluIGZpcnN0IHdpbGwgYmUgdGhlICoic2xvd2VzdCB2YXJ5aW5nIiogdmFyaWFibGUuIEluIG91ciBjYXNlLCB0aGUgc2xvd2VzdCB2YXJ5aW5nIGlzIGFjdHVhbGx5IHRoZSAqKmJldHdlZW4tc3ViamVjdHMqKiB2YXJpYWJsZSBgYGBCVFdgYGAgYmVjYXVzZSB0aGVyZSBhcmUgb25seSAyIGxldmVscy4gSW4gb3RoZXIgd29yZHMsIG91ciBgYGBCVFdgYGAgdmFyaWFibGUgd2lsbCB2YXJ5IG9ubHkgb25jZS4gSG93ZXZlciwgaWYgd2UgcHV0IHRoYXQgaW4gZmlyc3QsIHRoZW4gdGhlIGBgYElEYGBgIG51bWJlcnMgd291bGQgYmUgb3V0IG9mIG9yZGVyLiBMaWtlIHRoaXMuLi4NCg0KYGBge3IsIG1lc3NhZ2U9RkFMU0V9DQpjYXN0Lm1pbmQyPC1kY2FzdChtZWx0ZWQubWluZCwgQlRXK0lEfldUTikNCg0KY2FzdC5taW5kMiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICNMb29rIGF0IHRoYXQhIA0KYGBgDQoNCg0KV2UgY2FuIGFsc28gY2hvb3NlIHRvIHNwZWNpZnkgb25seSBvbmUgc2lkZSBvZiB0aGUgYGBgY2FzdGBgYGluZyBmb3JtdWxhLCBsaWtlIHRoaXMuLi4NCg0KYGBge3IsIG1lc3NhZ2U9RkFMU0V9DQpjYXN0Lm1pbmQzPC1kY2FzdChtZWx0ZWQubWluZCwgSUQrQlRXfi4uLikNCg0KY2FzdC5taW5kMyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICNMb29rIGF0IHRoaXMhIA0KYGBgDQoNCg0KLi4ub3IgdGhpcy4uLg0KDQpgYGB7ciwgbWVzc2FnZT1GQUxTRX0NCmNhc3QubWluZDQ8LWRjYXN0KG1lbHRlZC5taW5kLCAuLi5+V1ROKQ0KDQpjYXN0Lm1pbmQ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgI0xvb2sgYXQgdGhhdCEgDQpgYGANCg0KDQpOb3csIHdlIGNvdWxkIGhhdmUgc3RhcnRlZCBmcm9tIHRoZSBvcmlnaW5hbCBkYXRhc2V0IGBgYG1lbHQubWluZGBgYCwgYnV0IHdlIHdpbGwgbmVlZCB0byBkbyBzb21ldGhpbmcgZXh0cmEgdG8gcmVjb3ZlciBzb21ldGhpbmcgY2xvc2UgdG8gdGhlIG9yaWdpbmFsICoqd2lkZSoqIGRhdGEuIEhvdyBhYm91dCB5b3UgcnVuIHRoZSBjb2RlIGJlbG93LCBhbmQgSSdsbCB3YWxrIHlvdSB0aHJvdWdoIHdoYXQgeW91IHNlZT8gU291bmQgZ29vZD8gT2ssIGdvIGZvciBpdC4gSSdsbCB3YWl0Lg0KDQpgYGB7ciwgbWVzc2FnZT1GQUxTRX0NCmNhc3QubWluZDU8LWRjYXN0KG1lbHQubWluZCwgSUQrQlRXK1dUTjErV1ROMn4iUm93IikNCg0KY2FzdC5taW5kNSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICNMb29rIGF0IHRoaXMhIA0KYGBgDQoNCg0KQXMgeW91IGNhbiBzZWUsIHdlIGhhdmUgYSBuZXcgY29sdW1uIG5hbWVkICJgYGBSb3dgYGAiLiBXaHkgZGlkIEkgZG8gdGhhdD8gSW4gb3VyIG9yaWdpbmFsIGRhdGFzZXQgYGBgbWluZGBgYCwgSSBkaWQgbm90IHNwZWNpZnkgdGhhdCBgYGBJRGBgYCBhbmQgYGBgQlRXYGBgIHdlcmUgZmFjdG9ycy4gSWYgeW91J2xsIHNjcm9sbCBiYWNrIHVwIHRvIHRoZSBzZWN0aW9uIHdoZXJlIEkgY2FsbGVkIHRoZSBzdHJ1Y3R1cmUgb2YgdGhlIGBgYG1pbmRgYGAgZGF0YSwgdGhlIHZhcmlhYmxlIHR5cGVzIGZvciBgYGBJRGBgYCBhbmQgYGBgQlRXYGBgIGFyZSBgYGBpbnRgYGAuIFRoaXMgaXMgd2h5IHRoZSB0d28gdmFyaWFibGVzIGdldCBmb2xkZWQgaW50byBlYWNoIG90aGVyIGluIHRoZSBgYGBtZWx0Lm1pbmRgYGAgZGF0YS4gSWYgeW91J2xsIGdvIGJhY2sgKmV2ZW4gZmFydGhlciogdG8gdGhlIGNvZGUgd2hlcmUgd2Ugd2VyZSBjcmVhdGluZyBvdXIgZGF0YSBmcmFtZSwgSSBjb21tZW50ZWQgb3V0IHR3byBsaW5lcyB0aGF0IHdvdWxkIGhhdmUgY29udmVydGVkIGBgYElEYGBgIGFuZCBgYGBCVFdgYGAgaW50byBmYWN0b3JzLiBJZiB5b3UgcnVuIHRoYXQgY29kZSBwcmlvciB0byBjcmVhdGluZyB0aGUgYGBgbWVsdC5taW5kYGBgIGRhdGEsIHRoZW4gaXQgd2lsbCBsb29rIGV4YWN0bHkgbGlrZSB0aGUgYGBgbWVsdC5taW5kMmBgYCBkYXRhLiBEb24ndCBiZWxpZXZlIG1lPyBZb3UgY2FuIHRyeSBpdCwgaWYgeW91J2QgbGlrZS4gSWYgeW91IGRvIHRyeSBpdCwgaG93ZXZlciwgeW91IHNob3VsZCBwcm9iYWJseSByZW5hbWUgdGhlIGRhdGFzZXRzIHlvdSBjcmVhdGUgc29tZXRoaW5nIGVsc2Ugc28geW91IGNhbiBrZWVwIGV2ZXJ5dGhpbmcgc3RyYWlnaHQuDQoNCk5vdywgd2hhdCBoYXBwZW5zIGlmIHlvdSBmb3JnZXQgdG8gaW5jbHVkZSBhIHZhcmlhYmxlIGluIHlvdXIgY2FzdGluZyBmb3JtdWxhPyBXZWxsLCB0aGF0IGFsbCBkZXBlbmRzIG9uIHdoaWNoIHZhcmlhYmxlIHlvdSBmb3JnZXQuIElmIHlvdSBmb3JnZXQgdG8gaW5jbHVkZSB5b3VyIGJldHdlZW4tc3ViamVjdHMsIGBgYEJUV2BgYCB2YXJpYWJsZSwgdGhlbiBpdCBtYXkgZGlzYXBwZWFyIGZyb20geW91ciBjYXN0ZWQgZGF0YS4gTGlrZSB0aGlzLi4uDQoNCmBgYHtyLCBtZXNzYWdlPUZBTFNFfQ0KZXJyb3IubWluZDwtZGNhc3QobWVsdGVkLm1pbmQsIElEfldUTikNCg0KZXJyb3IubWluZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICNMb29rIGF0IHRoYXQhIA0KYGBgDQoNCg0KTm90aWNlIGhvdyB0aGUgYGBgQlRXYGBgIHZhcmlhYmxlIGp1c3QgZGlzYXBwZWFyZWQ/IFRoYXQgaXMgc29tZXRoaW5nIHlvdSBzaG91bGQgYmUgYXdhcmUgb2YgYW5kIGtlZXAgYW4gZXllIG91dCBmb3IuIFBlcnNvbmFsbHksIEkgYWx3YXlzIGRvdWJsZS1jaGVjayBteSB3b3JrIGFmdGVyIGBgYG1lbHRgYGBpbmcgYW5kIGBgYGNhc3RgYGBpbmcuIA0KDQpXaGF0IGhhcHBlbnMgaWYgeW91IGZvcmdldCB0aGUgc3ViamVjdCBgYGBJRGBgYCB2YXJpYWJsZT8gV2VsbCwgdGhpcyB3aWxsIHJlc3VsdCBpbiBhIHZlcnkgZGlmZmVyZW50IHJlc3VsdC4gQ2hlY2sgaXQgb3V0Li4uDQoNCmBgYHtyLCBtZXNzYWdlPUZBTFNFfQ0KZXJyb3IubWluZDI8LWRjYXN0KG1lbHRlZC5taW5kLCBCVFd+V1ROKQ0KDQplcnJvci5taW5kMiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICNMb29rIGF0IHRoaXMhIA0KYGBgDQoNCg0KTm90aWNlIHRoZSBlcnJvciBtZXNzYWdlIGBgYEFnZ3JlZ2F0aW9uIGZ1bmN0aW9uIG1pc3Npbmc6IGRlZmF1bHRpbmcgdG8gbGVuZ3RoYGBgPyBOb3RpY2UgdGhhdCB0aGVyZSBhcmUgbm93IG9ubHkgMiByb3dzLCBvbmUgZm9yIGVhY2ggbGV2ZWwgb2YgeW91ciBgYGBCVFdgYGAgdmFyaWFibGUsIGFuZCB0aGUgdmFsdWVzIGluIHVuZGVyIGVhY2ggYGBgV1ROYGBgIGxldmVsIGlzIGBgYDNgYGA/IFRoYXQncyBiZWNhdXNlIGBgYGRlZmF1bHRpbmcgdG8gbGVuZ3RoYGBgIGFwcGVhcnMgdG8gaGF2ZSBtZWFudCB0aGF0IGBgYFJgYGAgd2lsbCBjb2xsYXBzZSBhbGwgdmFsdWVzIHRoYXQgeW91IHVzZWQgdG8gaGF2ZSBpbnRvICBqdXN0IHRoZSBudW1iZXIgb2YgY29sdW1ucyBpbiB5b3VyIGRhdGFzZXQuIE5vdywgbWF5YmUgeW91IHdhbnQgdG8gY29sbGFwc2UgYWNyb3NzIGFsbCBwYXJ0aWNpcGFudHMuIEhleSwgaXQncyBwb3NzaWJsZS4gQnV0IHdoYXQgaWYgaW5zdGVhZCBvZiBhIHdvcnRobGVzcyBudW1iZXIsIGxpa2UgdGhlIG51bWJlciBvZiBjb2x1bW5zIGluIHlvdSBkYXRhLCB5b3Ugd2FudGVkIHRoZSBhdmVyYWdlIGZvciBlYWNoIHdpdGhpbi1zdWJqZWN0cyB2YXJpYWJsZSBhdCBlYWNoIGJldHdlZW4tc3ViamVjdHMgdmFyaWFibGU/IE5vdyB0aGF0IHNvdW5kcyBsaWtlIHNvbWUgaW5mbyB0aGF0IGNvdWxkIGJlIHVzZWZ1bCEhIFRvIGRvIHRoaXMsIHdlIHdpbGwgbmVlZCB0byB1c2UgdGhlIGBgYGZ1bi5hZ2dyZWdhdGVgYGAgZnVuY3Rpb24gaW4gdGhlIGBgYGNhc3RgYGBpbmcgZm9ybXVsYS4gTGlrZSB0aGlzLi4uDQoNCmBgYHtyLCBtZXNzYWdlPUZBTFNFfQ0KbWluZC5zdW1tYXJ5PC1kY2FzdChtZWx0ZWQubWluZCwgQlRXfldUTiwgZnVuLmFnZ3JlZ2F0ZSA9IG1lYW4pDQoNCm1pbmQuc3VtbWFyeSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgI0xvb2sgYXQgdGhhdCEgDQpgYGANCg0KDQpZb3UgY291bGQgaGF2ZSBhY3R1YWxseSBpbmNsdWRlZCBhbnkgZnVuY3Rpb24gYWZ0ZXIgdGhlIGBgYGZ1bi5hZ2dyZWdhdGVgYGAgZnVuY3Rpb24sIGluY2x1ZGluZyBhIGxvY2FsIGZ1bmN0aW9uLiBJIGNob3NlIHRvIGRlbW9uc3RyYXRlIHRoZSBgYGBtZWFuYGBgIGZ1bmN0aW9uIHNpbXBseSBiZWNhdXNlIGl0IHdhcyBlYXN5IGFuZCBtYXkgYmUgdXNlZnVsIHRvIHlvdSBpbiB0aGUgZnV0dXJlLiANCg0KV2VsbCwgdGhhdCdzIGl0LiBSZWFkIG9uIGZvciBtb3JlIHVzZWZ1bCBsaW5rcyBhbmQgaW5mb3JtYXRpb24uDQo8YnIvPjxici8+PGJyLz48YnIvPg0KDQoNCg0KDQojIEZpbmFsIFdvcmRzDQoNClRoaXMgaXMgaXQgZm9yIG15IGludHJvZHVjdGlvbiB0byB0aGUgYGBgcmVzaGFwZTJgYGAgcGFja2FnZSwgYnV0IHRoZXJlIGFyZSBhICp0b24qIG9mIHRoaW5ncyB5b3UgY2FuIGRvIHdpdGggYGBgY2FzdGBgYCB0aGF0IEkgZGlkIG5vdCBnZXQgYXJvdW5kIHRvIGRlc2NyaWJpbmcuIEkgcmVjb21tZW5kIHRoYXQgeW91IHBsYXkgYXJvdW5kIHdpdGggdGhpcyBwYWNrYWdlIGFuZCBmaWd1cmUgb3V0IHdoYXQgd29ya3MgYmVzdCBmb3IgeW91LiBBbmQsIGlmIHlvdSBuZWVkIGFueSBvdGhlciBoZWxwLCBvciBpZiBteSBleHBsYW5hdGlvbnMgd2VyZSB0b28gcmlkaWN1bG91cyBmb3IgeW91ciBzZXJpb3VzIGBgYG1pbmRgYGAsIHRoZW4geW91IGNhbiBnbyB0byB0aGUgc291cmNlcyBiZWxvdyBmb3IgYWRkaXRpb25hbCBoZWxwLi4uDQo8YnIvPjxici8+PGJyLz48YnIvPg0KDQoNCg0KDQojIFNvdXJjZXMgDQoNCmh0dHA6Ly9zZWFuYW5kZXJzb24uY2EvMjAxMy8xMC8xOS9yZXNoYXBlLmh0bWwgICAgICAgICAgICAgICAgICANClRoaXMgdHV0b3JpYWwgaXMgYW1hemluZw0KDQpodHRwczovL2NyYW4uci1wcm9qZWN0Lm9yZy93ZWIvcGFja2FnZXMvcmVzaGFwZTIvcmVzaGFwZTIucGRmICAgDQpUaGlzIG9uZSBpcyBwcmV0dHkgZ29vZCB0b28NCg0KaHR0cDovL2hhZC5jby5uei9yZXNoYXBlLyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIA0KVGhpcyBpcyB0aGUgYGBgcmVzaGFwZTJgYGAgd2Vic2l0ZQ0KDQoNCjxzY3JpcHQ+DQogIChmdW5jdGlvbihpLHMsbyxnLHIsYSxtKXtpWydHb29nbGVBbmFseXRpY3NPYmplY3QnXT1yO2lbcl09aVtyXXx8ZnVuY3Rpb24oKXsNCiAgKGlbcl0ucT1pW3JdLnF8fFtdKS5wdXNoKGFyZ3VtZW50cyl9LGlbcl0ubD0xKm5ldyBEYXRlKCk7YT1zLmNyZWF0ZUVsZW1lbnQobyksDQogIG09cy5nZXRFbGVtZW50c0J5VGFnTmFtZShvKVswXTthLmFzeW5jPTE7YS5zcmM9ZzttLnBhcmVudE5vZGUuaW5zZXJ0QmVmb3JlKGEsbSkNCiAgfSkod2luZG93LGRvY3VtZW50LCdzY3JpcHQnLCdodHRwczovL3d3dy5nb29nbGUtYW5hbHl0aWNzLmNvbS9hbmFseXRpY3MuanMnLCdnYScpOw0KDQogIGdhKCdjcmVhdGUnLCAnVUEtOTg4Nzg3OTMtMScsICdhdXRvJyk7DQogIGdhKCdzZW5kJywgJ3BhZ2V2aWV3Jyk7DQoNCjwvc2NyaXB0Pg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("melt_cast.Rmd");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
