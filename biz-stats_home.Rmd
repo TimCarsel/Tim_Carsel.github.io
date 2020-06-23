@@ -18,7 +18,7 @@ knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/
 
 
 <center>
-# COMING SOON
+# UNDER CONSTRUCTION
 </center>
 
 Welcome to the Stats for Business part of my website! In these pages, I overview common statistical terms and concepts and apply them in business contexts. The target audiences are the leaders and managers who have data scientists on their team and those data scientists. I hope that by reading these resources, both your data scientists and your managers will be better able to communicate with each other.
