@@ -12,7 +12,7 @@ navbar:
       - text: "Probability"
         href: prob.html
       - text: "Inference or Description"
-        #href: infer-describe.html
+        href: infer-describe.html
       - text: "Between Groups"
         #href: btw-groups.html
       - text: "Repeated Measures"
