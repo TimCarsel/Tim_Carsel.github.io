@@ -9,6 +9,7 @@ output:
     theme: cosmo
 ---
 
+
 ```{r, echo = FALSE, out.height = '50%', out.width = '50%', fig.align='center'}
 knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/Head Shot2.jpg")
 ```
@@ -24,7 +25,7 @@ Prior to my academic career I served honorably in the U.S. military. During my m
 
 
 
-## People Work 
+# People Work 
 ```{r, echo = FALSE, out.height = '70%', out.width = '70%', fig.align = 'left'}
 knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/frustrated.jpg")
 ```
@@ -38,7 +39,7 @@ People Work is exhausting. It is emotionally and psychologically draining to con
 
 
 
-## My Philosophy 
+# My Philosophy 
 ```{r, echo = FALSE, out.height = '70%', out.width = '70%', fig.align = 'left'}
 knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/workplace_image.jpg")
 ```

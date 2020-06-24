@@ -9,8 +9,8 @@ navbar:
       menu: 
       - text: "Overview"
         href: biz-stats_home.html
-      - text: "Probability & Odds"
-        href: prob-odds.html
+      - text: "Probability"
+        href: prob.html
       - text: "Inference, Description, & Error"
         #href: infer-describe-error.html
       - text: "Between Groups"
