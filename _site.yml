@@ -11,8 +11,8 @@ navbar:
         href: biz-stats_home.html
       - text: "Probability"
         href: prob.html
-      - text: "Inference, Description, & Error"
-        #href: infer-describe-error.html
+      - text: "Inference or Description"
+        #href: infer-describe.html
       - text: "Between Groups"
         #href: btw-groups.html
       - text: "Repeated Measures"
