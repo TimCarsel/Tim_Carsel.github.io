@@ -11,7 +11,7 @@
 
 
 
-<title>Inference or Description</title>
+<title>Between Groups</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -447,70 +447,46 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Inference or Description</h1>
+<h1 class="title toc-ignore">Between Groups</h1>
 
 </div>
 
 
-<p><img src="numbers.jpg" width="100%" height="100%" style="display: block; margin: auto;" /> <br/><br/></p>
-<p>The word “statistics” is used to describe two related but very different activities. Knowing which one you’re talking about will greatly help you communicate with your team (or post more accurate job ads). Below, I cover each of these two terms, including when to use them and why they’re important.</p>
-<div id="descriptive-statistics" class="section level1">
-<h1>Descriptive Statistics</h1>
-<p><img src="describe.jpg" width="100%" height="100%" style="display: block; margin: auto;" /> <br/><br/></p>
-<p>If you are interested in <em>The Data You Have</em>, you are talking about <strong>Descriptive Statistics</strong>.</p>
-<p>Descriptive Statistics are used to get a sense of, for example, the average salary of your data scientists or how much variability there is in the amount of hours your consultants are billing per week. Descriptive Statistics give you a snap-shot of how your company is doing <em>up to now</em>.</p>
-<p>Common Descriptive Statistics include those that tell you about the <em>middle</em> of a set of values (e.g., the mean (average), the median, the mode), how much <em>variability</em> is in those scores (e.g., variance, standard deviation, range), how extreme a given score is relative to the rest (e.g., z-score), or the relationship between two variables, like base salary and hours of work per week (e.g., correlation).</p>
-<p>Descriptive Statistics can be built into dashboards that automatically update as you get new data, and there are many clever ways to compute and combine data to tell you the story you need.</p>
-<p>For example, you could create a dashboard that tracks the salary of your employees by gender and ethnicity. There is a long and unfortunate history of companies paying people like me more than women, racial and ethnic minorities, or people from the LGBTQ+ communities. In order to be more equitable, companies need to track those data so as to identify when their practices might deviate from their policies. Unconscious bias is like mold; it grows in the dank and dark. Descriptive Statistics will shine a bright light on your business and enable you to bring out the best in your company.</p>
-<p>Another example of ways to use Descriptive Statistics is to create weighted averages of your employee’s evaluations. Employees are evaluated on a number of dimensions, like the hours they put in a week, the amount of sales they bring to the company per year, or their leadership evaluations. These ratings are not equally important, so leaders and managers might want to prioritize some evaluations over others. Creating a weighted average of these measures is a way to prioritize the important metrics of your employees while still including the other evaluations of lesser importance.</p>
-<p>Descriptive Statistics are important and powerful tools to help you understand <strong>The Data You Have</strong>. However, they are limited in that they cannot tell you whether an employee is likely to be a rockstar manager or whether your recruiting pipeline is biased. These questions are best answered with Inferential Statistics.</p>
+<p><img src="btwgroups_head.jpg" width="100%" height="100%" style="display: block; margin: auto;" /> <br/><br/></p>
+<p>One of the most common questions people use statistics to help answer is “Are these groups the same or different?”</p>
+<p>A between-groups design uses different groups of people (or whatever) to see if it is more likely they are actually the same or different on a given measure. That’s a bit abstract, so let’s work through an example.</p>
+<p>One of the most common between-groups tests is the A/B test. In User Experience (UX) studies, companies might test whether different webpage designs net them more revenue due to the placement of different banners. Their question, then, is “Are these two banner placements probably the same or different when it comes to generating revenue?”</p>
+<p>When comparing two groups on a continuous measure, the statistical test is called a <em>t</em>-test. There are other kinds of <em>t</em>-tests, but they all generally follow the same format, and here I’m talking about what’s called the <strong>Independent Samples <em>t</em>-test</strong>. <br/><br/></p>
+<div id="t-test" class="section level1">
+<h1><em>t</em>-test</h1>
+<p><img src="different_houses.jpg" width="100%" height="100%" style="display: block; margin: auto auto auto 0;" /> <br/><br/></p>
+<p>The <em>t</em>-test works by simply asking whether two groups are different enough from each other that it’s more likely to assume they come from different <strong>Populations</strong> than from the same <strong>Population</strong> (see <a href="http://timcarsel.com/infer-describe.html#populations">Inference or Description</a> for an overview of Populations and Samples). If the averages of these groups are larger than we would expect by sampling error alone, then we conclude that there’s probably a real difference between them.</p>
+<p>The standard in psychology and many other sciences is to set the threshold for this decision at <em>p</em> &lt; 0.05. What this means is that we would expect to randomly sample mean differences <em>this big</em> only 5% of the time (or less) if they were actually sampled from the same population. Therefore, we decide that it is more likely that the groups are actually drawn from different populations – we decide that the two groups are probably actually different. <br/><br/></p>
 </div>
-<div id="inferential-statistics" class="section level1">
-<h1>Inferential Statistics</h1>
-<p><img src="predict.jpg" width="100%" height="90%" style="display: block; margin: auto;" /> <br/><br/></p>
-<p>If you are interested in <em>Making Predictions About Data You Don’t Have</em>, you are talking about <strong>Inferential Statistics</strong>.</p>
-<p>Inferential Statistics are used to make predictions about data you do not have. They do this by making use of the principles of probability to infer details about a <strong>Population</strong> of data based on the <strong>Sample</strong> of data you do have. These are important concepts, so I will review them now.</p>
-<div id="populations" class="section level2">
-<h2>Populations</h2>
-<p>A Population is the set of <em>All Scores</em> of a given group of things. Populations can be people, animals, white blood cells, anything that can be defined as a group. Populations can be very small, like the Population of CEO’s of Fortune 500 companies. In this case, the total number in this Population is 500. Often though, Populations are very big. For example, the Population of people on this planet as of now (6/24/2020) is about 7, 800, 000, 000. That’s a lot of decimal places!</p>
-<p>Populations are the things in which people are really interested in Inferential Statistics. In Inferential Statistics, we care more about how the data we have tells us about all of the data from the population than just about data we have. To get a sense of the Population, we use the data we have to make guesses about what the Population probably looks like. We call the data we have our Sample.</p>
+<div id="anova" class="section level1">
+<h1>ANOVA</h1>
+<p><img src="three_planes.jpg" width="100%" height="100%" style="display: block; margin: auto auto auto 0;" /> <br/><br/></p>
+<p>Although the <em>t</em>-test is a very useful analysis, it is limited in a very important way. Specifically, the <em>t</em>-test works by subtracting the mean (average) of one group from the mean of the other group, and then dividing that difference by error. However, what happens if we have more than two groups?</p>
+<p>Let’s imagine for a moment that you have three tiers of data scientists, and you wanted to test whether they are paid differently. The Data Scientist I is paid on average $30k, the Data Scientist II is paid on average $40k, and the Data Scientist III is paid on average $70k per year (as an aside: please do not pay your hard-working data scientists such low wages – these numbers are just easier for the math). Simply by looking at these numbers, it should be clear that at the very least, the lowest and highest paid groups are paid very differently. In fact the highest paid data scientist is paid more than twice the salary of the lowest paid data scientist. However, if we applied the logic of the <em>t</em>-test, we would get: 70,000 – 40,000 – 30,000 = 0. There you have it, there are <em>no differences</em> in the amount you pay your different tiers. Obviously, that would be a stupid test and a stupid result.</p>
+<p>Instead of using <em>t</em>-test logic when we have three or more groups, we use what’s called an ANalysis Of VAriance (or ANOVA for short). The ANOVA, as might be guessed from the name, looks at ratios of <strong>variance</strong> instead of mean differences. Although it is beyond the scope of this page to teach you about variance, I will briefly overview the topic so you can more easily follow along (however, variance is <em>incredibly</em> important for <em>all</em> analyses, so I encourage you to check out my undergraduate lecture <a href="https://osf.io/7cn9g/">here</a>). <br/><br/></p>
+<div id="variance" class="section level2">
+<h2>Variance</h2>
+<p><strong>Variance</strong> is a measure of how much variability is in your set of scores. Just like the <strong>mean</strong> gives us a number to represent the middle of an entire group of scores, <strong>variance</strong> gives us a number to represent whether the group of scores are all clustered together or are generally spread apart. Technically, the variance of a set of scores is the average squared difference between all of the scores. It’s not really necessary to fully understand that, but I again recommend my stats lecture if you’re interested.</p>
+<p>In the picture below, the holes are spaced very close together.</p>
+<p><img src="grouped_target.jpg" width="100%" height="100%" style="display: block; margin: auto auto auto 0;" /></p>
+<p>In this picture, however, the holes are spaced much farther apart.</p>
+<p><img src="distant_target.jpg" width="100%" height="100%" style="display: block; margin: auto auto auto 0;" /></p>
+<p>There would be a smaller value for the variance of the holes on the target from the first picture than from the second picture.</p>
+<p>In a more business example, let’s return to our underpaid Data Scientists. In the first example, the three different classes of data scientist were paid on average $30k, $40k, and $70k per year. Imagine that you decided to overhaul your data scientists’ pay to attract better talent, so you begin to pay your three levels at $80k, $90k, and $100k. Now, although the <strong>means</strong> of these three pays are higher, the <strong>variance</strong> is lower. In fact, the <strong>range</strong> of the second group is only $20k whereas the <strong>range</strong> of the first group was $40k (range is another measure of variability, but it’s pretty worthless because it only tells you the difference between the highest and lowest values whereas variance uses all of the scores). <br/><br/></p>
 </div>
-<div id="samples" class="section level2">
-<h2>Samples</h2>
-<p>The word “Sample” can be used as a noun or a verb. We’ll first talk about the noun version before turning to the verb.</p>
-<ul>
-<li><p>When used to describe a thing, the word Sample refers simply to the data we have. We assume that the data we have is a subset of the Population, or a smaller group of the total number of things.</p></li>
-<li><p>When used to describe an activity, Sample refers to the process of selecting a Sample from the Population. In other words, “to Sample” means the process by which we select a smaller group of things from the total group of things.</p></li>
-</ul>
-<p>If we assume that our Sample was <strong>Randomly Sampled</strong> from the Population, then we can <strong>Infer</strong> details about the Population. We do this by capitalizing on the properties of <a href="http://timcarsel.com/prob.html">Probability</a> and sampling error.</p>
-<p>Essentially, we assume that the data we have was randomly drawn from the larger Population and that the larger Population roughly resembles our Sample. We do this by creating a metric called <strong>Standard Error</strong> which formalizes our intuitions about how sure we can be of our data.</p>
-<p>Standard error quantifies the certainty we have in our data as a function of <strong>Sample Size</strong> and <strong>Variability</strong>.</p>
-<ul>
-<li>Sample Size: Sample Size is the total number of things we have in our Sample. For example, if you have 100 data scientists in your organization, your Sample Size is 100.</li>
-<li>Variability: Variability is how similar or dissimilar the values in your sample are from each other. If all of your data scientists make somewhere between $90k – $110k, then you have less Variability in your data scientists’ salaries than a company that pays their data scientists anywhere between $70k – $130k.</li>
-</ul>
-<p>The above examples should make sense intuitively. Is everybody saying the same thing? Then there’s lower error in our information. Is everybody saying something completely different? Then there’s more error in our information. Did we ask 2 people for an answer to a question or 10,000? We can be more sure of our information as we ask more people and they tell us roughly the same answer. For a more thorough review of how this is done, you can check out my undergraduate lecture on <a href="https://osf.io/9bd5v/">Probability and Sampling</a>.</p>
-<p>Once we have a measurement of error, we can then start to make guesses about how closely our Sample resembles the Population from which it was Sampled. Once we have <em>that</em> information, we can start to make predictions about the data we don’t have.</p>
-</div>
-<div id="common-types" class="section level2">
-<h2>Common Types</h2>
-<p>There are <em>many</em> different analyses that fall under the enormous umbrella of Inferential Statistics. In general, however, they are used to tell us one of two questions:</p>
-<ul>
-<li>Are these things probably the same or different?</li>
-<li>Are these things probably related or not?</li>
-</ul>
-<p>There are also a couple of common research designs to ask these questions:</p>
-<ul>
-<li>Between Groups</li>
-<li>Repeated Measures</li>
-<li>Covariance</li>
-</ul>
+<div id="anova-again" class="section level2">
+<h2>ANOVA Again</h2>
+<p>The ANOVA looks at a ratio of different kinds of variance. The variance that goes in the top of the ratio (the numerator) is the variance between the averages of the group. So, it would be the variance between $30k, $40k, and $70k or $80k, $90k, and $100k. The bottom of the fraction (the denominator) is the variance we would expect by chance (our error). The final value of this ratio is then checked to see whether there is more variability between the means than we would expect by chance, and if it is, we conclude that the groups are probably different (technically we can only conclude that <em>at least one group</em> is different from the others). <br/><br/></p>
 </div>
 </div>
 <div id="summary" class="section level1">
 <h1>Summary</h1>
-<p><img src="summary.jpg" width="100%" height="100%" style="display: block; margin: auto;" /> <br/><br/></p>
-<p>The word “statistics” is used to describe two related but very different activities, and knowing which one you’re talking about will greatly help you communicate with your team. <strong>Descriptive Statistics</strong> tell you information about the data you have, and <strong>Inferential Statistics</strong> help you make predictions about the data you do not have.</p>
+<p><strong>Between-groups</strong> designs are used to see whether two groups of things are more likely the same or different. You can use them to test whether different groups of your employees are paid differently, whether different banner placement on your websites generate more revenue, or whether different teams work more hours than others.</p>
 </div>
 
 
