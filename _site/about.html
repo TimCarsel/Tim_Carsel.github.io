@@ -401,9 +401,7 @@ div.tocify {
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="simulation.html">Simulating An RM Study</a>
-    </li>
+    <li class="dropdown-header">Simulating An RM Study</li>
     <li>
       <a href="dissertation.html">Contextual Trust Study</a>
     </li>
@@ -528,7 +526,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

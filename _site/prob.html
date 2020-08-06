@@ -401,9 +401,7 @@ div.tocify {
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="simulation.html">Simulating An RM Study</a>
-    </li>
+    <li class="dropdown-header">Simulating An RM Study</li>
     <li>
       <a href="dissertation.html">Contextual Trust Study</a>
     </li>
@@ -499,7 +497,7 @@ div.tocify {
 </table>
 <p>The columns labeled “Actually Sick” and “Actually Healthy” represent the number of people out of 100,000 that either really do have this fake illness or do not, respectively. The rows marked “Test Positive” and “Test Negative” indicate the number of people out of that 100,000 whose test told them they had the disease or not, respectively. In other words, the columns tell us about reality and the rows tell us about the test. <br/><br/></p>
 <p>As you can see, 5 people who actually have the disease got test results that told them they were healthy, and 4,995 people who are healthy were told that they actually have the disease. If you add those groups up, you will find that 5% of the total number of people who took the test received wrong results (<span class="math inline">\(\frac{5,000}{100,000}\)</span>). The test makers were not being inaccurate when they told you that their test was correct 95% of the time, they just failed to mention that the overwhelming majority of wrong tests happen when somebody who is actually healthy receives a test result that tells them they will die. Therefore, if you received those test results, you actually only have about a 1.90% chance of actually having the disease.</p>
-<p>In order to know the probability of whatever it is you are interested in, you have to know the total number of possible outcomes (<span class="math inline">\(\frac{Outcome-of-Interest}{Total-Number-of-Possible-Outcomes}\)</span>). Sometimes figuring that out is easy. For example, the probability of rolling a <code>1</code> on a single role of a six-sided die is <span class="math inline">\(\frac{1}{6}\)</span> because there are 6 total possible outcomes. In the above example, the total number was 100,000 people. When I go over error later in this post, I will show tricks that statisticians have learned to essentially guess the total number of outcomes based on only knowing the details about a sample. <br/><br/></p>
+<p>In order to know the probability of whatever it is you are interested in, you have to know the total number of possible outcomes (<span class="math inline">\(\frac{Outcome-of-Interest}{Total-Number-of-Possible-Outcomes}\)</span>). Sometimes figuring that out is easy. For example, the probability of rolling a <code>1</code> on a single role of a six-sided die is <span class="math inline">\(\frac{1}{6}\)</span> because there are 6 total possible outcomes. In the above example, the total number was 100,000 people. When I go over error in a later post, I will show tricks that statisticians have learned to essentially guess the total number of outcomes based on only knowing the details about a sample. <br/><br/></p>
 </div>
 <div id="continuous-outcomes" class="section level2">
 <h2>Continuous Outcomes</h2>
@@ -521,7 +519,7 @@ div.tocify {
 <p>Imagine you want to see whether men are paid more than women in your organization for different types of employees (e.g., C-suite and customer-facing). Obviously, these two types of employees have very different salary expectations, so how would you compare the pay of C-suite with the pay of your cashiers? A “z-score” is a common way to place values from different distributions on a common scale.</p>
 <p><img src="money.jpg" width="50%" height="50%" style="display: block; margin: auto;" /></p>
 <p>Although the details are unnecessary for these purposes, it is important to know that there are specific probabilities associated with each z-score. For example, between the average of a distribution and +/-1 z-score is about 68% of the distribution. Between the average and +/- 2 z-scores is about 95% of the distribution.</p>
-<p>Now, back to the question at hand. If we know that the area between +1 and -1 z-score is ~68% of the distribution, then we know that the area outside +1 and -1 z-score is ~32% of the population (100% – 68% = 32%). Because that area is on both sides of the curve, then there’s ~16% of the distribution that is greater than +1 z-score and ~16% of the distribution that is less than -1 z-score. That means we can convert the pay of all of our employees into z-scores and look at whether men are disproportionally represented in the top of the distribution across all positions (<em>Spoiler:</em> They probably are, and that’s a problem).</p>
+<p>Now, back to the question at hand. If we know that the area between +1 and -1 z-score is ~68% of the distribution, then we know that the area outside +1 and -1 z-score is ~32% of the population (100% – 68% = 32%). Because that area is on both sides of the curve, then there’s ~16% of the distribution that is greater than +1 z-score and ~16% of the distribution that is less than -1 z-score. That means we can convert the pay of all of our employees into z-scores and look at whether men are disproportionately represented in the top of the distribution across all positions (<em>Spoiler:</em> They probably are, and that’s a problem).</p>
 <p>In fact, by converting your raw scores to z-scores, you can start to estimate the probability of randomly drawing a value that’s “greater than X,” or “between X and Z.” <em>That</em> is how you estimate probabilities when you are dealing with continuous values and not counts. And you thought you’d never have to think about area problems again!</p>
 </div>
 </div>
@@ -576,7 +574,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
