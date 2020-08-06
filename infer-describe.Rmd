@@ -80,7 +80,7 @@ Essentially, we assume that the data we have was randomly drawn from the larger 
 Standard error quantifies the certainty we have in our data as a function of **Sample Size** and **Variability**.
 
 -	Sample Size: Sample Size is the total number of things we have in our Sample. For example, if you have 100 data scientists in your organization, your Sample Size is 100.
--	Variability how similar or dissimilar the values in your sample are from each other. If all of your data scientists make somewhere between $90k -- $110k, then you have less Variability in your data scientists’ salaries than a company that pays their data scientists anywhere between $70k -- $130k.
+-	Variability: Variability is how similar or dissimilar the values in your sample are from each other. If all of your data scientists make somewhere between $90k -- $110k, then you have less Variability in your data scientists’ salaries than a company that pays their data scientists anywhere between $70k -- $130k.
 
 The above examples should make sense intuitively. Is everybody saying the same thing? Then there’s lower error in our information. Is everybody saying something completely different? Then there’s more error in our information. Did we ask 2 people for an answer to a question or 10,000? We can be more sure of our information as we ask more people and they tell us roughly the same answer. For a more thorough review of how this is done, you can check out my undergraduate lecture on [Probability and Sampling](https://osf.io/9bd5v/).
 

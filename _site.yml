@@ -26,7 +26,7 @@ navbar:
     - text: "Research"
       menu:
       - text: "Simulating An RM Study"
-        href: simulation.html
+        #href: simulation.html
       - text: "Contextual Trust Study"
         href: dissertation.html
       - text: "Scientific Publications"
