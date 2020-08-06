@@ -24,7 +24,7 @@ knitr::opts_chunk$set(results='hold')
 
 
 ```{r, echo = FALSE, out.height = '130%', out.width = '130%', fig.align = 'center'}
-knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/dice.jpg")
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/dice.jpg")
 ```
 <br/><br/>
 
@@ -43,7 +43,7 @@ Let’s say you have just met with your doctor who has informed you that you hav
 -	What is the probability you will die from this disease?
 
 ```{r, echo = FALSE, out.height = '50%', out.width = '50%', fig.align = 'center'}
-knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/medical-test.jpg")
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/medical-test.jpg")
 ```
 <br/><br/>
 
@@ -101,7 +101,7 @@ Along the X-axis, you'll notice that it's centered at 0 and goes from -4 to +4, 
 Imagine you want to see whether men are paid more than women in your organization for different types of employees (e.g., C-suite and customer-facing). Obviously, these two types of employees have very different salary expectations, so how would you compare the pay of C-suite with the pay of your cashiers? A “z-score” is a common way to place values from different distributions on a common scale. 
 
 ```{r, echo = FALSE, out.height = '50%', out.width = '50%', fig.align = 'center'}
-knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/money.jpg")
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/money.jpg")
 ```
 
 Although the details are unnecessary for these purposes, it is important to know that there are specific probabilities associated with each z-score. For example, between the average of a distribution and +/-1 z-score is about 68% of the distribution. Between the average and +/- 2 z-scores is about 95% of the distribution. 

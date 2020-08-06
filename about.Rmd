@@ -14,7 +14,7 @@ output:
 
 
 ```{r, echo = FALSE, out.height = '50%', out.width = '50%', fig.align='center'}
-knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/Head Shot2.jpg")
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/Head Shot2.jpg")
 ```
 
 <center>
@@ -30,7 +30,7 @@ Prior to my academic career I served honorably in the U.S. military. During my m
 
 # People Work 
 ```{r, echo = FALSE, out.height = '70%', out.width = '70%', fig.align = 'left'}
-knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/frustrated.jpg")
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/frustrated.jpg")
 ```
 
 Everybody has had to engage in "People Work" at some point in their lives. Maybe the boss got in the way, or maybe your subordinates didn't do their work. Whenever you have to strategize about how to deal with someone else instead of being able to focus on your job, you are engaging in People Work. 
@@ -44,7 +44,7 @@ People Work is exhausting. It is emotionally and psychologically draining to con
 
 # My Philosophy 
 ```{r, echo = FALSE, out.height = '70%', out.width = '70%', fig.align = 'left'}
-knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/workplace_image.jpg")
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/workplace_image.jpg")
 ```
 
 I believe that companies can get the most out of their people when their people love what they do. When employees are fully engaged in their work, everyone benefits. Companies benefit because they get more for their money, and employees benefit because they can trust that their teammates will pull their weight. By applying the latest research on interpersonal trust, I help teams be more effective by reducing the amount of time your employees engage in People Work. 
@@ -55,7 +55,7 @@ I believe that companies can get the most out of their people when their people 
 
 # About This Website
 ```{r, echo = FALSE, out.height = '70%', out.width = '70%', fig.align='left'}
-knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/code.jpg")
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/code.jpg")
 ```
 
 I built this entire website in the R programming language. Every page was created separately and compiled by RMarkdown and Github Pages. On all of the pages where I cover data manipulation, visualizations, or analyses, I make my code available so you can walk through my examples. 

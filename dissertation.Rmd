@@ -39,6 +39,7 @@ library(apaTables)
 ```
 
 ```{r, echo=FALSE, warning=FALSE}
+setwd("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/")
 data1<-read.csv("Dissertation_IdioTrust.csv", header = T, na.strings = c(""))
 ```
 
