@@ -14,9 +14,9 @@ navbar:
       - text: "Inference or Description"
         href: infer-describe.html
       - text: "Between Groups"
-        href: btw-groups.html
+        href: btw-subjects.html
       - text: "Repeated Measures"
-        #href: rm-designs.html
+        href: rm-designs.html
       - text: "Covariance"
         #href: covariance.html
     - text: "Data Manipulation"  

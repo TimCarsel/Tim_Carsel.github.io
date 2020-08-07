@@ -1,0 +1,84 @@
+---
+title: "Repeated-Measures Designs"
+output:
+  html_document:
+    code_download: no
+    fontsize: 8pt
+    highlight: textmate
+    number_sections: no
+    theme: cosmo
+    toc: yes
+    toc_float:
+      collapsed: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning =  FALSE)
+knitr::opts_chunk$set(fig.width=3.25)
+knitr::opts_chunk$set(fig.height=2.75)
+knitr::opts_chunk$set(fig.align='center') 
+knitr::opts_chunk$set(results='hold') 
+```
+```{r, echo = FALSE, out.height = '100%', out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/before-after.jpg")
+```
+<br/><br/>
+
+
+In the last post, we talked about the question of whether two different groups are the same or different using two different group of people. That is a very useful technique, but it has it’s problems. 
+<br/><br/>
+
+
+# Problems with Between-Subjects Designs
+There are a few important limitations to between-subjects designs that a repeated-measures design can fix. First, the number of people you need to be able to detect a difference if one exists (statistical power) is pretty large. Because the people in the groups are different, you don’t know why some people in the same group score really low whereas others score really high. In other words, there can be a lot of variability within your groups, and all of that variability goes straight to error. If you have access to a lot of data, though, then that’s not a big issue. 
+
+
+However, another big problem that can’t simply be overcome with loads of data is that an assumption of the between-subjects tests is that the groups were randomly selected. That is, you are assuming that the groups are roughly the same on the outcome measure to begin with, and the only difference is your manipulation. That might not seem like a big deal, so let’s walk through an example.
+
+
+```{r, echo = FALSE, out.height = '100%', out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/programmer.jpg")
+```
+
+
+Let’s say that you want to test the efficacy of a new leadership training program designed for your top programmers. How do you do it? You can’t just give a test to the engineers selected for the program and the engineers who were not because you already *know* those groups are different in important ways. After all, you selected *the best* engineers for the program, right? You would *hope*, then, that the engineers you selected would score higher on leadership assessments than the engineers you didn’t even before they go through the program. So how do you assess the program?
+
+
+In contrast to a between-subjects design, a repeated-measures design uses the same people in both groups. This design change has the major benefit in that you don’t have to *assume* you randomly sampled your groups and that they’re roughly equivalent along the dimensions you care about. Now you *know* the people in both groups are roughly the same because it’s the exact same person. With a repeated-measures design you will need less data to be able to detect real differences in your groups, and you can assess your top engineers’ leadership abilities before and after they attend your new leadership training program.
+
+
+```{r, echo = FALSE, out.height = '100%', out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/logic.jpg")
+```
+<br/><br/>
+
+
+# Logic of the Repeated-Measures Design
+So how does a repeated-measures design work? In a between-subjects design, you look at the fraction of either group differences or between-group variances in the numerator over error in the denominator. This error represents unknown variability. That is, not everybody in the same group had the same score, so there was variability on the dependent measure within the groups. In a between-subjects design, we don’t know where that variability is coming from, so it all goes into the error term.
+
+
+In a repeated-measures design, the logic is almost *exactly the same*. The only difference is we now know whether one person scores abnormally high on leadership to begin with relative to the rest of the group of engineers whereas another engineer might score abnormally low, for example. So we can subtract out these **individual differences** from the error. 
+
+
+Individual differences are the things that make you unique from another person. For example, maybe you’re taller than average, or perhaps you are more comfortable in colder temperatures than others. Some of the things that make you unique might affect the way you score on a given measurement (e.g., leadership assessment). So, we collect your score on the assessment before training and then again at the conclusion of the program. We then compute a **difference score** (in the case of an RM-*t*-test) by subtracting your first score from your second. Because error is unknown variability, and because we now know where some of that variability is coming from (i.e., different people having different baseline levels on the outcome measure), we can quite literally just remove it from the error term. 
+
+
+```{r, echo = FALSE, out.height = '100%', out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/dont.jpg")
+```
+<br/><br/>
+
+
+# Problems with Repeated-Measures Designs
+The issues associated with repeated-measures designs are the mirror image of those associated with the between-subjects designs. First, it is unclear whether your program improved your engineers’ leadership scores or whether simply taking the test again resulted in the improvement. After all, they’re smart folks, so they might have just realized the “right” answers.
+
+
+Another concern is that you can’t be sure whether your programmers just became better leaders through the passage of time. If your training program lasted a year so that the assessments are over a year apart, it’s possible that during that year they became more mature through factors completely unassociated with your program.
+<br/><br/>
+
+
+# Summary
+**Repeated-measures** designs are very powerful tools that can help you answer questions that **between-subjects** designs cannot. When you want to know how *specific people* change from your interventions, whether it be the results of a leadership training program or changes in employee effectiveness following an organizational change, **repeated-measures** designs are an important tool in your analysts’ toolbox.
