@@ -50,7 +50,7 @@ knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.git
 <br/><br/>
 
 
-## Covariance Intuitions Through Examples
+## Covariance Intuitions
 Let’s imagine that height and weight are related. Specifically, let’s imagine that the taller somebody is, the heavier they tend to weigh. I know, it’s not much of a stretch of the imagination. But what would that look like in numbers? Well, covariance is here to help.
 
 
