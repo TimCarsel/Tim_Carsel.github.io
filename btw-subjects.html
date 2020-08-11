@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Between-Subjects Designs</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Stats for Business
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="biz-stats_home.html">Overview</a>
+    </li>
+    <li>
+      <a href="prob.html">Probability</a>
+    </li>
+    <li>
+      <a href="infer-describe.html">Inference or Description</a>
+    </li>
+    <li>
+      <a href="btw-subjects.html">Between-Subjects</a>
+    </li>
+    <li>
+      <a href="rm-designs.html">Repeated-Measures</a>
+    </li>
+    <li>
+      <a href="correlation.html">Correlation</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Data Manipulation
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="melt_cast.html">Melting &amp; Casting</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Research
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Simulating An RM Study</li>
+    <li>
+      <a href="dissertation.html">Contextual Trust Study</a>
+    </li>
+    <li>
+      <a href="scientific_articles.html">Scientific Publications</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="Timothy Carsel_6-17-2020.pdf">
+    <span class="fa fa-file"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="mailto:timothy.carsel@gmail.com">
+    <span class="fa fa-envelope"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/timcarsel/">
+    <span class="fa fa-linkedin"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/TCarsel">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Between-Subjects Designs</h1>
+
+</div>
+
+
+<p><img src="btwgroups_head.jpg" width="100%" height="100%" style="display: block; margin: auto;" /> <br/><br/></p>
+<p>One of the most common questions people use statistics to help answer is “Are these groups the same or different?”</p>
+<p>A between-subjects design uses different groups of people (or whatever) to see if it is more likely they are actually the same or different on a given measure. That’s a bit abstract, so let’s work through an example.</p>
+<p>One of the most common between-subjects tests is the A/B test. In User Experience (UX) studies, companies might test whether different webpage designs net them more revenue due to the placement of different banners. Their question, then, is “Are these two banner placements probably the same or different when it comes to generating revenue?”</p>
+<p>When comparing two groups on a continuous measure, the statistical test is called a <em>t</em>-test. There are other kinds of <em>t</em>-tests, but they all generally follow the same format, and here I’m talking about what’s called the <strong>Independent Samples <em>t</em>-test</strong>. <br/><br/></p>
+<div id="t-test" class="section level1">
+<h1><em>t</em>-test</h1>
+<p><img src="different_houses.jpg" width="100%" height="100%" style="display: block; margin: auto auto auto 0;" /> <br/><br/></p>
+<p>The <em>t</em>-test works by simply asking whether two groups are different enough from each other that it’s more likely to assume they come from different <strong>Populations</strong> than from the same <strong>Population</strong> (see <a href="http://timcarsel.com/infer-describe.html#populations">Inference or Description</a> for an overview of Populations and Samples). If the averages of these groups are larger than we would expect by sampling error alone, then we conclude that there’s probably a real difference between them.</p>
+<p>The standard in psychology and many other sciences is to set the threshold for this decision at <em>p</em> &lt; 0.05. What this means is that we would expect to randomly sample mean differences <em>this big</em> only 5% of the time (or less) if they were actually sampled from the same population. Therefore, we decide that it is more likely that the groups are actually drawn from different populations – we decide that the two groups are probably actually different. <br/><br/></p>
+</div>
+<div id="anova" class="section level1">
+<h1>ANOVA</h1>
+<p><img src="three_planes.jpg" width="100%" height="100%" style="display: block; margin: auto auto auto 0;" /> <br/><br/></p>
+<p>Although the <em>t</em>-test is a very useful analysis, it is limited in a very important way. Specifically, the <em>t</em>-test works by subtracting the mean (average) of one group from the mean of the other group, and then dividing that difference by error. However, what happens if we have more than two groups?</p>
+<p>Let’s imagine for a moment that you have three tiers of data scientists, and you wanted to test whether they are paid differently. The Data Scientist I is paid on average $30k, the Data Scientist II is paid on average $40k, and the Data Scientist III is paid on average $70k per year (as an aside: please do not pay your hard-working data scientists such low wages – these numbers are just easier for the math). Simply by looking at these numbers, it should be clear that at the very least, the lowest and highest paid groups are paid very differently. In fact the highest paid data scientist is paid more than twice the salary of the lowest paid data scientist. However, if we applied the logic of the <em>t</em>-test, we would get: 70,000 – 40,000 – 30,000 = 0. There you have it, there are <em>no differences</em> in the amount you pay your different tiers. Obviously, that would be a stupid test and a stupid result.</p>
+<p>Instead of using <em>t</em>-test logic when we have three or more groups, we use what’s called an ANalysis Of VAriance (or ANOVA for short). The ANOVA, as might be guessed from the name, looks at ratios of <strong>variance</strong> instead of mean differences. Although it is beyond the scope of this page to teach you about variance, I will briefly overview the topic so you can more easily follow along (however, variance is <em>incredibly</em> important for <em>all</em> analyses, so I encourage you to check out my undergraduate lecture <a href="https://osf.io/7cn9g/">here</a>). <br/><br/></p>
+<div id="variance" class="section level2">
+<h2>Variance</h2>
+<p><strong>Variance</strong> is a measure of how much variability is in your set of scores. Just like the <strong>mean</strong> gives us a number to represent the middle of an entire group of scores, <strong>variance</strong> gives us a number to represent whether the group of scores are all clustered together or are generally spread apart. Technically, the variance of a set of scores is the average squared difference between all of the scores. It’s not really necessary to fully understand that, but I again recommend my stats lecture if you’re interested.</p>
+<p>In the picture below, the holes are spaced very close together.</p>
+<p><img src="grouped_target.jpg" width="100%" height="100%" style="display: block; margin: auto auto auto 0;" /></p>
+<p>In this picture, however, the holes are spaced much farther apart.</p>
+<p><img src="distant_target.jpg" width="100%" height="100%" style="display: block; margin: auto auto auto 0;" /></p>
+<p>There would be a smaller value for the variance of the holes on the target from the first picture than from the second picture.</p>
+<p>In a more business example, let’s return to our underpaid Data Scientists. In the first example, the three different classes of data scientist were paid on average $30k, $40k, and $70k per year. Imagine that you decided to overhaul your data scientists’ pay to attract better talent, so you begin to pay your three levels at $80k, $90k, and $100k. Now, although the <strong>means</strong> of these three pays are higher, the <strong>variance</strong> is lower. In fact, the <strong>range</strong> of the second group is only $20k whereas the <strong>range</strong> of the first group was $40k (range is another measure of variability, but it’s pretty worthless because it only tells you the difference between the highest and lowest values whereas variance uses all of the scores). <br/><br/></p>
+</div>
+<div id="anova-again" class="section level2">
+<h2>ANOVA Again</h2>
+<p>The ANOVA looks at a ratio of different kinds of variance. The variance that goes in the top of the ratio (the numerator) is the variance between the averages of the group. So, it would be the variance between $30k, $40k, and $70k or $80k, $90k, and $100k. The bottom of the fraction (the denominator) is the variance we would expect by chance (our error). The final value of this ratio is then checked to see whether there is more variability between the means than we would expect by chance, and if it is, we conclude that the groups are probably different (technically we can only conclude that <em>at least one group</em> is different from the others). <br/><br/></p>
+</div>
+</div>
+<div id="problems-with-between-subjects-designs" class="section level1">
+<h1>Problems with Between-Subjects Designs</h1>
+<p>Between-subjects designs are a very useful tool, but they have their limitations. First, you will need a <em>lot</em> of participants to be able to detect any differences between your groups. If you have lots of data, though,that’s not really a big deal. A more important problem is that the designs <em>assume</em> the groups are roughly the same, but it takes a logical leap to infer that the treatment is the only cause of any differences you observe in your groups. In other words, you can’t tell how a <em>specific person</em> changes in response to your conditions. <br/><br/></p>
+</div>
+<div id="summary" class="section level1">
+<h1>Summary</h1>
+<p><strong>Between-Subjects</strong> designs are used to see whether two groups of things are more likely the same or different. You can use them to test whether different groups of your employees are paid differently, whether different banner placement on your websites generate more revenue, or whether different teams work more hours than others.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
