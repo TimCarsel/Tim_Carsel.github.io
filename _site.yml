@@ -18,7 +18,7 @@ navbar:
       - text: "Repeated-Measures"
         href: rm-designs.html
       - text: "Correlation"
-        #href: covariance.html
+        href: correlation.html
     - text: "Data Manipulation"  
       menu: 
       - text: "Melting & Casting"
