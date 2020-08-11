@@ -12,12 +12,8 @@ output:
 ```{r, echo = FALSE, out.height = '100%', out.width = '100%', fig.align = 'center'}
 knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/stats-comp.jpg")
 ```
+<br/><br/>
 
-
-
-<center>
-# UNDER CONSTRUCTION
-</center>
 
 Welcome to the Stats for Business part of my website! In these pages, I overview common statistical terms and concepts and apply them in business contexts. The target audiences are the leaders and managers who have data scientists on their team and those data scientists. I hope that by reading these resources, both your data scientists and your managers will be better able to communicate with each other.
 
@@ -27,4 +23,4 @@ The following pages are arranged in roughly the same order as the topics in the 
 -	[Inference or Description](http://timcarsel.com/infer-describe.html)
 -	[Between-Subjects](http://timcarsel.com/btw-subjects.html)
 -	[Repeated-Measures](http://timcarsel.com/rm-designs.html)
--	Covariance
+-	[Correlation](http://timcarsel.com/correlation.html)
