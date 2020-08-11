@@ -1,0 +1,108 @@
+---
+title: "Inference or Description"
+output:
+  html_document:
+    code_download: no
+    fontsize: 8pt
+    highlight: textmate
+    number_sections: no
+    theme: cosmo
+    toc: yes
+    toc_float:
+      collapsed: no
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning =  FALSE)
+knitr::opts_chunk$set(fig.width=3.25)
+knitr::opts_chunk$set(fig.height=2.75)
+knitr::opts_chunk$set(fig.align='center') 
+knitr::opts_chunk$set(results='hold') 
+```
+
+```{r, echo = FALSE, out.height = '100%', out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/numbers.jpg")
+```
+<br/><br/>
+
+The word “statistics” is used to describe two related but very different activities. Knowing which one you’re talking about will greatly help you communicate with your team (or post more accurate job ads). Below, I cover each of these two terms, including when to use them and why they’re important. 
+
+# Descriptive Statistics
+```{r, echo = FALSE, out.height = '100%', out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/describe.jpg")
+```
+<br/><br/>
+
+
+If you are interested in *The Data You Have*, you are talking about **Descriptive Statistics**. 
+
+Descriptive Statistics are used to get a sense of, for example, the average salary of your data scientists or how much variability there is in the amount of hours your consultants are billing per week. Descriptive Statistics give you a snap-shot of how your company is doing *up to now*.
+
+Common Descriptive Statistics include those that tell you about the *middle* of a set of values (e.g., the mean (average), the median, the mode), how much *variability* is in those scores (e.g., variance, standard deviation, range), how extreme a given score is relative to the rest (e.g., z-score), or the relationship between two variables, like base salary and hours of work per week (e.g., correlation). 
+
+Descriptive Statistics can be built into dashboards that automatically update as you get new data, and there are many clever ways to compute and combine data to tell you the story you need. 
+
+For example, you could create a dashboard that tracks the salary of your employees by gender and ethnicity. There is a long and unfortunate history of companies paying people like me more than women, racial and ethnic minorities, or people from the LGBTQ+ communities. In order to be more equitable, companies need to track those data so as to identify when their practices might deviate from their policies. Unconscious bias is like mold; it grows in the dank and dark. Descriptive Statistics will shine a bright light on your business and enable you to bring out the best in your company.
+
+Another example of ways to use Descriptive Statistics is to create weighted averages of your employee’s evaluations. Employees are evaluated on a number of dimensions, like the hours they put in a week, the amount of sales they bring to the company per year, or their leadership evaluations. These ratings are not equally important, so leaders and managers might want to prioritize some evaluations over others. Creating a weighted average of these measures is a way to prioritize the important metrics of your employees while still including the other evaluations of lesser importance.
+
+Descriptive Statistics are important and powerful tools to help you understand **The Data You Have**. However, they are limited in that they cannot tell you whether an employee is likely to be a rockstar manager or whether your recruiting pipeline is biased. These questions are best answered with Inferential Statistics.
+
+# Inferential Statistics
+```{r, echo = FALSE, out.height = '90%', out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/predict.jpg")
+```
+<br/><br/>
+
+
+If you are interested in *Making Predictions About Data You Don’t Have*, you are talking about **Inferential Statistics**.
+
+Inferential Statistics are used to make predictions about data you do not have. They do this by making use of the principles of probability to infer details about a **Population** of data based on the **Sample** of data you do have. These are important concepts, so I will review them now.
+
+## Populations
+A Population is the set of *All Scores* of a given group of things. Populations can be people, animals, white blood cells, anything that can be defined as a group. Populations can be very small, like the Population of CEO’s of Fortune 500 companies. In this case, the total number in this Population is 500. Often though, Populations are very big. For example, the Population of people on this planet as of now (6/24/2020) is about 7, 800, 000, 000. That’s a lot of decimal places!
+
+Populations are the things in which people are really interested in Inferential Statistics. In Inferential Statistics, we care more about how the data we have tells us about all of the data from the population than just about data we have. To get a sense of the Population, we use the data we have to make guesses about what the Population probably looks like. We call the data we have our Sample.
+
+## Samples
+The word “Sample” can be used as a noun or a verb. We’ll first talk about the noun version before turning to the verb.
+
+-	When used to describe a thing, the word Sample refers simply to the data we have. We assume that the data we have is a subset of the Population, or a smaller group of the total number of things.
+
+-	When used to describe an activity, Sample refers to the process of selecting a Sample from the Population. In other words, “to Sample” means the process by which we select a smaller group of things from the total group of things. 
+
+If we assume that our Sample was **Randomly Sampled** from the Population, then we can **Infer** details about the Population. We do this by capitalizing on the properties of [Probability](http://timcarsel.com/prob.html) and sampling error. 
+
+Essentially, we assume that the data we have was randomly drawn from the larger Population and that the larger Population roughly resembles our Sample. We do this by creating a metric called **Standard Error** which formalizes our intuitions about how sure we can be of our data.
+
+Standard error quantifies the certainty we have in our data as a function of **Sample Size** and **Variability**.
+
+-	Sample Size: Sample Size is the total number of things we have in our Sample. For example, if you have 100 data scientists in your organization, your Sample Size is 100.
+-	Variability: Variability is how similar or dissimilar the values in your sample are from each other. If all of your data scientists make somewhere between $90k -- $110k, then you have less Variability in your data scientists’ salaries than a company that pays their data scientists anywhere between $70k -- $130k.
+
+The above examples should make sense intuitively. Is everybody saying the same thing? Then there’s lower error in our information. Is everybody saying something completely different? Then there’s more error in our information. Did we ask 2 people for an answer to a question or 10,000? We can be more sure of our information as we ask more people and they tell us roughly the same answer. For a more thorough review of how this is done, you can check out my undergraduate lecture on [Probability and Sampling](https://osf.io/9bd5v/).
+
+Once we have a measurement of error, we can then start to make guesses about how closely our Sample resembles the Population from which it was Sampled. Once we have *that* information, we can start to make predictions about the data we don’t have.
+
+## Common Types
+There are *many* different analyses that fall under the enormous umbrella of Inferential Statistics. In general, however, they are used to tell us one of two questions:
+
+-	Are these things probably the same or different?
+-	Are these things probably related or not?
+
+There are also a couple of common research designs to ask these questions:
+
+-	Between Groups
+-	Repeated Measures
+-	Covariance
+
+# Summary
+```{r, echo = FALSE, out.height = '100%', out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/summary.jpg")
+```
+<br/><br/>
+
+
+The word “statistics” is used to describe two related but very different activities, and knowing which one you’re talking about will greatly help you communicate with your team. **Descriptive Statistics** tell you information about the data you have, and **Inferential Statistics** help you make predictions about the data you do not have. 

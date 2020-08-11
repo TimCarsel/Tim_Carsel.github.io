@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Probability</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Stats for Business
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="biz-stats_home.html">Overview</a>
+    </li>
+    <li>
+      <a href="prob.html">Probability</a>
+    </li>
+    <li>
+      <a href="infer-describe.html">Inference or Description</a>
+    </li>
+    <li>
+      <a href="btw-subjects.html">Between-Subjects</a>
+    </li>
+    <li>
+      <a href="rm-designs.html">Repeated-Measures</a>
+    </li>
+    <li class="dropdown-header">Correlation</li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Data Manipulation
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="melt_cast.html">Melting &amp; Casting</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Research
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Simulating An RM Study</li>
+    <li>
+      <a href="dissertation.html">Contextual Trust Study</a>
+    </li>
+    <li>
+      <a href="scientific_articles.html">Scientific Publications</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="Timothy Carsel_6-17-2020.pdf">
+    <span class="fa fa-file"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="mailto:timothy.carsel@gmail.com">
+    <span class="fa fa-envelope"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/timcarsel/">
+    <span class="fa fa-linkedin"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/TCarsel">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Probability</h1>
+
+</div>
+
+
+<p><img src="dice.jpg" width="130%" height="130%" style="display: block; margin: auto;" /> <br/><br/></p>
+<div id="definition" class="section level2">
+<h2>Definition</h2>
+<p>Probability is a mathematical concept used to predict how likely an event is to occur by assigning a number to represent whether something is definitely going to happen, definitely not going to happen, or anywhere in between. Although there are a lot of complicated things we can do with probability, the equation is simply the ratio of outcomes of interest to total outcomes and ranges from 0 (definitely won’t happen) to 1 (definitely will happen).</p>
+<p>Although most of the concepts of probability are fairly simple, they can be counterintuitive. Take for example the following question.</p>
+<p><strong>Forewarning:</strong> I will try to trick you. <br/><br/></p>
+</div>
+<div id="base-rate-fallacy-example" class="section level2">
+<h2>Base Rate Fallacy Example</h2>
+<p>Let’s say you have just met with your doctor who has informed you that you have tested positive for a fatal disease. To make things worse, this test is accurate 95% of the time.</p>
+<ul>
+<li>What is the probability you will die from this disease?</li>
+</ul>
+<p><img src="medical-test.jpg" width="50%" height="50%" style="display: block; margin: auto;" /> <br/><br/></p>
+<p>This question makes use of the base rate fallacy, which occurs when someone misjudges the likelihood of an event because they don’t take into account other relevant information. In this case, the relevant information is <em>how infrequently the disease occurs in the population</em>. Let’s take a look at Table 1 Below:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center"></th>
+<th align="center">Table 1</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">Actually Sick</td>
+<td align="center">Actually Healthy</td>
+<td align="center">Probability of Having the Disease</td>
+</tr>
+<tr class="even">
+<td align="center">Test Positive</td>
+<td align="center">95</td>
+<td align="center">4,995</td>
+<td align="center">1.90%</td>
+</tr>
+<tr class="odd">
+<td align="center">Test Nagative</td>
+<td align="center">5</td>
+<td align="center">94,905</td>
+<td align="center">0.01%</td>
+</tr>
+</tbody>
+</table>
+<p>The columns labeled “Actually Sick” and “Actually Healthy” represent the number of people out of 100,000 that either really do have this fake illness or do not, respectively. The rows marked “Test Positive” and “Test Negative” indicate the number of people out of that 100,000 whose test told them they had the disease or not, respectively. In other words, the columns tell us about reality and the rows tell us about the test. <br/><br/></p>
+<p>As you can see, 5 people who actually have the disease got test results that told them they were healthy, and 4,995 people who are healthy were told that they actually have the disease. If you add those groups up, you will find that 5% of the total number of people who took the test received wrong results (<span class="math inline">\(\frac{5,000}{100,000}\)</span>). The test makers were not being inaccurate when they told you that their test was correct 95% of the time, they just failed to mention that the overwhelming majority of wrong tests happen when somebody who is actually healthy receives a test result that tells them they will die. Therefore, if you received those test results, you actually only have about a 1.90% chance of actually having the disease.</p>
+<p>In order to know the probability of whatever it is you are interested in, you have to know the total number of possible outcomes (<span class="math inline">\(\frac{Outcome-of-Interest}{Total-Number-of-Possible-Outcomes}\)</span>). Sometimes figuring that out is easy. For example, the probability of rolling a <code>1</code> on a single role of a six-sided die is <span class="math inline">\(\frac{1}{6}\)</span> because there are 6 total possible outcomes. In the above example, the total number was 100,000 people. When I go over error in a later post, I will show tricks that statisticians have learned to essentially guess the total number of outcomes based on only knowing the details about a sample. <br/><br/></p>
+</div>
+<div id="continuous-outcomes" class="section level2">
+<h2>Continuous Outcomes</h2>
+<p>What happens if the thing we’re trying to predict is not a discrete outcome, like whether somebody is sick or not, and instead is continuous, like how many hours a consultant might bill next week based off their billing for the last month? The general equation for probability remains the same here, but now we look at <strong>area</strong> instead of <strong>counts.</strong></p>
+<p>Look at the graph below. There are many names for this distribution, but the two most common are the Normal Distribution and the Gaussian Distribution. I will use both terms interchangeably.</p>
+<p><img src="prob_files/figure-html/unnamed-chunk-3-1.png" width=".49\linewidth" style="display: block; margin: auto;" /></p>
+<div id="normal-distribution" class="section level3">
+<h3>Normal Distribution</h3>
+<p>A lot of natural phenomena are normally distributed, like height and IQ. That’s pretty great because the normal distribution has a number of features that make things a bit easier when estimating probabilities and relationships, but those features are a bit out of the scope of this tutorial.</p>
+<p>Because the normal distribution makes things a bit easier on estimating probabilities, statisticians, data scientists, and researchers often assume that an unknown distribution is normally distributed. <strong>Note:</strong> Good statisticians, data scientists, and researchers will always check those assumptions.</p>
+<p>One of those benefits is that the normal distribution is precisely defined by an equation. As a consequence, you can define the probability of something by identifying the area of the normal distribution that corresponds to what you’re interested and divide that area by the total area. Ok, there’s a lot in this, so let’s step back and go over it slowly.</p>
+<p>Let’s take a look at the normal distribution again, but this time I want you to notice the labels on the x- and y-axes.</p>
+<p><img src="prob_files/figure-html/unnamed-chunk-4-1.png" width=".49\linewidth" style="display: block; margin: auto;" /></p>
+</div>
+<div id="z-scores" class="section level3">
+<h3>Z-scores</h3>
+<p>Along the Y-axis is plotted the proportion of the distribution that has that value. In other words, the taller that part of the curve, the more likely is that value. It’s clear, then, that if you have no other information about a distribution than its mean and that it’s normally distributed, your best guess is the mean of the distribution.</p>
+<p>Along the X-axis, you’ll notice that it’s centered at 0 and goes from -4 to +4, and the axis is labeled “Z.” I’ve generated what’s called a “z-curve,” which is a way to standardize values from different distributions. It’s not necessary to fully understand what this means, but a quick example might help.</p>
+<p>Imagine you want to see whether men are paid more than women in your organization for different types of employees (e.g., C-suite and customer-facing). Obviously, these two types of employees have very different salary expectations, so how would you compare the pay of C-suite with the pay of your cashiers? A “z-score” is a common way to place values from different distributions on a common scale.</p>
+<p><img src="money.jpg" width="50%" height="50%" style="display: block; margin: auto;" /></p>
+<p>Although the details are unnecessary for these purposes, it is important to know that there are specific probabilities associated with each z-score. For example, between the average of a distribution and +/-1 z-score is about 68% of the distribution. Between the average and +/- 2 z-scores is about 95% of the distribution.</p>
+<p>Now, back to the question at hand. If we know that the area between +1 and -1 z-score is ~68% of the distribution, then we know that the area outside +1 and -1 z-score is ~32% of the population (100% – 68% = 32%). Because that area is on both sides of the curve, then there’s ~16% of the distribution that is greater than +1 z-score and ~16% of the distribution that is less than -1 z-score. That means we can convert the pay of all of our employees into z-scores and look at whether men are disproportionately represented in the top of the distribution across all positions (<em>Spoiler:</em> They probably are, and that’s a problem).</p>
+<p>In fact, by converting your raw scores to z-scores, you can start to estimate the probability of randomly drawing a value that’s “greater than X,” or “between X and Z.” <em>That</em> is how you estimate probabilities when you are dealing with continuous values and not counts. And you thought you’d never have to think about area problems again!</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

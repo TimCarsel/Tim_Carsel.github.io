@@ -1,8 +1,6 @@
 ---
 title: "Melting & Casting"
 output:
-  pdf_document:
-    toc: yes
   html_document:
     code_download: yes
     fontsize: 8pt
@@ -13,6 +11,17 @@ output:
     toc_float:
       collapsed: no
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning =  FALSE)
+knitr::opts_chunk$set(fig.width=3.25)
+knitr::opts_chunk$set(fig.height=2.75)
+knitr::opts_chunk$set(fig.align='center') 
+knitr::opts_chunk$set(results='hold') 
+```
 
 **Note:** I wrote this tutorial before tidyverse was a thing. I almost exclusively use those packages now for shaping my data, but the explanations here might still be useful. 
 

@@ -21,7 +21,7 @@ knitr::opts_chunk$set(results='hold')
 ```
 
 ```{r, echo=FALSE,out.height='70%',out.width='70%'}
-knitr::include_graphics("C:/Users/tcarse2/Documents/GitHub/Tim_Carsel.github.io/books.jpg")
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/books.jpg")
 ```
 
 *Disclaimer*: The articles provided on this website as pdfs were published by journals and in edited volumes and thus copyrighted to them. These links are intended to facilitate the accepted practice that authors are allowed to distribute copies of their articles to interested parties for personal use. No commercial use may be made of the articles nor is mass production of the articles permitted.

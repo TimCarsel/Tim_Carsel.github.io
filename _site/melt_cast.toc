@@ -1,0 +1,9 @@
+\contentsline {section}{Why Reshape Your Data}{1}{section*.2}
+\contentsline {section}{R Help}{2}{section*.3}
+\contentsline {section}{Data Frame}{2}{section*.4}
+\contentsline {section}{Melting}{2}{section*.5}
+\contentsline {subsection}{Explanation}{3}{section*.6}
+\contentsline {section}{Casting}{5}{section*.7}
+\contentsline {subsection}{Explanation}{5}{section*.8}
+\contentsline {section}{Final Words}{8}{section*.9}
+\contentsline {section}{Sources}{8}{section*.10}

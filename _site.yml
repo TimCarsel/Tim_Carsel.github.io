@@ -9,15 +9,15 @@ navbar:
       menu: 
       - text: "Overview"
         href: biz-stats_home.html
-      - text: "Probability & Odds"
-        #href: prob-odds.html
-      - text: "Inference, Description, & Error"
-        #href: infer-describe-error.html
-      - text: "Between Groups"
-        #href: btw-groups.html
-      - text: "Repeated Measures"
-        #href: rm-designs.html
-      - text: "Covariance"
+      - text: "Probability"
+        href: prob.html
+      - text: "Inference or Description"
+        href: infer-describe.html
+      - text: "Between-Subjects"
+        href: btw-subjects.html
+      - text: "Repeated-Measures"
+        href: rm-designs.html
+      - text: "Correlation"
         #href: covariance.html
     - text: "Data Manipulation"  
       menu: 
@@ -26,7 +26,7 @@ navbar:
     - text: "Research"
       menu:
       - text: "Simulating An RM Study"
-        href: simulation.html
+        #href: simulation.html
       - text: "Contextual Trust Study"
         href: dissertation.html
       - text: "Scientific Publications"
