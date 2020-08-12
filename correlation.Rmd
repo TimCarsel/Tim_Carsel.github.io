@@ -2,6 +2,8 @@
 title: "Correlation"
 output:
   html_document:
+    includes:
+       in_header: GA_script.html
     code_download: no
     fontsize: 8pt
     highlight: textmate

@@ -2,6 +2,8 @@
 title: "Melting & Casting"
 output:
   html_document:
+    includes:
+       in_header: GA_script.html
     code_download: yes
     fontsize: 8pt
     highlight: textmate
