@@ -16,8 +16,12 @@ output:
 
 
 ```{r, echo = FALSE, out.height = '50%', out.width = '50%', fig.align='center'}
-knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/Head Shot2.jpg")
+knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/headshot_9-2020.jpg")
 ```
+<br/><br/><br/><br/>
+
+
+
 
 <center>
 **I apply research, data, and experience to answer questions about effective leadership and teamwork in the workplace.** 
