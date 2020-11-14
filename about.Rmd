@@ -53,7 +53,7 @@ People Work is exhausting. It is emotionally and psychologically draining to con
 knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.github.io/workplace_image.jpg")
 ```
 
-I believe that companies can get the most out of their people when their people love what they do. When employees are fully engaged in their work, everyone benefits. Companies benefit because they get more for their money, and employees benefit because they can trust that their teammates will pull their weight. By applying the latest research on interpersonal trust, I help teams be more effective by reducing the amount of time your employees engage in People Work. 
+Companies can get the most out of their people when their people don't have to engage in People Work. When employees are fully engaged in their work instead of worrying about whether or not they can trust their team or leadership, everyone benefits. Companies benefit because they get more for their money, and employees benefit because environments characterized by distrust and unfairness are psychologically and emotionally taxing. By applying the latest research on interpersonal trust, I help teams be more effective by reducing the amount of time your employees engage in People Work. 
 <br/><br/><br/><br/>
 
 

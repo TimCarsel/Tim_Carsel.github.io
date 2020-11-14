@@ -42,7 +42,7 @@ A correlational design allows you to collect data naturally, without experimenta
 
 
 # Logic of Correlational Designs
-A correlational design looks at the covariance between two measures, or the degree to which two measures are related. Mean differences or between-group variances go in the numerator of the previous tests. In contrast, the numerator of a correlational design is something called covariance. The measure looks at the degree to which someone is higher or lower than average on one measure and whether that same person is higher or lower on another measure than the average person. Let’s turn to a couple examples to get a sense of how this works.
+A correlational design looks at the covariance between two measures, or the degree to which two measures are related. Mean differences or between-group variances go in the numerator of the previous tests. In contrast, the numerator of a correlational design is this thing called covariance. The measure looks at the degree to which someone is higher or lower than average on one measure and whether that same person is higher or lower on another measure than the average person. Let’s turn to a couple examples to get a sense of how this works.
 <br/><br/>
 
 
@@ -66,7 +66,7 @@ The correlation takes the measure of covariance you just created and places it i
 
 
 # Uses for Correlations
-Correlations can be used for **Descriptive** or **Inferential** purposes. If you simply are interested in whether and to what extent your consultants’ billable hours and work quality are related, then you are simply **Describing the data you have**. If, however, you want to build a model to predict the work quality of a given consultant based on the number of billable hours they put in this week, then your are interested in **Making inferences about the data you don’t have**.
+Correlations can be used for **Descriptive** or **Inferential** purposes. If you are simply interested in whether and to what extent your consultants’ billable hours and work quality are related, then you are **Describing the data you have**. If, however, you want to build a model to predict the work quality of a given consultant based on the number of billable hours they put in this week, then your are interested in **Making inferences about the data you don’t have**.
 
 
 The last example about the use of correlations to predict new values is a very basic example of probably one of the most widely used statistic out there:  Regression. Regression analyses use the logic of the correlation but offer enormous flexibility. You can add more than one predictor, like the experience of the consultant, to predict your outcome variable of work quality. You can predict dichotomous outcome variables, like whether a sales person will probably make a sale or not based on how much time they’ve spent cultivating the relationship, or whether a customer will click on the link in your email based on how long they’ve been a customer. You can even account for the fact that you may be measuring something from a group that tends to respond similarly. For example, you can assess the relationship between billable hours and work quality accounting for the fact that your offices in each of the locations around the country have different cultures around work/life balance. And this only scratches the surface! Correlational logic is also in analyses like confirmatory factor analysis, principal components analysis, structural equation modeling, and latent growth curves. 
@@ -83,4 +83,4 @@ knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.git
 Correlational designs add an incredibly powerful tool to your toolkit. Understanding covariance and correlations, and when to use them, will open up a universe of statistical methods you can leverage to gain a competitive edge in your business. 
 
 
-One word of warning before you leave. There is a time-worn adage that “Correlation does not equal causation.” Just because two things are *related* does not mean that the one *causes* the other. It could. But the other variable could also cause the first. *Or*, a third variable you didn’t even measure causes both of the variables you measured. Be sure to always keep these caveats in mind!
+One word of warning before you leave. There is a time-worn adage that “Correlation does not equal causation.” Just because two things are *related* does not mean that the one *causes* the other. It could. But the other variable could also cause the first. *Or* perhaps a third variable you didn’t even measure causes both of the variables you measured. Be sure to always keep these caveats in mind!

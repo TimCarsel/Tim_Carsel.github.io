@@ -33,8 +33,6 @@ navbar:
         href: scientific_articles.html
 
   right:
-    - icon: fa-file
-      href: Timothy Carsel_8-24-2020.pdf
     - icon: fa-envelope
       href: mailto:timothy.carsel@gmail.com
     - icon: fa-linkedin

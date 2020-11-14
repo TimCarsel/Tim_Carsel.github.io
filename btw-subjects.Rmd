@@ -96,7 +96,7 @@ The ANOVA looks at a ratio of different kinds of variance. The variance that goe
 
 
 # Problems with Between-Subjects Designs
-Between-subjects designs are a very useful tool, but they have their limitations. First, you will need a *lot* of participants to be able to detect any differences between your groups. If you have lots of data, though,that's not really a big deal. A more important problem is that the designs *assume* the groups are roughly the same, but it takes a logical leap to infer that the treatment is the only cause of any differences you observe in your groups. In other words, you can't tell how a *specific person* changes in response to your conditions. 
+Between-subjects designs are a very useful tool, but they have their limitations. First, you will need a *lot* of participants to be able to detect any differences between your groups. If you have lots of data, though, that's not really a big deal. A more important problem is that the designs *assume* the groups are roughly the same, but it takes a logical leap to infer that the treatment is the only cause of any differences you observe in your groups. In other words, you can't tell how a *specific person* changes in response to your conditions. 
 <br/><br/>
 
 
