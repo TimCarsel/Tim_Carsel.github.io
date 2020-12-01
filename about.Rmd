@@ -66,6 +66,6 @@ knitr::include_graphics("C:/Users/timot/OneDrive/Documents/GitHub/Tim_Carsel.git
 
 I built this entire website in the R programming language. Every page was created separately and compiled by RMarkdown and Github Pages. On all of the pages where I cover data manipulation, visualizations, or analyses, I make my code available so you can walk through my examples. 
 
-If you would like me to add something, or if you notice an error on any of these pages (or if you just want to chat!), please email me at timothy dot carsel at gmail dot com. You can also click on the links on the top right-hand side of each page for my resume, email, LinkedIn, or Twitter.
+If you would like me to add something, or if you notice an error on any of these pages (or if you just want to chat!), please email me at timothy dot carsel at gmail dot com. You can also click on the links on the top right-hand side of each page for my email, LinkedIn, or Twitter.
 
 I hope you find these resources helpful, and thank you for stopping by!
