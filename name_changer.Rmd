@@ -1,0 +1,241 @@
+---
+title: "Change Values"
+output:
+  html_document:
+    includes:
+       in_header: GA_script.html
+    code_download: yes
+    fontsize: 8pt
+    highlight: textmate
+    number_sections: no
+    theme: cosmo
+    toc: yes
+    toc_float:
+      collapsed: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning =  FALSE)
+knitr::opts_chunk$set(fig.width=3.25)
+knitr::opts_chunk$set(fig.height=2.75)
+knitr::opts_chunk$set(fig.align='center') 
+knitr::opts_chunk$set(results='hold') 
+```
+
+# Creating A Function To Change Names
+
+There often comes a time where you will have to match names from across different data sets, but sometimes people are represented by different names in each of the datasets. For example, if you want to merge data with employee performance ratings and monthly hours billed, the employees' names in both of those data sets must match exactly. However, for a variety of reasons those employees might be represented by different names in the separate data sets. 
+
+For example, someone might go by the name "Mike Jones" in the data containing the hours, but the the HRIS software might list the employee by their full name, "Michael Jones." This name difference will force an error such that "Mike Jones'" hours and "Michael Jones'" performance ratings won't be matched. How do go about fixing this?
+
+You *could* go through the data set manually and change every instance of "Michael Jones" to "Mike Jones," but if your data has many cases, or there are other employees with similar name changes, then this would be very time-consuming. The problem becomes compounded if the data is constantly being updated with, say, new hours and new performance reviews, so that each time you download the data you would have to manually fix the names.
+
+To solve this problem, I wrote a simple function to automatically identify and fix all the ```bad_names``` and convert them to ```good_names```. Below, I demonstrate the problem and walk you through the steps of this function.
+<br/><br/><br/><br/>
+
+
+
+
+## Setting Up The Problem
+
+Let's imagine that we have a team of five employees: Mike Jones, Dana Owens, Chris Rios, Gary Grice, and Melissa Elliot. We'll create a dataset below with their names and most recent reviews.
+
+```{r}
+# Names
+workers <- c("Mike Jones", "Dana Owens", "Chris Rios", "Chance Bennett", "Melissa Elliot")
+
+# Reviews
+reviews <- c(4.5, 4.7, 4.6, 4.9, 5.0)
+
+# Combine into a dataframe
+review_data <- as.data.frame(cbind(workers, reviews))
+```
+
+Now, let's say that a few of the people above have different names that are used by the HRIS to track monthly hours. Let's create that here.
+
+```{r}
+# Names
+workers <- c("Michael Jones", "Dana Owens", "Christopher Rios", "Gary Grice", "Melissa Elliot")
+
+# Monthly hours
+hours <- c(235, 241.5, 243, 251, 272.5)
+
+# Combine into a dataframe
+hours_data <- as.data.frame(cbind(workers, hours))
+```
+
+If we try to merger the dataframes by worker, then we will lose all entries for the workers whose names are mismatched:
+
+```{r}
+# Merge dataframes
+bad_data <- merge(hours_data, review_data)
+
+# Let's look at it
+bad_data
+```
+
+We can choose to keep ```all.x```, ```all.y```, or ```all``` to avoid losing information, but the rows will still not be matched properly. Instead, we can create and maintain a vector of names we want to keep and a vector of names we want to change for the people who have mismatched names. Importantly, you must keep the position of the names corresponding to the same person in the same position of each vector. Here, I put Mike first and Chris second.
+
+```{r}
+# Vector of names we want to change
+bad_names <- c("Michael Jones", "Christopher Rios")
+
+# Vector of names we want to keep
+good_names <- c("Mike Jones", "Chris Rios")
+```
+
+Once we have those vectors, we can use the command ```intersect``` to identify all unique bad names we have in our data.
+
+```{r}
+# Identify which bad names are present in x
+intersect(bad_names, hours_data$workers)
+intersect(bad_names, review_data$workers)
+```
+
+As you can see, the ```intersect``` command outputs a character vector containing all of the names in our data that match our vector of bed names. Because the ```hours_data``` is the only dataset with ```bad_names``` in it, let's save that to a character vector.
+
+```{r}
+names_to_change <- intersect(bad_names, hours_data$workers)
+
+# Check
+names_to_change
+```
+
+We're off to a good start, but the character vector by itself is pretty useless. However, it can be used to identify which rows in our ```hours_data``` contain the ```bad_names```.
+
+```{r}
+# Identify position of bad names in x
+pos_to_change <- which(hours_data$workers %in% names_to_change)
+
+# Check
+pos_to_change
+```
+
+Using our new vector of positions, we can now extract all of the bad names throughout our dataset. In this example, there is only one instance of "Michael Jones" and one instance of "Christopher Rios," but if our data were real, we could imagine that those names might be repeated several times. This next step identifies all instances of the ```bad_names``` in our data.
+
+```{r}
+# Extract all bad names from x
+to_change <- hours_data[pos_to_change, "workers"]
+
+# Check
+to_change
+```
+
+Now, we need to identify the location in the vector of ```bad_names``` that each person appears. This will allow us to match that position with their preferred name in the vector of ```good_names```.
+
+```{r}
+# Identify the position of the bad names of x in vector of bad names
+pos_bad <- match(to_change, bad_names)
+
+# Check
+pos_bad
+```
+
+Next, we identify the preferred names using the positions we just saved.
+
+```{r}
+# Identify the good names that match the bad names
+good_names <- good_names[pos_bad]
+
+# Check
+good_names
+```
+
+Finally, let's change the ```bad_names``` to ```good_names``` in our ```hours_data```.
+
+```{r}
+# Changing bad_names to good_names
+hours_data[pos_to_change, "workers"] <- good_names
+
+# Check to make sure worked
+hours_data
+```
+
+Now, you may have noticed that this takes a few steps, and in Step 7 where I identify the good names to match the bad, I am overwriting that vector. Well, a better way to do this that repeating these same steps and resetting the vector of ```good_names``` evertime is to create a function. Because this function is pretty simple, we only need to define a ```function(x)``` and swap out every instance of ```hours_data``` in our code to ```x```. Let's do that below.
+
+```{r}
+# Resetting vector of names we want to change
+bad_names <- c("Michael Jones", "Christopher Rios")
+
+# Resetting vector of names we want to keep
+good_names <- c("Mike Jones", "Chris Rios")
+
+# Create function to fix names
+name_changer <- function(x){
+  
+  # Identify which bad names are present in x
+  names_to_change <- intersect(bad_names, x$workers)
+  
+  # Identify position of bad names in x
+  pos_to_change <- which(x$workers %in% names_to_change)
+  
+  # Extract all bad names from x
+  to_change <- x[pos_to_change, "workers"]
+  
+  # Identify the position of the bad names of x in vector of bad names
+  pos_bad <- match(to_change, bad_names)
+  
+  # Identify the good names that match the bad names
+  good_names <- good_names[pos_bad]
+  
+  # Switch bad names for good names
+  x[pos_to_change, "workers"] <- good_names
+  return(x)
+}
+```
+
+Let's see if that worked!
+
+```{r}
+# Names
+workers <- c("Michael Jones", "Dana Owens", "Christopher Rios", "Gary Grice", "Melissa Elliot")
+
+# Monthly hours
+hours <- c(235, 241.5, 243, 251, 272.5)
+
+# Combine into a dataframe
+hours_data <- as.data.frame(cbind(workers, hours))
+
+# Use name_changer function
+hours_data <- name_changer(hours_data)
+
+# Let's take a look
+hours_data
+```
+
+Great! Our function works! But there is one last piece that will make sure this code is more generalizable. If you're like me, you probably tend to use the ```tidyverse``` a lot. This will sometimes result in your ```data.frame``` being converted to a ```tibble```. Unfortunately, the line where we call ```pos_bad <- match(to_change, bad_names)``` will not work on a tibble because it requires a vector. If we were working with tibbles, then this command ```to_change <- x[pos_to_change, "Worker"]``` would result in a tibble with one column instead of a vector. To fix this potential issue, let's add one final line of code to our function: ```if(is_tibble(to_change)) to_change <- pull(to_change, Worker)```. So, the full function would be like this:
+
+### Finaly Function
+
+```{r}
+# Create function to fix names
+name_changer <- function(x){
+  
+  # Identify which bad names are present in x
+  names_to_change <- intersect(bad_names, x$workers)
+  
+  # Identify position of bad names in x
+  pos_to_change <- which(x$workers %in% names_to_change)
+  
+  # Extract all bad names from x
+  to_change <- x[pos_to_change, "workers"]
+  
+  # Converting to vector if it's a tibble
+  if(is_tibble(to_change)) to_change <- pull(to_change, workers)
+  
+  # Identify the position of the bad names of x in vector of bad names
+  pos_bad <- match(to_change, bad_names)
+  
+  # Identify the good names that match the bad names
+  good_names <- good_names[pos_bad]
+  
+  # Switch bad names for good names
+  x[pos_to_change, "Worker"] <- good_names
+  return(x)
+}
+```
+
+And that's it! I hope you've enjoyed and learned something from this, and if you have a better solution, please send me an email!

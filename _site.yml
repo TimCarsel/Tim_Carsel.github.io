@@ -21,6 +21,8 @@ navbar:
         href: correlation.html
     - text: "Data Manipulation"  
       menu: 
+      - text: "Fixing Names"
+        href: name_changer.html
       - text: "Melting & Casting"
         href: melt_cast.html
     - text: "Research"
