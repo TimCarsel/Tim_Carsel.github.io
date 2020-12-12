@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Change Values</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-175254629-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-175254629-1');
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Stats for Business
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="biz-stats_home.html">Overview</a>
+    </li>
+    <li>
+      <a href="prob.html">Probability</a>
+    </li>
+    <li>
+      <a href="infer-describe.html">Inference or Description</a>
+    </li>
+    <li>
+      <a href="btw-subjects.html">Between-Subjects</a>
+    </li>
+    <li>
+      <a href="rm-designs.html">Repeated-Measures</a>
+    </li>
+    <li>
+      <a href="correlation.html">Correlation</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Data Manipulation
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="name_changer.html">Fixing Names</a>
+    </li>
+    <li>
+      <a href="melt_cast.html">Melting &amp; Casting</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Research
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Simulating An RM Study</li>
+    <li>
+      <a href="dissertation.html">Contextual Trust Study</a>
+    </li>
+    <li>
+      <a href="scientific_articles.html">Scientific Publications</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="mailto:timothy.carsel@gmail.com">
+    <span class="fa fa-envelope"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/timcarsel/">
+    <span class="fa fa-linkedin"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/TCarsel">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Change Values</h1>
+
+</div>
+
+
+<div id="creating-a-function-to-change-names" class="section level1">
+<h1>Creating A Function To Change Names</h1>
+<p>There often comes a time where you will have to match names from across different data sets, but sometimes people are represented by different names in each of the datasets. For example, if you want to merge data with employee performance ratings and monthly hours billed, the employees’ names in both of those data sets must match exactly. However, for a variety of reasons those employees might be represented by different names in the separate data sets.</p>
+<p>For example, someone might go by the name “Mike Jones” in the data containing the hours, but the the HRIS software might list the employee by their full name, “Michael Jones.” This name difference will force an error such that “Mike Jones’” hours and “Michael Jones’” performance ratings won’t be matched. How do go about fixing this?</p>
+<p>You <em>could</em> go through the data set manually and change every instance of “Michael Jones” to “Mike Jones,” but if your data has many cases, or there are other employees with similar name changes, then this would be very time-consuming. The problem becomes compounded if the data is constantly being updated with, say, new hours and new performance reviews, so that each time you download the data you would have to manually fix the names.</p>
+<p>To solve this problem, I wrote a simple function to automatically identify and fix all the <code>bad_names</code> and convert them to <code>good_names</code>. Below, I demonstrate the problem and walk you through the steps of this function. <br/><br/><br/><br/></p>
+<div id="setting-up-the-problem" class="section level2">
+<h2>Setting Up The Problem</h2>
+<p>Let’s imagine that we have a team of five employees: Mike Jones, Dana Owens, Chris Rios, Gary Grice, and Melissa Elliot. We’ll create a dataset below with their names and most recent reviews.</p>
+<pre class="r"><code># Names
+workers &lt;- c(&quot;Mike Jones&quot;, &quot;Dana Owens&quot;, &quot;Chris Rios&quot;, &quot;Gary Grice&quot;, &quot;Melissa Elliot&quot;)
+
+# Reviews
+reviews &lt;- c(4.5, 4.7, 4.6, 4.9, 5.0)
+
+# Combine into a dataframe
+review_data &lt;- as.data.frame(cbind(workers, reviews))
+
+# Take a look
+knitr::kable(review_data, caption = &#39;Reviews by Worker&#39;)</code></pre>
+<table>
+<caption>Reviews by Worker</caption>
+<thead>
+<tr class="header">
+<th align="left">workers</th>
+<th align="left">reviews</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Mike Jones</td>
+<td align="left">4.5</td>
+</tr>
+<tr class="even">
+<td align="left">Dana Owens</td>
+<td align="left">4.7</td>
+</tr>
+<tr class="odd">
+<td align="left">Chris Rios</td>
+<td align="left">4.6</td>
+</tr>
+<tr class="even">
+<td align="left">Gary Grice</td>
+<td align="left">4.9</td>
+</tr>
+<tr class="odd">
+<td align="left">Melissa Elliot</td>
+<td align="left">5</td>
+</tr>
+</tbody>
+</table>
+<p>Now, let’s say that a few of the people above have different names that are used by the HRIS to track monthly hours. Let’s create that here.</p>
+<pre class="r"><code># Names
+workers &lt;- c(&quot;Michael Jones&quot;, &quot;Dana Owens&quot;, &quot;Christopher Rios&quot;, &quot;Gary Grice&quot;, &quot;Melissa Elliot&quot;)
+
+# Monthly hours
+hours &lt;- c(235, 241.5, 243, 251, 272.5)
+
+# Combine into a dataframe
+hours_data &lt;- as.data.frame(cbind(workers, hours))
+
+# Take a look
+knitr::kable(hours_data, caption = &#39;Hours by Worker&#39;)</code></pre>
+<table>
+<caption>Hours by Worker</caption>
+<thead>
+<tr class="header">
+<th align="left">workers</th>
+<th align="left">hours</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Michael Jones</td>
+<td align="left">235</td>
+</tr>
+<tr class="even">
+<td align="left">Dana Owens</td>
+<td align="left">241.5</td>
+</tr>
+<tr class="odd">
+<td align="left">Christopher Rios</td>
+<td align="left">243</td>
+</tr>
+<tr class="even">
+<td align="left">Gary Grice</td>
+<td align="left">251</td>
+</tr>
+<tr class="odd">
+<td align="left">Melissa Elliot</td>
+<td align="left">272.5</td>
+</tr>
+</tbody>
+</table>
+<p>If we try to merger the dataframes by worker, then we will lose all entries for the workers whose names are mismatched:</p>
+<pre class="r"><code># Merge dataframes
+bad_data &lt;- merge(hours_data, review_data)
+
+# Let&#39;s look at it
+knitr::kable(bad_data, caption = &#39;Womp Womp&#39;)</code></pre>
+<table>
+<caption>Womp Womp</caption>
+<thead>
+<tr class="header">
+<th align="left">workers</th>
+<th align="left">hours</th>
+<th align="left">reviews</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Dana Owens</td>
+<td align="left">241.5</td>
+<td align="left">4.7</td>
+</tr>
+<tr class="even">
+<td align="left">Gary Grice</td>
+<td align="left">251</td>
+<td align="left">4.9</td>
+</tr>
+<tr class="odd">
+<td align="left">Melissa Elliot</td>
+<td align="left">272.5</td>
+<td align="left">5</td>
+</tr>
+</tbody>
+</table>
+<p>We can choose to keep <code>all.x</code>, <code>all.y</code>, or <code>all</code> to avoid losing information, but the rows will still not be matched properly. Instead, we can create and maintain a vector of names we want to keep and a vector of names we want to change for the people who have mismatched names. Importantly, you must keep the position of the names corresponding to the same person in the same position of each vector. Here, I put Mike first and Chris second.</p>
+<pre class="r"><code># Vector of names we want to change
+bad_names &lt;- c(&quot;Michael Jones&quot;, &quot;Christopher Rios&quot;)
+
+# Vector of names we want to keep
+good_names &lt;- c(&quot;Mike Jones&quot;, &quot;Chris Rios&quot;)</code></pre>
+<p>Once we have those vectors, we can use the command <code>intersect</code> to identify all unique bad names we have in our data.</p>
+<pre class="r"><code># Identify which bad names are present in x
+intersect(bad_names, hours_data$workers)
+intersect(bad_names, review_data$workers)</code></pre>
+<pre><code>## [1] &quot;Michael Jones&quot;    &quot;Christopher Rios&quot;
+## character(0)</code></pre>
+<p>As you can see, the <code>intersect</code> command outputs a character vector containing all of the names in our data that match our vector of bed names. Because the <code>hours_data</code> is the only dataset with <code>bad_names</code> in it, let’s save that to a character vector.</p>
+<pre class="r"><code># Saving character vector
+names_to_change &lt;- intersect(bad_names, hours_data$workers)
+
+# Check
+names_to_change</code></pre>
+<pre><code>## [1] &quot;Michael Jones&quot;    &quot;Christopher Rios&quot;</code></pre>
+<p>We’re off to a good start, but the character vector by itself is pretty useless. However, it can be used to identify which rows in our <code>hours_data</code> contain the <code>bad_names</code>.</p>
+<pre class="r"><code># Identify position of bad names in x
+pos_to_change &lt;- which(hours_data$workers %in% names_to_change)
+
+# Check
+pos_to_change</code></pre>
+<pre><code>## [1] 1 3</code></pre>
+<p>Using our new vector of positions, we can now extract all of the bad names throughout our dataset. In this example, there is only one instance of “Michael Jones” and one instance of “Christopher Rios,” but if our data were real, we could imagine that those names might be repeated several times. This next step identifies all instances of the <code>bad_names</code> in our data.</p>
+<pre class="r"><code># Extract all bad names from x
+to_change &lt;- hours_data[pos_to_change, &quot;workers&quot;]
+
+# Check
+to_change</code></pre>
+<pre><code>## [1] &quot;Michael Jones&quot;    &quot;Christopher Rios&quot;</code></pre>
+<p>Now, we need to identify the location in the vector of <code>bad_names</code> that each person appears. This will allow us to match that position with their preferred name in the vector of <code>good_names</code>.</p>
+<pre class="r"><code># Identify the position of the bad names of x in vector of bad names
+pos_bad &lt;- match(to_change, bad_names)
+
+# Check
+pos_bad</code></pre>
+<pre><code>## [1] 1 2</code></pre>
+<p>Next, we identify the preferred names using the positions we just saved.</p>
+<pre class="r"><code># Identify the good names that match the bad names
+good_names &lt;- good_names[pos_bad]
+
+# Check
+good_names</code></pre>
+<pre><code>## [1] &quot;Mike Jones&quot; &quot;Chris Rios&quot;</code></pre>
+<p>Finally, let’s change the <code>bad_names</code> to <code>good_names</code> in our <code>hours_data</code>.</p>
+<pre class="r"><code># Changing bad_names to good_names
+hours_data[pos_to_change, &quot;workers&quot;] &lt;- good_names
+
+# Check to make sure worked
+knitr::kable(hours_data, caption = &#39;Yus&#39;)</code></pre>
+<table>
+<caption>Yus</caption>
+<thead>
+<tr class="header">
+<th align="left">workers</th>
+<th align="left">hours</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Mike Jones</td>
+<td align="left">235</td>
+</tr>
+<tr class="even">
+<td align="left">Dana Owens</td>
+<td align="left">241.5</td>
+</tr>
+<tr class="odd">
+<td align="left">Chris Rios</td>
+<td align="left">243</td>
+</tr>
+<tr class="even">
+<td align="left">Gary Grice</td>
+<td align="left">251</td>
+</tr>
+<tr class="odd">
+<td align="left">Melissa Elliot</td>
+<td align="left">272.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="creating-a-function" class="section level2">
+<h2>Creating a Function</h2>
+<p>Now, you may have noticed that this takes a few steps, and in Step 7 where I identify the good names to match the bad, I am overwriting that vector. Well, a better way to do this that repeating these same steps and resetting the vector of <code>good_names</code> everytime is to create a function. Because this function is pretty simple, we only need to define a <code>function(x)</code> and swap out every instance of <code>hours_data</code> in our code to <code>x</code>. Let’s do that below and see if it works!</p>
+<pre class="r"><code># Create function to fix names
+name_changer &lt;- function(x){
+  
+  # Identify which bad names are present in x
+  names_to_change &lt;- intersect(bad_names, x$workers)
+  
+  # Identify position of bad names in x
+  pos_to_change &lt;- which(x$workers %in% names_to_change)
+  
+  # Extract all bad names from x
+  to_change &lt;- x[pos_to_change, &quot;workers&quot;]
+  
+  # Identify the position of the bad names of x in vector of bad names
+  pos_bad &lt;- match(to_change, bad_names)
+  
+  # Identify the good names that match the bad names
+  good_names &lt;- good_names[pos_bad]
+  
+  # Switch bad names for good names
+  x[pos_to_change, &quot;workers&quot;] &lt;- good_names
+  return(x)
+}
+
+# Names
+workers &lt;- c(&quot;Michael Jones&quot;, &quot;Dana Owens&quot;, &quot;Christopher Rios&quot;, &quot;Gary Grice&quot;, &quot;Melissa Elliot&quot;)
+
+# Monthly hours
+hours &lt;- c(235, 241.5, 243, 251, 272.5)
+
+# Combine into a dataframe
+hours_data2 &lt;- as.data.frame(cbind(workers, hours))
+
+# Let&#39;s take a look
+knitr::kable(hours_data2, caption = &#39;Ok...&#39;)
+
+# Use name_changer function
+hours_data2 &lt;- name_changer(hours_data2)
+
+# Let&#39;s take a look
+knitr::kable(hours_data2, caption = &#39;Worked!&#39;)
+
+# Merge data
+good_data &lt;- merge(hours_data2, review_data, by = &quot;workers&quot;)
+
+# Look at it
+knitr::kable(good_data, caption = &#39;Huzzah!&#39;)</code></pre>
+<table>
+<caption>Ok…</caption>
+<thead>
+<tr class="header">
+<th align="left">workers</th>
+<th align="left">hours</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Michael Jones</td>
+<td align="left">235</td>
+</tr>
+<tr class="even">
+<td align="left">Dana Owens</td>
+<td align="left">241.5</td>
+</tr>
+<tr class="odd">
+<td align="left">Christopher Rios</td>
+<td align="left">243</td>
+</tr>
+<tr class="even">
+<td align="left">Gary Grice</td>
+<td align="left">251</td>
+</tr>
+<tr class="odd">
+<td align="left">Melissa Elliot</td>
+<td align="left">272.5</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Worked!</caption>
+<thead>
+<tr class="header">
+<th align="left">workers</th>
+<th align="left">hours</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Mike Jones</td>
+<td align="left">235</td>
+</tr>
+<tr class="even">
+<td align="left">Dana Owens</td>
+<td align="left">241.5</td>
+</tr>
+<tr class="odd">
+<td align="left">Chris Rios</td>
+<td align="left">243</td>
+</tr>
+<tr class="even">
+<td align="left">Gary Grice</td>
+<td align="left">251</td>
+</tr>
+<tr class="odd">
+<td align="left">Melissa Elliot</td>
+<td align="left">272.5</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Huzzah!</caption>
+<thead>
+<tr class="header">
+<th align="left">workers</th>
+<th align="left">hours</th>
+<th align="left">reviews</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Chris Rios</td>
+<td align="left">243</td>
+<td align="left">4.6</td>
+</tr>
+<tr class="even">
+<td align="left">Dana Owens</td>
+<td align="left">241.5</td>
+<td align="left">4.7</td>
+</tr>
+<tr class="odd">
+<td align="left">Gary Grice</td>
+<td align="left">251</td>
+<td align="left">4.9</td>
+</tr>
+<tr class="even">
+<td align="left">Melissa Elliot</td>
+<td align="left">272.5</td>
+<td align="left">5</td>
+</tr>
+<tr class="odd">
+<td align="left">Mike Jones</td>
+<td align="left">235</td>
+<td align="left">4.5</td>
+</tr>
+</tbody>
+</table>
+<p>Great! Our function works! But there is one last piece that will make sure this code is more generalizable. If you’re like me, you probably tend to use the <code>tidyverse</code> a lot. This will sometimes result in your <code>data.frame</code> being converted to a <code>tibble</code>. Unfortunately, the line where we call <code>pos_bad &lt;- match(to_change, bad_names)</code> will not work on a tibble because it requires a vector. If we were working with tibbles, then this command <code>to_change &lt;- x[pos_to_change, "Worker"]</code> would result in a tibble with one column instead of a vector. To fix this potential issue, let’s add one final line of code to our function: <code>if(is_tibble(to_change)) to_change &lt;- pull(to_change, Worker)</code>. So, the full function would be like this:</p>
+</div>
+<div id="final-function" class="section level2">
+<h2>Final Function</h2>
+<pre class="r"><code># Create function to fix names
+name_changer &lt;- function(x){
+  
+  # Identify which bad names are present in x
+  names_to_change &lt;- intersect(bad_names, x$workers)
+  
+  # Identify position of bad names in x
+  pos_to_change &lt;- which(x$workers %in% names_to_change)
+  
+  # Extract all bad names from x
+  to_change &lt;- x[pos_to_change, &quot;workers&quot;]
+  
+  # Converting to vector if it&#39;s a tibble
+  if(is_tibble(to_change)) to_change &lt;- pull(to_change, workers)
+  
+  # Identify the position of the bad names of x in vector of bad names
+  pos_bad &lt;- match(to_change, bad_names)
+  
+  # Identify the good names that match the bad names
+  good_names &lt;- good_names[pos_bad]
+  
+  # Switch bad names for good names
+  x[pos_to_change, &quot;Worker&quot;] &lt;- good_names
+  return(x)
+}</code></pre>
+<p>And that’s it! I hope you’ve enjoyed and learned something from this, and if you have a better solution, please send me an email!</p>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNoYW5nZSBWYWx1ZXMiDQpvdXRwdXQ6DQogIGh0bWxfZG9jdW1lbnQ6DQogICAgaW5jbHVkZXM6DQogICAgICAgaW5faGVhZGVyOiBHQV9zY3JpcHQuaHRtbA0KICAgIGNvZGVfZG93bmxvYWQ6IHllcw0KICAgIGZvbnRzaXplOiA4cHQNCiAgICBoaWdobGlnaHQ6IHRleHRtYXRlDQogICAgbnVtYmVyX3NlY3Rpb25zOiBubw0KICAgIHRoZW1lOiBjb3Ntbw0KICAgIHRvYzogeWVzDQogICAgdG9jX2Zsb2F0Og0KICAgICAgY29sbGFwc2VkOiBubw0KLS0tDQoNCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGNhY2hlID0gVFJVRSkNCmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkNCmtuaXRyOjpvcHRzX2NodW5rJHNldChtZXNzYWdlID0gRkFMU0UpDQprbml0cjo6b3B0c19jaHVuayRzZXQod2FybmluZyA9ICBGQUxTRSkNCmtuaXRyOjpvcHRzX2NodW5rJHNldChmaWcud2lkdGg9My4yNSkNCmtuaXRyOjpvcHRzX2NodW5rJHNldChmaWcuaGVpZ2h0PTIuNzUpDQprbml0cjo6b3B0c19jaHVuayRzZXQoZmlnLmFsaWduPSdjZW50ZXInKSANCmtuaXRyOjpvcHRzX2NodW5rJHNldChyZXN1bHRzPSdob2xkJykgDQpgYGANCg0KIyBDcmVhdGluZyBBIEZ1bmN0aW9uIFRvIENoYW5nZSBOYW1lcw0KDQpUaGVyZSBvZnRlbiBjb21lcyBhIHRpbWUgd2hlcmUgeW91IHdpbGwgaGF2ZSB0byBtYXRjaCBuYW1lcyBmcm9tIGFjcm9zcyBkaWZmZXJlbnQgZGF0YSBzZXRzLCBidXQgc29tZXRpbWVzIHBlb3BsZSBhcmUgcmVwcmVzZW50ZWQgYnkgZGlmZmVyZW50IG5hbWVzIGluIGVhY2ggb2YgdGhlIGRhdGFzZXRzLiBGb3IgZXhhbXBsZSwgaWYgeW91IHdhbnQgdG8gbWVyZ2UgZGF0YSB3aXRoIGVtcGxveWVlIHBlcmZvcm1hbmNlIHJhdGluZ3MgYW5kIG1vbnRobHkgaG91cnMgYmlsbGVkLCB0aGUgZW1wbG95ZWVzJyBuYW1lcyBpbiBib3RoIG9mIHRob3NlIGRhdGEgc2V0cyBtdXN0IG1hdGNoIGV4YWN0bHkuIEhvd2V2ZXIsIGZvciBhIHZhcmlldHkgb2YgcmVhc29ucyB0aG9zZSBlbXBsb3llZXMgbWlnaHQgYmUgcmVwcmVzZW50ZWQgYnkgZGlmZmVyZW50IG5hbWVzIGluIHRoZSBzZXBhcmF0ZSBkYXRhIHNldHMuIA0KDQpGb3IgZXhhbXBsZSwgc29tZW9uZSBtaWdodCBnbyBieSB0aGUgbmFtZSAiTWlrZSBKb25lcyIgaW4gdGhlIGRhdGEgY29udGFpbmluZyB0aGUgaG91cnMsIGJ1dCB0aGUgdGhlIEhSSVMgc29mdHdhcmUgbWlnaHQgbGlzdCB0aGUgZW1wbG95ZWUgYnkgdGhlaXIgZnVsbCBuYW1lLCAiTWljaGFlbCBKb25lcy4iIFRoaXMgbmFtZSBkaWZmZXJlbmNlIHdpbGwgZm9yY2UgYW4gZXJyb3Igc3VjaCB0aGF0ICJNaWtlIEpvbmVzJyIgaG91cnMgYW5kICJNaWNoYWVsIEpvbmVzJyIgcGVyZm9ybWFuY2UgcmF0aW5ncyB3b24ndCBiZSBtYXRjaGVkLiBIb3cgZG8gZ28gYWJvdXQgZml4aW5nIHRoaXM/DQoNCllvdSAqY291bGQqIGdvIHRocm91Z2ggdGhlIGRhdGEgc2V0IG1hbnVhbGx5IGFuZCBjaGFuZ2UgZXZlcnkgaW5zdGFuY2Ugb2YgIk1pY2hhZWwgSm9uZXMiIHRvICJNaWtlIEpvbmVzLCIgYnV0IGlmIHlvdXIgZGF0YSBoYXMgbWFueSBjYXNlcywgb3IgdGhlcmUgYXJlIG90aGVyIGVtcGxveWVlcyB3aXRoIHNpbWlsYXIgbmFtZSBjaGFuZ2VzLCB0aGVuIHRoaXMgd291bGQgYmUgdmVyeSB0aW1lLWNvbnN1bWluZy4gVGhlIHByb2JsZW0gYmVjb21lcyBjb21wb3VuZGVkIGlmIHRoZSBkYXRhIGlzIGNvbnN0YW50bHkgYmVpbmcgdXBkYXRlZCB3aXRoLCBzYXksIG5ldyBob3VycyBhbmQgbmV3IHBlcmZvcm1hbmNlIHJldmlld3MsIHNvIHRoYXQgZWFjaCB0aW1lIHlvdSBkb3dubG9hZCB0aGUgZGF0YSB5b3Ugd291bGQgaGF2ZSB0byBtYW51YWxseSBmaXggdGhlIG5hbWVzLg0KDQpUbyBzb2x2ZSB0aGlzIHByb2JsZW0sIEkgd3JvdGUgYSBzaW1wbGUgZnVuY3Rpb24gdG8gYXV0b21hdGljYWxseSBpZGVudGlmeSBhbmQgZml4IGFsbCB0aGUgYGBgYmFkX25hbWVzYGBgIGFuZCBjb252ZXJ0IHRoZW0gdG8gYGBgZ29vZF9uYW1lc2BgYC4gQmVsb3csIEkgZGVtb25zdHJhdGUgdGhlIHByb2JsZW0gYW5kIHdhbGsgeW91IHRocm91Z2ggdGhlIHN0ZXBzIG9mIHRoaXMgZnVuY3Rpb24uDQo8YnIvPjxici8+PGJyLz48YnIvPg0KDQoNCg0KDQojIyBTZXR0aW5nIFVwIFRoZSBQcm9ibGVtDQoNCkxldCdzIGltYWdpbmUgdGhhdCB3ZSBoYXZlIGEgdGVhbSBvZiBmaXZlIGVtcGxveWVlczogTWlrZSBKb25lcywgRGFuYSBPd2VucywgQ2hyaXMgUmlvcywgR2FyeSBHcmljZSwgYW5kIE1lbGlzc2EgRWxsaW90LiBXZSdsbCBjcmVhdGUgYSBkYXRhc2V0IGJlbG93IHdpdGggdGhlaXIgbmFtZXMgYW5kIG1vc3QgcmVjZW50IHJldmlld3MuDQoNCmBgYHtyIHJldmlld2RhdGF9DQojIE5hbWVzDQp3b3JrZXJzIDwtIGMoIk1pa2UgSm9uZXMiLCAiRGFuYSBPd2VucyIsICJDaHJpcyBSaW9zIiwgIkdhcnkgR3JpY2UiLCAiTWVsaXNzYSBFbGxpb3QiKQ0KDQojIFJldmlld3MNCnJldmlld3MgPC0gYyg0LjUsIDQuNywgNC42LCA0LjksIDUuMCkNCg0KIyBDb21iaW5lIGludG8gYSBkYXRhZnJhbWUNCnJldmlld19kYXRhIDwtIGFzLmRhdGEuZnJhbWUoY2JpbmQod29ya2VycywgcmV2aWV3cykpDQoNCiMgVGFrZSBhIGxvb2sNCmtuaXRyOjprYWJsZShyZXZpZXdfZGF0YSwgY2FwdGlvbiA9ICdSZXZpZXdzIGJ5IFdvcmtlcicpDQpgYGANCg0KTm93LCBsZXQncyBzYXkgdGhhdCBhIGZldyBvZiB0aGUgcGVvcGxlIGFib3ZlIGhhdmUgZGlmZmVyZW50IG5hbWVzIHRoYXQgYXJlIHVzZWQgYnkgdGhlIEhSSVMgdG8gdHJhY2sgbW9udGhseSBob3Vycy4gTGV0J3MgY3JlYXRlIHRoYXQgaGVyZS4NCg0KYGBge3IgaG91cnNkYXRhfQ0KIyBOYW1lcw0Kd29ya2VycyA8LSBjKCJNaWNoYWVsIEpvbmVzIiwgIkRhbmEgT3dlbnMiLCAiQ2hyaXN0b3BoZXIgUmlvcyIsICJHYXJ5IEdyaWNlIiwgIk1lbGlzc2EgRWxsaW90IikNCg0KIyBNb250aGx5IGhvdXJzDQpob3VycyA8LSBjKDIzNSwgMjQxLjUsIDI0MywgMjUxLCAyNzIuNSkNCg0KIyBDb21iaW5lIGludG8gYSBkYXRhZnJhbWUNCmhvdXJzX2RhdGEgPC0gYXMuZGF0YS5mcmFtZShjYmluZCh3b3JrZXJzLCBob3VycykpDQoNCiMgVGFrZSBhIGxvb2sNCmtuaXRyOjprYWJsZShob3Vyc19kYXRhLCBjYXB0aW9uID0gJ0hvdXJzIGJ5IFdvcmtlcicpDQpgYGANCg0KSWYgd2UgdHJ5IHRvIG1lcmdlciB0aGUgZGF0YWZyYW1lcyBieSB3b3JrZXIsIHRoZW4gd2Ugd2lsbCBsb3NlIGFsbCBlbnRyaWVzIGZvciB0aGUgd29ya2VycyB3aG9zZSBuYW1lcyBhcmUgbWlzbWF0Y2hlZDoNCg0KYGBge3IgYmFkZGF0YX0NCiMgTWVyZ2UgZGF0YWZyYW1lcw0KYmFkX2RhdGEgPC0gbWVyZ2UoaG91cnNfZGF0YSwgcmV2aWV3X2RhdGEpDQoNCiMgTGV0J3MgbG9vayBhdCBpdA0Ka25pdHI6OmthYmxlKGJhZF9kYXRhLCBjYXB0aW9uID0gJ1dvbXAgV29tcCcpDQpgYGANCg0KV2UgY2FuIGNob29zZSB0byBrZWVwIGBgYGFsbC54YGBgLCBgYGBhbGwueWBgYCwgb3IgYGBgYWxsYGBgIHRvIGF2b2lkIGxvc2luZyBpbmZvcm1hdGlvbiwgYnV0IHRoZSByb3dzIHdpbGwgc3RpbGwgbm90IGJlIG1hdGNoZWQgcHJvcGVybHkuIEluc3RlYWQsIHdlIGNhbiBjcmVhdGUgYW5kIG1haW50YWluIGEgdmVjdG9yIG9mIG5hbWVzIHdlIHdhbnQgdG8ga2VlcCBhbmQgYSB2ZWN0b3Igb2YgbmFtZXMgd2Ugd2FudCB0byBjaGFuZ2UgZm9yIHRoZSBwZW9wbGUgd2hvIGhhdmUgbWlzbWF0Y2hlZCBuYW1lcy4gSW1wb3J0YW50bHksIHlvdSBtdXN0IGtlZXAgdGhlIHBvc2l0aW9uIG9mIHRoZSBuYW1lcyBjb3JyZXNwb25kaW5nIHRvIHRoZSBzYW1lIHBlcnNvbiBpbiB0aGUgc2FtZSBwb3NpdGlvbiBvZiBlYWNoIHZlY3Rvci4gSGVyZSwgSSBwdXQgTWlrZSBmaXJzdCBhbmQgQ2hyaXMgc2Vjb25kLg0KDQpgYGB7ciBuYW1lc3ZlY3RvcnN9DQojIFZlY3RvciBvZiBuYW1lcyB3ZSB3YW50IHRvIGNoYW5nZQ0KYmFkX25hbWVzIDwtIGMoIk1pY2hhZWwgSm9uZXMiLCAiQ2hyaXN0b3BoZXIgUmlvcyIpDQoNCiMgVmVjdG9yIG9mIG5hbWVzIHdlIHdhbnQgdG8ga2VlcA0KZ29vZF9uYW1lcyA8LSBjKCJNaWtlIEpvbmVzIiwgIkNocmlzIFJpb3MiKQ0KYGBgDQoNCk9uY2Ugd2UgaGF2ZSB0aG9zZSB2ZWN0b3JzLCB3ZSBjYW4gdXNlIHRoZSBjb21tYW5kIGBgYGludGVyc2VjdGBgYCB0byBpZGVudGlmeSBhbGwgdW5pcXVlIGJhZCBuYW1lcyB3ZSBoYXZlIGluIG91ciBkYXRhLg0KDQpgYGB7ciBpZHJvd3N9DQojIElkZW50aWZ5IHdoaWNoIGJhZCBuYW1lcyBhcmUgcHJlc2VudCBpbiB4DQppbnRlcnNlY3QoYmFkX25hbWVzLCBob3Vyc19kYXRhJHdvcmtlcnMpDQppbnRlcnNlY3QoYmFkX25hbWVzLCByZXZpZXdfZGF0YSR3b3JrZXJzKQ0KYGBgDQoNCkFzIHlvdSBjYW4gc2VlLCB0aGUgYGBgaW50ZXJzZWN0YGBgIGNvbW1hbmQgb3V0cHV0cyBhIGNoYXJhY3RlciB2ZWN0b3IgY29udGFpbmluZyBhbGwgb2YgdGhlIG5hbWVzIGluIG91ciBkYXRhIHRoYXQgbWF0Y2ggb3VyIHZlY3RvciBvZiBiZWQgbmFtZXMuIEJlY2F1c2UgdGhlIGBgYGhvdXJzX2RhdGFgYGAgaXMgdGhlIG9ubHkgZGF0YXNldCB3aXRoIGBgYGJhZF9uYW1lc2BgYCBpbiBpdCwgbGV0J3Mgc2F2ZSB0aGF0IHRvIGEgY2hhcmFjdGVyIHZlY3Rvci4NCg0KYGBge3IgbmFtZXN0b2NoYW5nZX0NCiMgU2F2aW5nIGNoYXJhY3RlciB2ZWN0b3INCm5hbWVzX3RvX2NoYW5nZSA8LSBpbnRlcnNlY3QoYmFkX25hbWVzLCBob3Vyc19kYXRhJHdvcmtlcnMpDQoNCiMgQ2hlY2sNCm5hbWVzX3RvX2NoYW5nZQ0KYGBgDQoNCldlJ3JlIG9mZiB0byBhIGdvb2Qgc3RhcnQsIGJ1dCB0aGUgY2hhcmFjdGVyIHZlY3RvciBieSBpdHNlbGYgaXMgcHJldHR5IHVzZWxlc3MuIEhvd2V2ZXIsIGl0IGNhbiBiZSB1c2VkIHRvIGlkZW50aWZ5IHdoaWNoIHJvd3MgaW4gb3VyIGBgYGhvdXJzX2RhdGFgYGAgY29udGFpbiB0aGUgYGBgYmFkX25hbWVzYGBgLg0KDQpgYGB7ciBwb3N0b2NoYW5nZX0NCiMgSWRlbnRpZnkgcG9zaXRpb24gb2YgYmFkIG5hbWVzIGluIHgNCnBvc190b19jaGFuZ2UgPC0gd2hpY2goaG91cnNfZGF0YSR3b3JrZXJzICVpbiUgbmFtZXNfdG9fY2hhbmdlKQ0KDQojIENoZWNrDQpwb3NfdG9fY2hhbmdlDQpgYGANCg0KVXNpbmcgb3VyIG5ldyB2ZWN0b3Igb2YgcG9zaXRpb25zLCB3ZSBjYW4gbm93IGV4dHJhY3QgYWxsIG9mIHRoZSBiYWQgbmFtZXMgdGhyb3VnaG91dCBvdXIgZGF0YXNldC4gSW4gdGhpcyBleGFtcGxlLCB0aGVyZSBpcyBvbmx5IG9uZSBpbnN0YW5jZSBvZiAiTWljaGFlbCBKb25lcyIgYW5kIG9uZSBpbnN0YW5jZSBvZiAiQ2hyaXN0b3BoZXIgUmlvcywiIGJ1dCBpZiBvdXIgZGF0YSB3ZXJlIHJlYWwsIHdlIGNvdWxkIGltYWdpbmUgdGhhdCB0aG9zZSBuYW1lcyBtaWdodCBiZSByZXBlYXRlZCBzZXZlcmFsIHRpbWVzLiBUaGlzIG5leHQgc3RlcCBpZGVudGlmaWVzIGFsbCBpbnN0YW5jZXMgb2YgdGhlIGBgYGJhZF9uYW1lc2BgYCBpbiBvdXIgZGF0YS4NCg0KYGBge3IgdG9jaGFuZ2V9DQojIEV4dHJhY3QgYWxsIGJhZCBuYW1lcyBmcm9tIHgNCnRvX2NoYW5nZSA8LSBob3Vyc19kYXRhW3Bvc190b19jaGFuZ2UsICJ3b3JrZXJzIl0NCg0KIyBDaGVjaw0KdG9fY2hhbmdlDQpgYGANCg0KTm93LCB3ZSBuZWVkIHRvIGlkZW50aWZ5IHRoZSBsb2NhdGlvbiBpbiB0aGUgdmVjdG9yIG9mIGBgYGJhZF9uYW1lc2BgYCB0aGF0IGVhY2ggcGVyc29uIGFwcGVhcnMuIFRoaXMgd2lsbCBhbGxvdyB1cyB0byBtYXRjaCB0aGF0IHBvc2l0aW9uIHdpdGggdGhlaXIgcHJlZmVycmVkIG5hbWUgaW4gdGhlIHZlY3RvciBvZiBgYGBnb29kX25hbWVzYGBgLg0KDQpgYGB7ciBwb3NiYWR9DQojIElkZW50aWZ5IHRoZSBwb3NpdGlvbiBvZiB0aGUgYmFkIG5hbWVzIG9mIHggaW4gdmVjdG9yIG9mIGJhZCBuYW1lcw0KcG9zX2JhZCA8LSBtYXRjaCh0b19jaGFuZ2UsIGJhZF9uYW1lcykNCg0KIyBDaGVjaw0KcG9zX2JhZA0KYGBgDQoNCk5leHQsIHdlIGlkZW50aWZ5IHRoZSBwcmVmZXJyZWQgbmFtZXMgdXNpbmcgdGhlIHBvc2l0aW9ucyB3ZSBqdXN0IHNhdmVkLg0KDQpgYGB7ciBnb29kbmFtZXN9DQojIElkZW50aWZ5IHRoZSBnb29kIG5hbWVzIHRoYXQgbWF0Y2ggdGhlIGJhZCBuYW1lcw0KZ29vZF9uYW1lcyA8LSBnb29kX25hbWVzW3Bvc19iYWRdDQoNCiMgQ2hlY2sNCmdvb2RfbmFtZXMNCmBgYA0KDQpGaW5hbGx5LCBsZXQncyBjaGFuZ2UgdGhlIGBgYGJhZF9uYW1lc2BgYCB0byBgYGBnb29kX25hbWVzYGBgIGluIG91ciBgYGBob3Vyc19kYXRhYGBgLg0KDQpgYGB7ciBob3Vyc2RhdGEyfQ0KIyBDaGFuZ2luZyBiYWRfbmFtZXMgdG8gZ29vZF9uYW1lcw0KaG91cnNfZGF0YVtwb3NfdG9fY2hhbmdlLCAid29ya2VycyJdIDwtIGdvb2RfbmFtZXMNCg0KIyBDaGVjayB0byBtYWtlIHN1cmUgd29ya2VkDQprbml0cjo6a2FibGUoaG91cnNfZGF0YSwgY2FwdGlvbiA9ICdZdXMnKQ0KYGBgDQoNCiMjIENyZWF0aW5nIGEgRnVuY3Rpb24NCg0KTm93LCB5b3UgbWF5IGhhdmUgbm90aWNlZCB0aGF0IHRoaXMgdGFrZXMgYSBmZXcgc3RlcHMsIGFuZCBpbiBTdGVwIDcgd2hlcmUgSSBpZGVudGlmeSB0aGUgZ29vZCBuYW1lcyB0byBtYXRjaCB0aGUgYmFkLCBJIGFtIG92ZXJ3cml0aW5nIHRoYXQgdmVjdG9yLiBXZWxsLCBhIGJldHRlciB3YXkgdG8gZG8gdGhpcyB0aGF0IHJlcGVhdGluZyB0aGVzZSBzYW1lIHN0ZXBzIGFuZCByZXNldHRpbmcgdGhlIHZlY3RvciBvZiBgYGBnb29kX25hbWVzYGBgIGV2ZXJ5dGltZSBpcyB0byBjcmVhdGUgYSBmdW5jdGlvbi4gQmVjYXVzZSB0aGlzIGZ1bmN0aW9uIGlzIHByZXR0eSBzaW1wbGUsIHdlIG9ubHkgbmVlZCB0byBkZWZpbmUgYSBgYGBmdW5jdGlvbih4KWBgYCBhbmQgc3dhcCBvdXQgZXZlcnkgaW5zdGFuY2Ugb2YgYGBgaG91cnNfZGF0YWBgYCBpbiBvdXIgY29kZSB0byBgYGB4YGBgLiBMZXQncyBkbyB0aGF0IGJlbG93IGFuZCBzZWUgaWYgaXQgd29ya3MhDQoNCmBgYHtyIG5hbWVjaGFuZ2VyfQ0KDQojIENyZWF0ZSBmdW5jdGlvbiB0byBmaXggbmFtZXMNCm5hbWVfY2hhbmdlciA8LSBmdW5jdGlvbih4KXsNCiAgDQogICMgSWRlbnRpZnkgd2hpY2ggYmFkIG5hbWVzIGFyZSBwcmVzZW50IGluIHgNCiAgbmFtZXNfdG9fY2hhbmdlIDwtIGludGVyc2VjdChiYWRfbmFtZXMsIHgkd29ya2VycykNCiAgDQogICMgSWRlbnRpZnkgcG9zaXRpb24gb2YgYmFkIG5hbWVzIGluIHgNCiAgcG9zX3RvX2NoYW5nZSA8LSB3aGljaCh4JHdvcmtlcnMgJWluJSBuYW1lc190b19jaGFuZ2UpDQogIA0KICAjIEV4dHJhY3QgYWxsIGJhZCBuYW1lcyBmcm9tIHgNCiAgdG9fY2hhbmdlIDwtIHhbcG9zX3RvX2NoYW5nZSwgIndvcmtlcnMiXQ0KICANCiAgIyBJZGVudGlmeSB0aGUgcG9zaXRpb24gb2YgdGhlIGJhZCBuYW1lcyBvZiB4IGluIHZlY3RvciBvZiBiYWQgbmFtZXMNCiAgcG9zX2JhZCA8LSBtYXRjaCh0b19jaGFuZ2UsIGJhZF9uYW1lcykNCiAgDQogICMgSWRlbnRpZnkgdGhlIGdvb2QgbmFtZXMgdGhhdCBtYXRjaCB0aGUgYmFkIG5hbWVzDQogIGdvb2RfbmFtZXMgPC0gZ29vZF9uYW1lc1twb3NfYmFkXQ0KICANCiAgIyBTd2l0Y2ggYmFkIG5hbWVzIGZvciBnb29kIG5hbWVzDQogIHhbcG9zX3RvX2NoYW5nZSwgIndvcmtlcnMiXSA8LSBnb29kX25hbWVzDQogIHJldHVybih4KQ0KfQ0KDQojIE5hbWVzDQp3b3JrZXJzIDwtIGMoIk1pY2hhZWwgSm9uZXMiLCAiRGFuYSBPd2VucyIsICJDaHJpc3RvcGhlciBSaW9zIiwgIkdhcnkgR3JpY2UiLCAiTWVsaXNzYSBFbGxpb3QiKQ0KDQojIE1vbnRobHkgaG91cnMNCmhvdXJzIDwtIGMoMjM1LCAyNDEuNSwgMjQzLCAyNTEsIDI3Mi41KQ0KDQojIENvbWJpbmUgaW50byBhIGRhdGFmcmFtZQ0KaG91cnNfZGF0YTIgPC0gYXMuZGF0YS5mcmFtZShjYmluZCh3b3JrZXJzLCBob3VycykpDQoNCiMgTGV0J3MgdGFrZSBhIGxvb2sNCmtuaXRyOjprYWJsZShob3Vyc19kYXRhMiwgY2FwdGlvbiA9ICdPay4uLicpDQoNCiMgVXNlIG5hbWVfY2hhbmdlciBmdW5jdGlvbg0KaG91cnNfZGF0YTIgPC0gbmFtZV9jaGFuZ2VyKGhvdXJzX2RhdGEyKQ0KDQojIExldCdzIHRha2UgYSBsb29rDQprbml0cjo6a2FibGUoaG91cnNfZGF0YTIsIGNhcHRpb24gPSAnV29ya2VkIScpDQoNCiMgTWVyZ2UgZGF0YQ0KZ29vZF9kYXRhIDwtIG1lcmdlKGhvdXJzX2RhdGEyLCByZXZpZXdfZGF0YSwgYnkgPSAid29ya2VycyIpDQoNCiMgTG9vayBhdCBpdA0Ka25pdHI6OmthYmxlKGdvb2RfZGF0YSwgY2FwdGlvbiA9ICdIdXp6YWghJykNCmBgYA0KDQpHcmVhdCEgT3VyIGZ1bmN0aW9uIHdvcmtzISBCdXQgdGhlcmUgaXMgb25lIGxhc3QgcGllY2UgdGhhdCB3aWxsIG1ha2Ugc3VyZSB0aGlzIGNvZGUgaXMgbW9yZSBnZW5lcmFsaXphYmxlLiBJZiB5b3UncmUgbGlrZSBtZSwgeW91IHByb2JhYmx5IHRlbmQgdG8gdXNlIHRoZSBgYGB0aWR5dmVyc2VgYGAgYSBsb3QuIFRoaXMgd2lsbCBzb21ldGltZXMgcmVzdWx0IGluIHlvdXIgYGBgZGF0YS5mcmFtZWBgYCBiZWluZyBjb252ZXJ0ZWQgdG8gYSBgYGB0aWJibGVgYGAuIFVuZm9ydHVuYXRlbHksIHRoZSBsaW5lIHdoZXJlIHdlIGNhbGwgYGBgcG9zX2JhZCA8LSBtYXRjaCh0b19jaGFuZ2UsIGJhZF9uYW1lcylgYGAgd2lsbCBub3Qgd29yayBvbiBhIHRpYmJsZSBiZWNhdXNlIGl0IHJlcXVpcmVzIGEgdmVjdG9yLiBJZiB3ZSB3ZXJlIHdvcmtpbmcgd2l0aCB0aWJibGVzLCB0aGVuIHRoaXMgY29tbWFuZCBgYGB0b19jaGFuZ2UgPC0geFtwb3NfdG9fY2hhbmdlLCAiV29ya2VyIl1gYGAgd291bGQgcmVzdWx0IGluIGEgdGliYmxlIHdpdGggb25lIGNvbHVtbiBpbnN0ZWFkIG9mIGEgdmVjdG9yLiBUbyBmaXggdGhpcyBwb3RlbnRpYWwgaXNzdWUsIGxldCdzIGFkZCBvbmUgZmluYWwgbGluZSBvZiBjb2RlIHRvIG91ciBmdW5jdGlvbjogYGBgaWYoaXNfdGliYmxlKHRvX2NoYW5nZSkpIHRvX2NoYW5nZSA8LSBwdWxsKHRvX2NoYW5nZSwgV29ya2VyKWBgYC4gU28sIHRoZSBmdWxsIGZ1bmN0aW9uIHdvdWxkIGJlIGxpa2UgdGhpczoNCg0KIyMgRmluYWwgRnVuY3Rpb24NCg0KYGBge3J9DQojIENyZWF0ZSBmdW5jdGlvbiB0byBmaXggbmFtZXMNCm5hbWVfY2hhbmdlciA8LSBmdW5jdGlvbih4KXsNCiAgDQogICMgSWRlbnRpZnkgd2hpY2ggYmFkIG5hbWVzIGFyZSBwcmVzZW50IGluIHgNCiAgbmFtZXNfdG9fY2hhbmdlIDwtIGludGVyc2VjdChiYWRfbmFtZXMsIHgkd29ya2VycykNCiAgDQogICMgSWRlbnRpZnkgcG9zaXRpb24gb2YgYmFkIG5hbWVzIGluIHgNCiAgcG9zX3RvX2NoYW5nZSA8LSB3aGljaCh4JHdvcmtlcnMgJWluJSBuYW1lc190b19jaGFuZ2UpDQogIA0KICAjIEV4dHJhY3QgYWxsIGJhZCBuYW1lcyBmcm9tIHgNCiAgdG9fY2hhbmdlIDwtIHhbcG9zX3RvX2NoYW5nZSwgIndvcmtlcnMiXQ0KICANCiAgIyBDb252ZXJ0aW5nIHRvIHZlY3RvciBpZiBpdCdzIGEgdGliYmxlDQogIGlmKGlzX3RpYmJsZSh0b19jaGFuZ2UpKSB0b19jaGFuZ2UgPC0gcHVsbCh0b19jaGFuZ2UsIHdvcmtlcnMpDQogIA0KICAjIElkZW50aWZ5IHRoZSBwb3NpdGlvbiBvZiB0aGUgYmFkIG5hbWVzIG9mIHggaW4gdmVjdG9yIG9mIGJhZCBuYW1lcw0KICBwb3NfYmFkIDwtIG1hdGNoKHRvX2NoYW5nZSwgYmFkX25hbWVzKQ0KICANCiAgIyBJZGVudGlmeSB0aGUgZ29vZCBuYW1lcyB0aGF0IG1hdGNoIHRoZSBiYWQgbmFtZXMNCiAgZ29vZF9uYW1lcyA8LSBnb29kX25hbWVzW3Bvc19iYWRdDQogIA0KICAjIFN3aXRjaCBiYWQgbmFtZXMgZm9yIGdvb2QgbmFtZXMNCiAgeFtwb3NfdG9fY2hhbmdlLCAiV29ya2VyIl0gPC0gZ29vZF9uYW1lcw0KICByZXR1cm4oeCkNCn0NCmBgYA0KDQpBbmQgdGhhdCdzIGl0ISBJIGhvcGUgeW91J3ZlIGVuam95ZWQgYW5kIGxlYXJuZWQgc29tZXRoaW5nIGZyb20gdGhpcywgYW5kIGlmIHlvdSBoYXZlIGEgYmV0dGVyIHNvbHV0aW9uLCBwbGVhc2Ugc2VuZCBtZSBhbiBlbWFpbCE=</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("name_changer.Rmd");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
