@@ -29,7 +29,7 @@ knitr::opts_chunk$set(results='hold')
 
 There often comes a time where you will have to match names from across different data sets, but sometimes people are represented by different names in each of the datasets. For example, if you want to merge data with employee performance ratings and monthly hours billed, the employees' names in both of those data sets must match exactly. However, for a variety of reasons those employees might be represented by different names in the separate data sets. 
 
-For example, someone might go by the name "Mike Jones" in the data containing the hours, but the the HRIS software might list the employee by their full name, "Michael Jones." This name difference will force an error such that "Mike Jones'" hours and "Michael Jones'" performance ratings won't be matched. How do you go about fixing this?
+For example, someone might go by the name "Mike Jones" in the data containing the hours, but the HRIS software might list the employee by their full name, "Michael Jones." This name difference will force an error such that "Mike Jones'" hours and "Michael Jones'" performance ratings won't be matched. How do you go about fixing this?
 
 You *could* go through the data set manually and change every instance of "Michael Jones" to "Mike Jones," but if your data has many cases, or there are other employees with similar name changes, then this would be very time-consuming. The problem becomes compounded if the data is constantly being updated with, say, new hours and new performance reviews, so that each time you download the data you would have to manually fix the names.
 
