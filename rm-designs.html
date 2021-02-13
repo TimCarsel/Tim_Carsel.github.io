@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Repeated-Measures Designs</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-175254629-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-175254629-1');
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Stats for Business
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="biz-stats_home.html">Overview</a>
+    </li>
+    <li>
+      <a href="prob.html">Probability</a>
+    </li>
+    <li>
+      <a href="infer-describe.html">Inference or Description</a>
+    </li>
+    <li>
+      <a href="btw-subjects.html">Between-Subjects</a>
+    </li>
+    <li>
+      <a href="rm-designs.html">Repeated-Measures</a>
+    </li>
+    <li>
+      <a href="correlation.html">Correlation</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Data Manipulation
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="name_changer.html">Fixing Names</a>
+    </li>
+    <li>
+      <a href="melt_cast.html">Melting &amp; Casting</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Research
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Simulating An RM Study</li>
+    <li>
+      <a href="dissertation.html">Contextual Trust Study</a>
+    </li>
+    <li>
+      <a href="scientific_articles.html">Scientific Publications</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="mailto:timothy.carsel@gmail.com">
+    <span class="fas fa-envelope"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/timcarsel/">
+    <span class="fas fa-linkedin"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/TCarsel">
+    <span class="fas fa-twitter"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Repeated-Measures Designs</h1>
+
+</div>
+
+
+<p><img src="before-after.jpg" width="100%" height="100%" style="display: block; margin: auto;" /> <br/><br/></p>
+<p>In the last post, we talked about the question of whether two different groups are the same or different using two different group of people. That is a very useful technique, but it has it’s problems. <br/><br/></p>
+<div id="problems-with-between-subjects-designs" class="section level1">
+<h1>Problems with Between-Subjects Designs</h1>
+<p>There are a few important limitations to between-subjects designs that a repeated-measures design can fix. First, the number of people you need to be able to detect a difference if one exists (statistical power) is pretty large. Because the people in the groups are different, you don’t know why some people in the same group score really low whereas others score really high. In other words, there can be a lot of variability within your groups, and all of that variability goes straight to error. If you have access to a lot of data, though, then that’s not a big issue.</p>
+<p>However, another big problem that can’t simply be overcome with loads of data is that an assumption of the between-subjects tests is that the groups were randomly selected. That is, you are assuming that the groups are roughly the same on the outcome measure to begin with, and the only difference is your manipulation. That might not seem like a big deal, so let’s walk through an example.</p>
+<p><img src="programmer.jpg" width="100%" height="100%" style="display: block; margin: auto;" /></p>
+<p>Let’s say that you want to test the efficacy of a new leadership training program designed for your top programmers. How do you do it? You can’t just give a test to the engineers selected for the program and the engineers who were not because you already <em>know</em> those groups are different in important ways. After all, you selected <em>the best</em> engineers for the program, right? You would <em>hope</em>, then, that the engineers you selected would score higher on leadership assessments than the engineers you didn’t even before they go through the program. So how do you assess the program?</p>
+<p>In contrast to a between-subjects design, a repeated-measures design uses the same people in both groups. This design change has the major benefit in that you don’t have to <em>assume</em> you randomly sampled your groups and that they’re roughly equivalent along the dimensions you care about. Now you <em>know</em> the people in both groups are roughly the same because it’s the exact same person. With a repeated-measures design you will need less data to be able to detect real differences in your groups, and you can assess your top engineers’ leadership abilities before and after they attend your new leadership training program.</p>
+<p><img src="logic.jpg" width="100%" height="100%" style="display: block; margin: auto;" /> <br/><br/></p>
+</div>
+<div id="logic-of-the-repeated-measures-design" class="section level1">
+<h1>Logic of the Repeated-Measures Design</h1>
+<p>So how does a repeated-measures design work? In a between-subjects design, you look at the fraction of either group differences or between-group variances in the numerator over error in the denominator. This error represents unknown variability. That is, not everybody in the same group had the same score, so there was variability on the dependent measure within the groups. In a between-subjects design, we don’t know where that variability is coming from, so it all goes into the error term.</p>
+<p>In a repeated-measures design, the logic is almost <em>exactly the same</em>. The only difference is we now know whether one person scores abnormally high on leadership to begin with relative to the rest of the group of engineers whereas another engineer might score abnormally low, for example. So we can subtract out these <strong>individual differences</strong> from the error.</p>
+<p>Individual differences are the things that make you unique from another person. For example, maybe you’re taller than average, or perhaps you are more comfortable in colder temperatures than others. Some of the things that make you unique might affect the way you score on a given measurement (e.g., leadership assessment). So, we collect your score on the assessment before training and then again at the conclusion of the program. We then compute a <strong>difference score</strong> (in the case of an RM-<em>t</em>-test) by subtracting your first score from your second. Because error is unknown variability, and because we now know where some of that variability is coming from (i.e., different people having different baseline levels on the outcome measure), we can quite literally just remove it from the error term.</p>
+<p><img src="dont.jpg" width="100%" height="100%" style="display: block; margin: auto;" /> <br/><br/></p>
+</div>
+<div id="problems-with-repeated-measures-designs" class="section level1">
+<h1>Problems with Repeated-Measures Designs</h1>
+<p>The issues associated with repeated-measures designs are the mirror image of those associated with the between-subjects designs. First, it is unclear whether your program improved your engineers’ leadership scores or whether simply taking the test again resulted in the improvement. After all, they’re smart folks, so they might have just realized the “right” answers.</p>
+<p>Another concern is that you can’t be sure whether your programmers just became better leaders through the passage of time. If your training program lasted a year so that the assessments are over a year apart, it’s possible that during that year they became more mature through factors completely unassociated with your program. <br/><br/></p>
+</div>
+<div id="summary" class="section level1">
+<h1>Summary</h1>
+<p><strong>Repeated-measures</strong> designs are very powerful tools that can help you answer questions that <strong>between-subjects</strong> designs cannot. When you want to know how <em>specific people</em> change from your interventions, whether it be the results of a leadership training program or changes in employee effectiveness following an organizational change, <strong>repeated-measures</strong> designs are an important tool in your analysts’ toolbox.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
